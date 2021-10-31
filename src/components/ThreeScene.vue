@@ -13,7 +13,7 @@ export default {
         msg: String,
     },
     mounted() {
-        MainThreeScene.init(this.$refs.container);
+        new MainThreeScene(this.$refs.container);
     },
 };
 </script>

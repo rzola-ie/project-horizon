@@ -1,74 +1,158 @@
 import * as THREE from "three"
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Camera from './Camera'
 
 import RAF from '../utils/RAF'
-import config from '../utils/config'
 import MyGUI from '../utils/MyGUI'
+import Sizes from '../utils/Sizes'
+import Time from '../utils/Time'
 
 import simpleFrag from '../shaders/simple.frag'
 import simpleVert from '../shaders/simple.vert'
 
-class MainThreeScene {
-    constructor() {
-        this.bind()
-        this.camera
-        this.scene
-        this.renderer
-        this.controls
-    }
+export default class MainThreeScene {
+	constructor(_container) {
 
-    init(container) {
-        //RENDERER SETUP
-        this.renderer = new THREE.WebGLRenderer({ antialias: true })
-        this.renderer.setSize(window.innerWidth, window.innerHeight)
-        this.renderer.debug.checkShaderErrors = true
-        container.appendChild(this.renderer.domElement)
+		window.experience = this
+		this.targetElement = _container
+		
+		this.bind()
+		this.init()
+	}
 
-        //MAIN SCENE INSTANCE
-        this.scene = new THREE.Scene()
+	init() {
+		if(!this.targetElement) {
+			console.warn('Missing \'targetElement\' property')
+			return
+		}
 
-        //CAMERA AND ORBIT CONTROLLER
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-        this.camera.position.set(0, 0, 5)
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-        this.controls.enabled = config.controls
-        this.controls.maxDistance = 1500
-        this.controls.minDistance = 0
+		this.time = new Time()
+		this.sizes = new Sizes()
 
-        //DUMMY CUBE + SIMPLE GLSL SHADER LINKAGE
-        const shaderMat = new THREE.ShaderMaterial({
-            vertexShader: simpleVert,
-            fragmentShader: simpleFrag,
-        })
-        const cube = new THREE.Mesh(new THREE.BoxGeometry(), shaderMat)
-        this.scene.add(cube)
+		this.setConfig()
+		this.setDebug()
+		this.setScene()
+		this.setCamera()
+		this.setRenderer()
 
-        MyGUI.hide()
-        if (config.myGui)
-            MyGUI.show()
+		this.setPostProcessing()
+		this.setDummyCube()
 
-        //RENDER LOOP AND WINDOW SIZE UPDATER SETUP
-        window.addEventListener("resize", this.resizeCanvas)
-        RAF.subscribe('threeSceneUpdate', this.update)
-    }
+		//RENDER LOOP AND WINDOW SIZE UPDATER SETUP
+		this.sizes.on('resize', () => {
+			this.resizeCanvas()
+		})
 
-    update() {
-        this.renderer.render(this.scene, this.camera);
-    }
+		RAF.subscribe('threeSceneUpdate', this.update)
+	}
 
-    resizeCanvas() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight)
-        this.camera.aspect = window.innerWidth / window.innerHeight
-        this.camera.updateProjectionMatrix()
-    }
+	setConfig() {
+		this.config = {}
 
-    bind() {
-        this.resizeCanvas = this.resizeCanvas.bind(this)
-        this.update = this.update.bind(this)
-        this.init = this.init.bind(this)
-    }
+		// debug
+		this.config.debug = window.location.hash === '#debug'
+
+		// pixel ratio
+		this.config.pixelRatio = Math.min(Math.max(window.devicePixelRatio, 1), 2)
+
+		//dimensions
+		const boundings = this.targetElement.getBoundingClientRect()
+		this.config.width = boundings.width;
+		this.config.height = boundings.height || window.innerHeight;
+
+		// controls
+		this.config.controls = true
+
+		// post processing
+		this.config.usePostProcessing = true;
+	}
+
+	setDebug() {
+		MyGUI.hide()
+		if(this.config.debug) {
+			MyGUI.show()
+		}
+	}
+
+	setScene() {
+		this.scene = new THREE.Scene()
+	}
+
+	setCamera() {
+		this.camera = new Camera()
+	}
+
+	setRenderer() {
+		this.renderer = new THREE.WebGLRenderer({ antialias: true })
+		this.renderer.setSize(this.config.width, this.config.height)
+		this.renderer.setPixelRatio(this.config.pixelRatio)
+		this.renderer.debug.checkShaderErrors = true
+
+		this.targetElement.appendChild(this.renderer.domElement)
+	}
+
+	setPostProcessing() {
+		this.postProcess = {}
+
+		// render target
+		const RenderTargetClass = this.config.pixelRatio >= 2 ? THREE.WebGLRenderTarget : THREE.WebGLMultisampleRenderTarget
+		this.postProcess.renderTarget = new RenderTargetClass(
+			this.config.width,
+			this.config.height,
+			{
+				generateMipmaps: false,
+				minFilter: THREE.LinearFilter,
+				magFilter: THREE.LinearFilter,
+				format: THREE.RGBFormat,
+				encoding: THREE.sRGBEncoding
+			}
+		)
+
+		// effect composer
+		this.postProcess.composer = new EffectComposer(this.renderer, this.postProcess.renderTarget)
+
+		// passes
+		this.postProcess.renderPass = new RenderPass(this.scene, this.camera.instance)
+
+		// add passes
+		this.postProcess.composer.addPass(this.postProcess.renderPass)
+	}
+
+	setDummyCube() {
+		const shaderMat = new THREE.MeshBasicMaterial()
+		const cube = new THREE.Mesh(new THREE.BoxGeometry(), shaderMat)
+		this.scene.add(cube)
+	}
+
+	update() {
+		if(this.camera)
+			this.camera.update()
+
+		if(this.config.usePostProcessing) {
+			this.postProcess.composer.render()
+		} else {
+			this.renderer.render(this.scene, this.camera.instance);
+		}
+	}
+
+	resizeCanvas() {
+		const boundings = this.targetElement.getBoundingClientRect()
+		this.config.width = boundings.width
+		this.config.height = boundings.height || window.innerHeight
+		this.config.pixelRatio = Math.min(Math.max(window.devicePixelRatio, 1), 2)
+
+		this.renderer.setSize(this.config.width, this.config.height)
+		this.renderer.setPixelRatio(this.config.pixelRatio)
+
+		if(this.camera)
+			this.camera.resize()
+	}
+
+	bind() {
+		this.resizeCanvas = this.resizeCanvas.bind(this)
+		this.update = this.update.bind(this)
+		this.init = this.init.bind(this)
+	}
 }
-
-const _instance = new MainThreeScene()
-export default _instance
