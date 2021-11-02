@@ -1,7 +1,5 @@
 <template>
-    <div class="threeScene">
-        <div class="container" ref="container"></div>
-    </div>
+    <div class="container" ref="container"></div>
 </template>
 
 <script>
@@ -13,7 +11,7 @@ export default {
         msg: String,
     },
     mounted() {
-        new MainThreeScene(this.$refs.container);
+        this.scene = new MainThreeScene({ targetElement: this.$refs.container });
     },
 };
 </script>

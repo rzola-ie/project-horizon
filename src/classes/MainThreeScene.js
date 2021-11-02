@@ -1,48 +1,50 @@
 import * as THREE from "three"
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { Pane } from 'tweakpane'
 
 import Camera from './Camera'
+import Renderer from './Renderer'
+import Controls from './Controls'
+
+import Cube from './DummyCube'
 
 import RAF from '../utils/RAF'
-import MyGUI from '../utils/MyGUI'
 import Sizes from '../utils/Sizes'
 import Time from '../utils/Time'
 
-import simpleFrag from '../shaders/simple.frag'
-import simpleVert from '../shaders/simple.vert'
-
 export default class MainThreeScene {
-	constructor(_container) {
+	static instance
 
-		window.experience = this
-		this.targetElement = _container
+	constructor(_options) {
+		if(MainThreeScene.instance) {
+			return MainThreeScene.instance
+		}
+
+		MainThreeScene.instance = this
 		
-		this.bind()
-		this.init()
-	}
-
-	init() {
+		this.targetElement = _options.targetElement
+		
+		
 		if(!this.targetElement) {
 			console.warn('Missing \'targetElement\' property')
 			return
 		}
-
+		
 		this.time = new Time()
 		this.sizes = new Sizes()
-
+		
+		this.bind()
 		this.setConfig()
 		this.setDebug()
 		this.setScene()
 		this.setCamera()
 		this.setRenderer()
+		this.setControls()
 
-		this.setPostProcessing()
 		this.setDummyCube()
 
 		//RENDER LOOP AND WINDOW SIZE UPDATER SETUP
 		this.sizes.on('resize', () => {
-			this.resizeCanvas()
+			this.resize()
 		})
 
 		RAF.subscribe('threeSceneUpdate', this.update)
@@ -61,18 +63,12 @@ export default class MainThreeScene {
 		const boundings = this.targetElement.getBoundingClientRect()
 		this.config.width = boundings.width;
 		this.config.height = boundings.height || window.innerHeight;
-
-		// controls
-		this.config.controls = true
-
-		// post processing
-		this.config.usePostProcessing = true;
 	}
 
 	setDebug() {
-		MyGUI.hide()
 		if(this.config.debug) {
-			MyGUI.show()
+			this.debug = new Pane()
+			this.debug.containerElem_.style.width = '320px'
 		}
 	}
 
@@ -82,77 +78,63 @@ export default class MainThreeScene {
 
 	setCamera() {
 		this.camera = new Camera()
+		this.camera.instance.position.set(0, 0, 8)
 	}
 
 	setRenderer() {
-		this.renderer = new THREE.WebGLRenderer({ antialias: true })
-		this.renderer.setSize(this.config.width, this.config.height)
-		this.renderer.setPixelRatio(this.config.pixelRatio)
-		this.renderer.debug.checkShaderErrors = true
-
-		this.targetElement.appendChild(this.renderer.domElement)
+		this.renderer = new Renderer()
+		this.targetElement.appendChild(this.renderer.instance.domElement)
 	}
 
-	setPostProcessing() {
-		this.postProcess = {}
-
-		// render target
-		const RenderTargetClass = this.config.pixelRatio >= 2 ? THREE.WebGLRenderTarget : THREE.WebGLMultisampleRenderTarget
-		this.postProcess.renderTarget = new RenderTargetClass(
-			this.config.width,
-			this.config.height,
-			{
-				generateMipmaps: false,
-				minFilter: THREE.LinearFilter,
-				magFilter: THREE.LinearFilter,
-				format: THREE.RGBFormat,
-				encoding: THREE.sRGBEncoding
-			}
-		)
-
-		// effect composer
-		this.postProcess.composer = new EffectComposer(this.renderer, this.postProcess.renderTarget)
-
-		// passes
-		this.postProcess.renderPass = new RenderPass(this.scene, this.camera.instance)
-
-		// add passes
-		this.postProcess.composer.addPass(this.postProcess.renderPass)
+	setControls() {
+		this.controls = new Controls()
 	}
 
 	setDummyCube() {
-		const shaderMat = new THREE.MeshBasicMaterial()
-		const cube = new THREE.Mesh(new THREE.BoxGeometry(), shaderMat)
-		this.scene.add(cube)
+		this.cube = new Cube()
 	}
 
 	update() {
+		if(this.renderer)
+			this.renderer.update()
+
 		if(this.camera)
 			this.camera.update()
 
-		if(this.config.usePostProcessing) {
-			this.postProcess.composer.render()
-		} else {
-			this.renderer.render(this.scene, this.camera.instance);
-		}
+		if(this.controls)
+			this.controls.update()
+
+		if(this.cube)
+			this.cube.update()
 	}
 
-	resizeCanvas() {
+	resize() {
 		const boundings = this.targetElement.getBoundingClientRect()
 		this.config.width = boundings.width
 		this.config.height = boundings.height || window.innerHeight
 		this.config.pixelRatio = Math.min(Math.max(window.devicePixelRatio, 1), 2)
 
-		this.renderer.setSize(this.config.width, this.config.height)
-		this.renderer.setPixelRatio(this.config.pixelRatio)
-
 		if(this.camera)
 			this.camera.resize()
+
+		if(this.renderer) {
+			this.renderer.resize()
+		}
+	}
+
+	destroy() {
+		if(this.camera)
+			this.camera.destroy()
+
+		if(this.renderer)
+			this.renderer.destroy()
+
+		if(this.controls)
+			this.controls.destroy()
 	}
 
 	bind() {
-		this.resizeCanvas = this.resizeCanvas.bind(this)
+		this.resize = this.resize.bind(this)
 		this.update = this.update.bind(this)
-		this.init = this.init.bind(this)
 	}
 }
