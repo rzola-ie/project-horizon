@@ -17,4 +17,21 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus"></style>
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow: hidden;
+}
+
+.container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+</style>

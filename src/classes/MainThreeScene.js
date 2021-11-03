@@ -9,6 +9,7 @@ import Cube from './DummyCube'
 
 import RAF from '../utils/RAF'
 import Sizes from '../utils/Sizes'
+import Stats from '../utils/Stats'
 import Time from '../utils/Time'
 
 export default class MainThreeScene {
@@ -34,6 +35,7 @@ export default class MainThreeScene {
 		
 		this.bind()
 		this.setConfig()
+		this.setStats()
 		this.setDebug()
 		this.setScene()
 		this.setCamera()
@@ -63,6 +65,12 @@ export default class MainThreeScene {
 		const boundings = this.targetElement.getBoundingClientRect()
 		this.config.width = boundings.width;
 		this.config.height = boundings.height || window.innerHeight;
+	}
+
+	setStats() {
+		if(this.config.debug) {
+			this.stats = new Stats(true)
+		}
 	}
 
 	setDebug() {
@@ -95,6 +103,9 @@ export default class MainThreeScene {
 	}
 
 	update() {
+		if(this.stats)
+			this.stats.update()
+
 		if(this.renderer)
 			this.renderer.update()
 

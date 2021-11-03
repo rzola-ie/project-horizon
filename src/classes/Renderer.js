@@ -11,6 +11,7 @@ export default class Renderer {
     this.experience = new MainThreeScene()
     this.scene = this.experience.scene
     this.config = this.experience.config
+    this.stats = this.experience.stats
     this.debug = this.experience.debug
     this.time = this.experience.time
     this.sizes = this.experience.sizes
@@ -68,7 +69,7 @@ export default class Renderer {
 
     this.context = this.instance.getContext()
 
-    // Add stats panel
+    // add stats panel
     if(this.stats) {
       this.stats.setRenderPanel(this.context)
     }

@@ -26,8 +26,7 @@ export default class Cube {
     this.material = new THREE.ShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
-      wireframe: true,
-      side: THREE.DoubleSide
+      // wireframe: true,
     })
   }
 
@@ -39,7 +38,7 @@ export default class Cube {
 
   update() {
     this.mesh.rotation.x = this.time.elapsed * 0.0001
-    this.mesh.rotation.y = this.time.elapsed * 0.0001
+    this.mesh.rotation.z = this.time.elapsed * 0.0001
   }
 
   bind() {
