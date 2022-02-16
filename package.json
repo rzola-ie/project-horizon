@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -21,7 +21,11 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^12.6.0",
+    "style-resources-loader": "^1.4.1",
     "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-style-resources-loader": "~0.1.5"
   }
 }
