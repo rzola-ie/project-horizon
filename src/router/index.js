@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from '../components/Home.vue'
 import StoryMode from '../components/StoryMode.vue'
 import LiveMode from '../components/LiveMode.vue'
+import Experience from '@/components/Experience.vue'
+import Face from '@/components/Face.vue'
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/live',
     name: 'Live Mode',
     component: LiveMode
+  },
+  {
+    path: '/experience',
+    name: 'liveExperience',
+    component: Experience,
+  },
+  {
+    path: '/face',
+    name: 'faceExperience',
+    component: Face,
   },
 ]
 

@@ -15,14 +15,16 @@
     "stats.js": "^0.17.0",
     "three": "^0.127.0",
     "tweakpane": "^3.0.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "node-sass": "^7.0.1",
-    "sass-loader": "^12.6.0",
+    "sass": "^1.49.7",
+    "sass-loader": "^10.0.0",
     "style-resources-loader": "^1.4.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",

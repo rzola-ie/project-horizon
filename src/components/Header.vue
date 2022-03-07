@@ -1,5 +1,8 @@
 <template>
-  <header id="header">Header</header>
+  <header id="header">
+    <img src="/assets/ie.svg" alt="" />
+    <img src="/assets/horizon.svg" alt="" />
+  </header>
 </template>
 
 <script>
@@ -13,7 +16,15 @@ export default {};
   left: 0;
   right: 0;
   min-height: 6em;
+  height: 6em;
+  padding: 2em;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+}
+
+#header img {
+  height: 100%;
 }
 </style>

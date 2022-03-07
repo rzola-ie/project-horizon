@@ -7,15 +7,15 @@ import vertex from '../shaders/simple.vert'
 
 export default class Cube {
   constructor() {
-      this.bind()
+    this.bind()
 
-      this.experience = new MainThreeScene()
-      this.scene = this.experience.scene
-      this.time = this.experience.time
+    this.experience = new MainThreeScene()
+    this.scene = this.experience.scene
+    this.time = this.experience.time
 
-      this.setGeometry()
-      this.setMaterial()
-      this.setMesh()
+    this.setGeometry()
+    this.setMaterial()
+    this.setMesh()
   }
 
   setGeometry() {
@@ -23,10 +23,9 @@ export default class Cube {
   }
 
   setMaterial() {
-    this.material = new THREE.ShaderMaterial({
-      vertexShader: vertex,
-      fragmentShader: fragment,
-      // wireframe: true,
+    this.matcapMaterial = new THREE.TextureLoader().load('/assets/bgMatcap.png')
+    this.material = new THREE.MeshMatcapMaterial({
+      matcap: this.matcapMaterial
     })
   }
 

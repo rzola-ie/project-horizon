@@ -1,4 +1,13 @@
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "./public/assets/styles/_variables.scss";
+        `
+      }
+    }
+  },
   devServer: {
     https: false,
   },

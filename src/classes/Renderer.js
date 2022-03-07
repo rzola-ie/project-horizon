@@ -17,9 +17,9 @@ export default class Renderer {
     this.sizes = this.experience.sizes
     this.camera = this.experience.camera
 
-    this.usePostprocess = false
+    this.usePostprocess = true
 
-    if(this.debug) {
+    if (this.debug) {
       this.debugFolder = this.debug.addFolder({
         title: 'Renderer'
       })
@@ -30,22 +30,22 @@ export default class Renderer {
   }
 
   setInstance() {
-    this.clearColor = '#160f11'
+    this.clearColor = '#000000'
 
-    if(this.debug) {
-        this.debugFolder.addInput(
-            this,
-            'clearColor'
-        )
+    if (this.debug) {
+      this.debugFolder.addInput(
+        this,
+        'clearColor'
+      )
         .on('change', () => {
-            this.instance.setClearColor(this.clearColor)
+          this.instance.setClearColor(this.clearColor)
         })
     }
 
     // Renderer
     this.instance = new THREE.WebGLRenderer({
-        alpha: false,
-        antialias: true
+      alpha: true,
+      antialias: true,
     })
     this.instance.domElement.style.position = 'absolute'
     this.instance.domElement.style.top = 0
@@ -70,7 +70,7 @@ export default class Renderer {
     this.context = this.instance.getContext()
 
     // add stats panel
-    if(this.stats) {
+    if (this.stats) {
       this.stats.setRenderPanel(this.context)
     }
   }
@@ -82,15 +82,15 @@ export default class Renderer {
     const RenderTargetClass = this.config.pixelRatio >= 2 ? THREE.WebGLRenderTarget : THREE.WebGLMultisampleRenderTarget
     // const RenderTargetClass = THREE.WebGLRenderTarget
     const renderTarget = new RenderTargetClass(
-        this.config.width,
-        this.config.height,
-        {
-            generateMipmaps: false,
-            minFilter: THREE.LinearFilter,
-            magFilter: THREE.LinearFilter,
-            format: THREE.RGBFormat,
-            encoding: THREE.sRGBEncoding
-        }
+      this.config.width,
+      this.config.height,
+      {
+        generateMipmaps: false,
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBFormat,
+        encoding: THREE.sRGBEncoding
+      }
     )
 
     // effect composer
@@ -114,28 +114,28 @@ export default class Renderer {
   }
 
   update() {
-    if(this.stats) {
+    if (this.stats) {
       this.stats.beforeRender()
     }
 
-    if(this.usePostprocess) {
+    if (this.usePostprocess) {
       this.postProcess.composer.render()
     }
     else {
       this.instance.render(this.scene, this.camera.instance)
     }
 
-    if(this.stats) {
+    if (this.stats) {
       this.stats.afterRender()
     }
   }
 
   destroy() {
-    this.instance.renderLists.dispose()
+    // this.instance.renderLists.dispose()
     this.instance.dispose()
-    this.renderTarget.dispose()
-    this.postProcess.composer.renderTarget1.dispose()
-    this.postProcess.composer.renderTarget2.dispose()
+    // this.renderTarget.dispose()
+    // this.postProcess.composer.renderTarget1.dispose()
+    // this.postProcess.composer.renderTarget2.dispose()
   }
 
   bind() {

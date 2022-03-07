@@ -3,51 +3,53 @@ import { Pane } from 'tweakpane'
 
 import Camera from './Camera'
 import Renderer from './Renderer'
-import Controls from './Controls'
 
-import Cube from './DummyCube'
-
-import RAF from '../utils/RAF'
 import Sizes from '../utils/Sizes'
 import Stats from '../utils/Stats'
 import Time from '../utils/Time'
+
+import RAF from '../utils/RAF'
+
+import Room from './Room'
+import Screen from './Screen'
+import EyeBulge from "./EyeBulge"
 
 export default class MainThreeScene {
 	static instance
 
 	constructor(_options) {
-		if(MainThreeScene.instance) {
+		this.bind()
+
+		if (MainThreeScene.instance) {
 			return MainThreeScene.instance
 		}
 
 		MainThreeScene.instance = this
-		
+
 		this.targetElement = _options.targetElement
-		
-		
-		if(!this.targetElement) {
+
+		if (!this.targetElement) {
 			console.warn('Missing \'targetElement\' property')
 			return
 		}
-		
+
 		this.time = new Time()
 		this.sizes = new Sizes()
-		
-		this.bind()
+
 		this.setConfig()
 		this.setStats()
 		this.setDebug()
 		this.setScene()
 		this.setCamera()
 		this.setRenderer()
-		this.setControls()
 
-		this.setDummyCube()
-
-		//RENDER LOOP AND WINDOW SIZE UPDATER SETUP
-		this.sizes.on('resize', () => {
-			this.resize()
-		})
+		if (_options.mode) {
+			this.mode = _options.mode || sessionStorage.getItem('mode');
+			sessionStorage.setItem('mode', this.mode)
+			this.setScreen()
+		} else {
+			this.setRoom()
+		}
 
 		RAF.subscribe('threeSceneUpdate', this.update)
 	}
@@ -68,15 +70,16 @@ export default class MainThreeScene {
 	}
 
 	setStats() {
-		if(this.config.debug) {
+		if (this.config.debug) {
 			this.stats = new Stats(true)
 		}
 	}
 
 	setDebug() {
-		if(this.config.debug) {
+		if (this.config.debug) {
 			this.debug = new Pane()
 			this.debug.containerElem_.style.width = '320px'
+			this.debug.containerElem_.style.zIndex = 99999
 		}
 	}
 
@@ -86,7 +89,6 @@ export default class MainThreeScene {
 
 	setCamera() {
 		this.camera = new Camera()
-		this.camera.instance.position.set(0, 0, 8)
 	}
 
 	setRenderer() {
@@ -94,29 +96,34 @@ export default class MainThreeScene {
 		this.targetElement.appendChild(this.renderer.instance.domElement)
 	}
 
-	setControls() {
-		this.controls = new Controls()
+	setScreen() {
+		if (this.mode !== 'eyes') {
+			this.screen = new Screen({ mode: this.mode })
+		} else {
+			console.log('het')
+			this.screen = new EyeBulge({ canvas: this.renderer.instance.domElement })
+		}
 	}
 
-	setDummyCube() {
-		this.cube = new Cube()
+	setRoom() {
+		this.room = new Room()
 	}
 
 	update() {
-		if(this.stats)
+		if (this.stats)
 			this.stats.update()
 
-		if(this.renderer)
+		if (this.renderer)
 			this.renderer.update()
 
-		if(this.camera)
+		if (this.camera)
 			this.camera.update()
 
-		if(this.controls)
-			this.controls.update()
+		if (this.screen)
+			this.screen.update()
 
-		if(this.cube)
-			this.cube.update()
+		if (this.room)
+			this.room.update()
 	}
 
 	resize() {
@@ -125,23 +132,32 @@ export default class MainThreeScene {
 		this.config.height = boundings.height || window.innerHeight
 		this.config.pixelRatio = Math.min(Math.max(window.devicePixelRatio, 1), 2)
 
-		if(this.camera)
+		if (this.camera)
 			this.camera.resize()
 
-		if(this.renderer) {
+		if (this.renderer) {
 			this.renderer.resize()
 		}
 	}
 
 	destroy() {
-		if(this.camera)
+		if (this.camera)
 			this.camera.destroy()
 
-		if(this.renderer)
+		if (this.renderer)
 			this.renderer.destroy()
 
-		if(this.controls)
-			this.controls.destroy()
+		if (this.room)
+			this.room.destroy()
+
+		if (this.screen)
+			this.screen.destroy()
+
+		if (this.mode) {
+			sessionStorage.removeItem('mode')
+		}
+
+		MainThreeScene.instance = null
 	}
 
 	bind() {

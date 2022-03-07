@@ -4,17 +4,17 @@ import MainThreeScene from './MainThreeScene'
 
 export default class Camera {
   constructor(_options) {
-      this.experience = new MainThreeScene()
-      this.config = this.experience.config
-      this.scene = this.experience.scene
+    this.experience = new MainThreeScene()
+    this.config = this.experience.config
+    this.scene = this.experience.scene
 
-      this.bind()
-      this.setInstance()
+    this.bind()
+    this.setInstance()
 
   }
 
   setInstance() {
-    this.instance = new THREE.PerspectiveCamera(75, this.config.width / this.config.height, 0.1, 150)
+    this.instance = new THREE.PerspectiveCamera(30, this.config.width / this.config.height, 0.1, 1000)
     this.instance.rotation.reorder('YXZ')
 
     this.scene.add(this.instance)

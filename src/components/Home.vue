@@ -1,5 +1,4 @@
 <template>
-  <ThreeScene />
   <div id="content">
     <a class="story" href="/story">
       <h2>Story Mode</h2>
@@ -19,13 +18,9 @@
 </template>
 
 <script>
-import ThreeScene from "./ThreeScene.vue";
-
 export default {
   name: "Home",
-  components: {
-    ThreeScene,
-  },
+  components: {},
 };
 </script>
 
@@ -34,35 +29,98 @@ export default {
   height: 100%;
   width: 100%;
   /* background-color: rgba(220, 220, 220, 0.7); */
-  padding: 2em;
+  padding: 1em;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1em;
+
+  @media screen and (min-width: 992px) {
+    gap: 2em;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  // CSS applied when the device is in portrait mode
+  #content {
+    // color: red;
+    flex-direction: column;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  // CSS applied when the device is in landscape mode
+  #content {
+    // color: red;
+    flex-direction: row;
+  }
 }
 
 #content a {
+  height: 100%;
+  width: 100%;
+  position: relative;
   text-align: center;
-  padding: 6em;
+  padding: 2em;
   text-decoration: none;
   transition: background-color 250ms ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (min-width: 992px) {
+    height: 250px;
+    width: 400px;
+  }
 }
 
 #content a.story {
-  background-color: teal;
+  background-color: $color2;
   color: white;
   transition: background-color 250ms ease-in-out;
-}
 
-#content a.story:hover {
-  background-color: rgb(0, 71, 71);
+  h2 {
+    color: white;
+  }
+
+  &:hover {
+    background-color: darken($color: $color2, $amount: 10%);
+
+    &::after {
+      content: "";
+      inset: 8px;
+      position: absolute;
+
+      border: 4px solid white;
+    }
+  }
 }
 
 #content a.live {
   background-color: white;
-  color: teal;
-}
+  color: $color2;
 
-#content a.live:hover {
-  background-color: rgb(213, 213, 213);
+  h2 {
+    color: $color2;
+  }
+
+  &:hover {
+    background-color: lighten($color: $color2, $amount: 65%);
+    color: darken($color: $color2, $amount: 15%);
+
+    h2 {
+      color: darken($color: $color2, $amount: 15%);
+    }
+
+    &::after {
+      content: "";
+      inset: 8px;
+      position: absolute;
+
+      border: 4px solid $color2;
+    }
+  }
 }
 </style>
