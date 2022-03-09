@@ -5,31 +5,43 @@
     </div>
     <div class="button-group">
       <button
+        id="blur"
         :class="{ selected: experience === 'blur' }"
         @click="selectMode('blur')"
       >
-        blur
+        Blurry
       </button>
 
       <button
+        id="light"
         :class="{ selected: experience === 'light' }"
         @click="selectMode('light')"
       >
-        light
+        Light
       </button>
 
       <button
+        id="double"
         :class="{ selected: experience === 'double' }"
         @click="selectMode('double')"
       >
-        double
+        Double
       </button>
 
       <button
+        id="color"
         :class="{ selected: experience === 'color' }"
         @click="selectMode('color')"
       >
-        color
+        Color
+      </button>
+
+      <button
+        id="eyes"
+        :class="{ selected: experience === 'eyes' }"
+        @click="selectMode('eyes')"
+      >
+        Eye Bulge
       </button>
     </div>
   </div>
@@ -77,7 +89,7 @@ export default {
 
 <style lang="scss" scoped>
 .live {
-  $header-offset: 6em;
+  $header-offset: 60px;
 
   position: relative;
   height: 100%;
@@ -94,7 +106,7 @@ export default {
 .container {
   position: fixed;
   overflow: hidden;
-  inset: 6em 0 0;
+  inset: 60px 0 0;
   z-index: 1;
 
   @media screen and (min-width: 768px) {
@@ -130,27 +142,53 @@ export default {
 .button-group {
   position: fixed;
   width: 100%;
-  padding: 1em;
-  display: flex;
+  padding: 1.4em 1em;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr 1fr;
   gap: 1em;
-  bottom: 1em;
+  justify-items: center;
+  bottom: 0;
   left: 0;
   z-index: 9999;
+  background-color: rgba(black, 0.5);
 }
 
 button {
   color: white;
-  width: 33%;
+  width: 100%;
   padding: 0.5em;
-  color: $color3;
-  background-color: rgba($color2, 0.4);
-  border: 1px solid $color3;
+  color: $color2;
+  background-color: white;
+  border: 1px solid $color2;
+  border-radius: 30px;
 
   &.selected {
-    border: 1px solid $color2;
-    color: teal;
-    background-color: $color3;
+    border: 1px solid white;
+    color: white;
+    background-color: $color2;
     font-weight: bold;
   }
+}
+
+button#blur {
+  grid-row: 1 / 2;
+  grid-column: 1 / 3;
+}
+button#light {
+  grid-row: 1 / 2;
+  grid-column: 3 / 5;
+}
+button#double {
+  grid-row: 1 / 2;
+  grid-column: 5 / 7;
+}
+button#color {
+  grid-row: 2 / 3;
+  grid-column: 2 / 4;
+}
+button#eyes {
+  grid-row: 2 / 3;
+  grid-column: 4 / 6;
 }
 </style>
