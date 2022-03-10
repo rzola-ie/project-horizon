@@ -3,7 +3,30 @@
     <div class="container" ref="container">
       <canvas id="three-canvas"></canvas>
     </div>
-    <div class="button-group">
+    <div :class="['button-group', { hidden: hideControls }]">
+      <div class="controls">
+        <button
+          @click="
+            () => {
+              hideControls = !hideControls;
+            }
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      </div>
       <button
         id="blur"
         :class="{ selected: experience === 'blur' }"
@@ -49,12 +72,12 @@
 
 <script>
 import MainThreeScene from "@/classes/MainThreeScene";
-import Blur from "@/classes/Blur";
 
 export default {
   data() {
     return {
       experience: "",
+      hideControls: false,
     };
   },
   mounted() {
@@ -142,16 +165,25 @@ export default {
 .button-group {
   position: fixed;
   width: 100%;
-  padding: 1.4em 1em;
+  padding: 0.4em 1em 1.4em 1em;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 1em;
   justify-items: center;
   bottom: 0;
   left: 0;
   z-index: 9999;
   background-color: rgba(black, 0.5);
+  transition: all 150ms ease-in-out;
+
+  &.hidden {
+    bottom: -110px;
+
+    .controls button {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 button {
@@ -172,23 +204,40 @@ button {
 }
 
 button#blur {
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
   grid-column: 1 / 3;
 }
 button#light {
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
   grid-column: 3 / 5;
 }
 button#double {
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
   grid-column: 5 / 7;
 }
 button#color {
-  grid-row: 2 / 3;
+  grid-row: 3 / 4;
   grid-column: 2 / 4;
 }
 button#eyes {
-  grid-row: 2 / 3;
+  grid-row: 3 / 4;
   grid-column: 4 / 6;
+}
+
+.button-group .controls {
+  grid-row: 1 / 2;
+  grid-column: 6 / 7;
+
+  button {
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: transparent;
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 </style>
