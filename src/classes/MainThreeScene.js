@@ -23,13 +23,6 @@ export default class MainThreeScene {
 		if (MainThreeScene.instance) {
 			return MainThreeScene.instance
 		}
-		// console.log(screen)
-		window.screen.orientation
-			.lock('portrait-primary')
-			.then(
-				success => console.log('cool', success),
-				failure => console.log('not cool', failure)
-			)
 
 		MainThreeScene.instance = this
 
