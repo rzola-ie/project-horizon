@@ -89,7 +89,7 @@ h1 {
 
 .symptoms {
   width: 100%;
-  padding: 0.8em 0.5em;
+  padding: 1.6em 0.5em;
   display: grid;
   flex: 1;
   grid-template-rows: repeat(5, auto);
