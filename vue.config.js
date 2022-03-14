@@ -8,9 +8,9 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    https: true,
-  },
+  // devServer: {
+  //   https: true,
+  // },
 
   chainWebpack: config => {
     config.module

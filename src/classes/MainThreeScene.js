@@ -50,17 +50,10 @@ export default class MainThreeScene {
 		this.setCamera()
 		this.setRenderer()
 
-		if (_options.mode) {
-			this.mode = _options.mode || sessionStorage.getItem('mode');
-			sessionStorage.setItem('mode', this.mode)
-			this.setScreen()
-			RAF.subscribe('threeSceneUpdate', this.update)
-		} else {
-			this.setRoom()
-			this.renderer.instance.setAnimationLoop(() => {
-				this.renderer.instance.render(this.scene, this.camera.instance)
-			})
-		}
+		this.mode = _options.mode || sessionStorage.getItem('mode');
+		sessionStorage.setItem('mode', this.mode)
+		this.setScreen()
+		RAF.subscribe('threeSceneUpdate', this.update)
 	}
 
 	setConfig() {
