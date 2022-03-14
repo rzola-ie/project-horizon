@@ -21,7 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 .story {
-  $header-offset: 6em;
+  $header-offset: 60px;
 
   position: relative;
   height: 100%;
@@ -38,7 +38,7 @@ export default {
 .container {
   position: fixed;
   overflow: hidden;
-  inset: 6em 0 0;
+  inset: 60px 0 0;
   z-index: 1;
 
   @media screen and (min-width: 768px) {

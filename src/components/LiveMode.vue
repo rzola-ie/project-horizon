@@ -9,7 +9,7 @@
         class="symptom"
         :to="{ name: 'liveExperience', params: { experience: 'blur' } }"
       >
-        <img src="/assets/Blur.svg" alt="" />
+        <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
         Blurry Vision
       </router-link>
 
@@ -17,15 +17,15 @@
         class="symptom"
         :to="{ name: 'liveExperience', params: { experience: 'double' } }"
       >
-        <img src="/assets/Double.svg" alt="" />
-        Double Vision
+        <img src="/assets/diplopia-icon.svg" alt="" />
+        Double Vision / <br > Diplopia
       </router-link>
 
       <router-link
         class="symptom"
         :to="{ name: 'liveExperience', params: { experience: 'color' } }"
       >
-        <img src="/assets/Color.svg" alt="" />
+        <img src="/assets/eye-pressure-pain-icon.svg" alt="" />
         Color Vision Loss
       </router-link>
 
@@ -33,16 +33,16 @@
         class="symptom"
         :to="{ name: 'liveExperience', params: { experience: 'light' } }"
       >
-        <img src="/assets/Light.svg" alt="" />
-        Light Sensetivity
+        <img src="/assets/photophobia-icon.svg" alt="" />
+        Light Sensetivity / <br > Photophobia
       </router-link>
 
       <router-link
         class="symptom"
         :to="{ name: 'faceExperience', params: { experience: 'eyes' } }"
       >
-        <img src="/assets/Eyes.svg" alt="" />
-        Eye Bulge
+        <img src="/assets/proptosis-icon.svg" alt="" />
+        Bulging Eyes / <br > Proptosis
       </router-link>
       <!-- <router-link
         class="symptom"
@@ -63,7 +63,6 @@ export default {};
 #live {
   height: calc(100vh - 60px);
   width: 100%;
-  padding: 0.5em;
   background-color: white;
 
   display: flex;
@@ -82,13 +81,19 @@ h1 {
   font-family: "Barlow", sans-serif;
   text-align: center;
   color: $color2;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2em
+  }
 }
 
 .symptoms {
   width: 100%;
-  flex: 1;
+  padding: 0.8em 0.5em;
   display: grid;
-  grid-template-rows: repeat(3, auto);
+  flex: 1;
+  grid-template-rows: repeat(5, auto);
+  background-color: $color2;
   // grid-template-columns: repeat(2, auto);
   gap: 0.5em;
 
@@ -101,9 +106,9 @@ h1 {
 
 .symptom {
   position: relative;
-  height: 100%;
+
   width: 100%;
-  padding: 0.5em;
+  padding: 1em;
   display: grid;
   grid-template-columns: auto 1fr;
   // flex-direction: column;
@@ -111,20 +116,20 @@ h1 {
   justify-items: center;
   align-items: center;
   border-radius: 0.4em;
-  background-color: $color2;
+  color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  color: white;
+  background-color: white;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
-    background-color: darken($color2, 10%);
+    background-color: lighten($color2, 60%);
     &::after {
       content: "";
       inset: 8px;
       position: absolute;
-      border: 4px solid white;
+      border: 4px solid $color2;
     }
   }
 
@@ -134,8 +139,8 @@ h1 {
   }
 
   & img {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
   }
 }
 </style>

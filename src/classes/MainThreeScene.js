@@ -23,6 +23,13 @@ export default class MainThreeScene {
 		if (MainThreeScene.instance) {
 			return MainThreeScene.instance
 		}
+		// console.log(screen)
+		window.screen.orientation
+			.lock('portrait-primary')
+			.then(
+				success => console.log('cool', success),
+				failure => console.log('not cool', failure)
+			)
 
 		MainThreeScene.instance = this
 
@@ -47,11 +54,13 @@ export default class MainThreeScene {
 			this.mode = _options.mode || sessionStorage.getItem('mode');
 			sessionStorage.setItem('mode', this.mode)
 			this.setScreen()
+			RAF.subscribe('threeSceneUpdate', this.update)
 		} else {
 			this.setRoom()
+			this.renderer.instance.setAnimationLoop(() => {
+				this.renderer.instance.render(this.scene, this.camera.instance)
+			})
 		}
-
-		RAF.subscribe('threeSceneUpdate', this.update)
 	}
 
 	setConfig() {

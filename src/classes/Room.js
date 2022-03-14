@@ -3,6 +3,8 @@ import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOri
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
+import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
@@ -22,6 +24,7 @@ export default class Room {
     this.camera.instance.rotation.y += 4.9
     this.camera.instance.fov = 1600
     this.renderer = this.experience.renderer
+    this.renderer.instance.xr.enabled = true
     this.renderer.instance.physicallyCorrectLights = true
     this.renderer.instance.gammaOutPut = true
     this.renderer.instance.outputEncoding = THREE.sRGBEncoding
@@ -57,6 +60,11 @@ export default class Room {
     this.addOffice()
     this.addLights()
     this.addLightPass()
+    this.addXR()
+  }
+
+  addXR() {
+    document.body.appendChild(VRButton.createButton(this.renderer.instance));
   }
 
   addOffice() {
@@ -176,10 +184,6 @@ export default class Room {
       0.26 // threshold
     )
 
-    // this.bloomPass.strength = this.settings.strength
-    // this.bloomPass.radius = this.settings.radius
-    // this.bloomPass.threshold = this.settings.threshold
-
     this.renderer.postProcess.composer.addPass(this.bloomPass)
 
     if (this.debug) {
@@ -204,8 +208,8 @@ export default class Room {
 
   update() {
 
-    this.camera.instance.rotation.y -= 0.005
-    this.camera.instance.rotation.x += Math.sin(this.time.elapsed * 0.001) * 0.0002
+    // this.camera.instance.rotation.y -= 0.005
+    // this.camera.instance.rotation.x += Math.sin(this.time.elapsed * 0.001) * 0.0002
   }
 
   destroy() { }
