@@ -8,7 +8,7 @@ uniform float uTime;
 void main() {
   vec2 uv = vUv;
   vec2 offset = 0.1 * vec2(
-    cos(0.1 * uTime * 2.0), 
+    0.15, 
     0.0
   );
 

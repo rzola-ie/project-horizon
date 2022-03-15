@@ -11,7 +11,7 @@ const DoubleVisionShader = {
 
   uniforms: {
     tDiffuse: { value: null },
-    uOffset: { value: 0.35 },
+    uOffset: { value: 0.1 },
     uMix: { value: 0.4 },
     uTime: { value: 0 },
   },

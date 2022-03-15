@@ -67,6 +67,34 @@
         Eye Bulge
       </button>
     </div>
+    <router-link class="back-button" to="/live">
+      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
+        <line
+          x1="2"
+          y1="14.5"
+          x2="16"
+          y2="2"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <line
+          x1="2"
+          y1="14.5"
+          x2="38"
+          y2="14.5"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <line
+          x1="2"
+          y1="14.5"
+          x2="16"
+          y2="27"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+    </router-link>
   </div>
 </template>
 
@@ -239,5 +267,20 @@ button#eyes {
       width: 100%;
     }
   }
+}
+
+.back-button {
+  height: 21px;
+  width: 29px;
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 9999;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
 }
 </style>

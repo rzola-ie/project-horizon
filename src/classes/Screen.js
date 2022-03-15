@@ -42,7 +42,7 @@ export default class Screen {
         fragment: defaultFragment,
         vertex: defaultVertex,
         settings: {
-          offset: 0.35,
+          offset: 0.1,
           mix: 0.4,
         }
       },
@@ -65,7 +65,6 @@ export default class Screen {
     this.camera = this.experience.camera
     this.scene = this.experience.scene
     this.renderer = this.experience.renderer
-    this.renderer.usePostprocess = true
     this.time = this.experience.time
     this.config = this.experience.config
     this.debug = this.experience.debug
@@ -106,17 +105,14 @@ export default class Screen {
     this.height = boundings.height || window.innerHeight
 
     if (this.mesh) {
-      if (this.width > this.height) {
-        //landscape
-        this.mesh.scale.set(Math.ceil(this.height * 1.777777), this.height, 1)
-      } else {
-        //portrait
-        this.mesh.scale.set(this.width, (this.width * 1.777777), 1)
-      }
+      this.mesh.scale.set(this.width, this.height, 1)
+
       console.log('be not afraid bestie')
       this.setVideoFeed()
       this.updateUniforms()
       console.log(this.width, this.height)
+      this.selectMode(this.mode)
+      this.setPostProcessing()
     }
   }
 
@@ -239,6 +235,10 @@ export default class Screen {
   }
 
   setMesh() {
+    const material = new THREE.MeshBasicMaterial({
+      color: 0xff0000
+    })
+
     this.mesh = new THREE.Mesh(this.geometry, this.material)
     this.mesh.name = 'screen'
     this.scene.add(this.mesh)
@@ -271,23 +271,18 @@ export default class Screen {
 
     this.videoTexture = new THREE.VideoTexture(this.video)
 
-    let aspect = 0.5625
-
-    if (this.width > this.height) {
-      aspect = 1.7777777778
-    }
-
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const constraints = {
         audio: false,
         video: {
           facingMode: 'environment',
-          aspectRatio: aspect,
+          aspectRatio: this.width / this.height,
           height: this.height, //* window.devicePixelRatio,
           width: this.width //* window.devicePixelRatio
         }
       };
 
+      console.log('nice', constraints.video.aspectRatio)
 
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         // apply the stream to the video element used in the texture
@@ -481,7 +476,6 @@ export default class Screen {
     this.setGeometry = this.setGeometry.bind(this)
     this.setUniforms = this.setUniforms.bind(this)
     this.setMaterial = this.setMaterial.bind(this)
-    this.setMesh = this.setMesh.bind(this)
     this.updateUniforms = this.updateUniforms.bind(this)
     this.setVideoFeed = this.setVideoFeed.bind(this)
     this.update = this.update.bind(this)
