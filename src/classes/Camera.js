@@ -22,6 +22,7 @@ export default class Camera {
 
   resize() {
     this.instance.aspect = this.config.width / this.config.height
+    this.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
     this.instance.updateProjectionMatrix()
   }
 

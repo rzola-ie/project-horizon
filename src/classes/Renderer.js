@@ -104,7 +104,9 @@ export default class Renderer {
   }
 
   resize() {
+    console.log('renderer resize bruh')
     // Instance
+    console.log(this.config.width, this.config.height)
     this.instance.setSize(this.config.width, this.config.height)
     this.instance.setPixelRatio(this.config.pixelRatio)
 

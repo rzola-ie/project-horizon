@@ -145,9 +145,11 @@ export default {
 
 <style lang="scss" scoped>
 .live {
-  position: relative;
+  position: fixed;
+  inset: 0;
   height: 100%;
   width: 100%;
+  background-color: black;
 
   @media screen and (min-width: 768px) {
     display: flex;

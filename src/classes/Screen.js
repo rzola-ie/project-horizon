@@ -89,31 +89,33 @@ export default class Screen {
 
     this.hasPostProcessing = true
 
-    this.setShaders()
-    this.setUniforms()
-    this.setGeometry()
-    this.setMaterial()
-    this.setMesh()
-    this.setVideoFeed()
-    this.setPostProcessing()
+    // this.setShaders()
+    // this.setUniforms()
+    // this.setGeometry()
+    // this.setMaterial()
+    // this.setMesh()
+    // this.setVideoFeed()
+    // this.setPostProcessing()
     this.resize()
   }
 
   resize() {
     const boundings = this.container.getBoundingClientRect()
-    this.width = boundings.width
-    this.height = boundings.height || window.innerHeight
+    this.width = window.innerWidth
+    this.height =  window.innerHeight
+    console.log('watashi me too, me too, ooo eee ooo')
 
     if (this.mesh) {
-      this.mesh.scale.set(this.width, this.height, 1)
-
-      console.log('be not afraid bestie')
-      this.setVideoFeed()
-      this.updateUniforms()
-      console.log(this.width, this.height)
-      this.selectMode(this.mode)
-      this.setPostProcessing()
+      this.destroy()
     }
+
+      this.setShaders()
+      this.setUniforms()
+      this.setGeometry()
+      this.setMaterial()
+      this.setMesh()
+      this.setVideoFeed()
+      this.setPostProcessing()
   }
 
   setShaders() {
@@ -254,7 +256,7 @@ export default class Screen {
     this.video.style.width = this.width //* window.devicePixelRatio
     this.video.style.transform = `scale(0.0001, 0.0001)`
     this.video.style.position = `fixed`
-    this.video.style.top = `6em`
+    this.video.style.top = `-1000em`
     this.video.style.left = `0px`
     this.video.style.bottom = `0px`
     this.video.style.right = `0px`
@@ -265,7 +267,6 @@ export default class Screen {
     this.video.setAttribute('muted', 'true')
     this.video.setAttribute('autoplay', 'true')
     this.video.setAttribute('playsinline', 'true')
-
 
     this.container.appendChild(this.video);
 
@@ -281,8 +282,6 @@ export default class Screen {
           width: this.width //* window.devicePixelRatio
         }
       };
-
-      console.log('nice', constraints.video.aspectRatio)
 
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         // apply the stream to the video element used in the texture
@@ -328,6 +327,8 @@ export default class Screen {
     this.doubleEffect.uniforms.uMix.value = this.settings.mix
 
     this.renderer.postProcess.composer.addPass(this.doubleEffect)
+    this.doubleEffect.needsSwap = true;
+    console.log('double pass')
   }
 
   addBlurPass() {
@@ -466,8 +467,6 @@ export default class Screen {
       this.debugFolder = null
       this.debug = null
     }
-
-    console.log('scene destroyed')
   }
 
   bind() {
