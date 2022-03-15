@@ -47,6 +47,8 @@ export default class MainThreeScene {
 		sessionStorage.setItem('mode', this.mode)
 		this.setScreen()
 		RAF.subscribe('threeSceneUpdate', this.update)
+
+		window.addEventListener('resize', this.resize)
 	}
 
 	setConfig() {
@@ -132,6 +134,10 @@ export default class MainThreeScene {
 
 		if (this.renderer) {
 			this.renderer.resize()
+		}
+
+		if(this.screen) {
+			this.screen.resize()
 		}
 	}
 

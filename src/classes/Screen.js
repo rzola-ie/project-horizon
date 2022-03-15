@@ -12,19 +12,6 @@ import { ColorLossShader } from '../shaders/color/ColorLossShader'
 import defaultVertex from '../shaders/default/vertex.glsl'
 import defaultFragment from '../shaders/default/fragment.glsl'
 
-import blurVertex from '../shaders/blur/vertex.glsl'
-import blurFragment from '../shaders/blur/fragment.glsl'
-
-import colorVertex from '../shaders/color/vertex.glsl'
-import colorFragment from '../shaders/color/fragment.glsl'
-
-import doubleVertex from '../shaders/double/vertex.glsl'
-import doubleFragment from '../shaders/double/fragment.glsl'
-
-import lightVertex from '../shaders/light/vertex.glsl'
-import lightFragment from '../shaders/light/fragment.glsl'
-import Blur from './Blur'
-
 
 
 
@@ -124,7 +111,7 @@ export default class Screen {
         //portrait
         this.mesh.scale.set(this.width, (this.width * 1.777777), 1)
       }
-
+      console.log('be not afraid bestie')
       // this.setVideoFeed()
     }
   }
