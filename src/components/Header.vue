@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <header id="header" v-show="!isExperiencePage">
     <button v-if="isHomePage">
       <svg height="32" width="32" viewBox="0 0 32 32" stroke="#3d7664">
         <line
@@ -71,9 +71,9 @@ export default {
     isHomePage() {
       return this.$route.name == "Home";
     },
-  },
-  mounted() {
-    console.log(this.$route.name);
+    isExperiencePage() {
+      return this.$route.name == "liveExperience";
+    }
   },
   methods: {
     goBack() {

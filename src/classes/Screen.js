@@ -98,11 +98,13 @@ export default class Screen {
     this.setVideoFeed()
     this.setPostProcessing()
     this.resize()
-
-
   }
 
   resize() {
+    const boundings = this.container.getBoundingClientRect()
+    this.width = boundings.width
+    this.height = boundings.height || window.innerHeight
+
     if (this.mesh) {
       if (this.width > this.height) {
         //landscape
@@ -113,7 +115,8 @@ export default class Screen {
       }
       console.log('be not afraid bestie')
       this.setVideoFeed()
-      this.material.needsUpdate = true
+      this.updateUniforms()
+      console.log(this.width, this.height)
     }
   }
 
@@ -247,8 +250,8 @@ export default class Screen {
       this.video = document.createElement('video');
     }
 
-    this.video.style.height = this.height * window.devicePixelRatio
-    this.video.style.width = this.width * window.devicePixelRatio
+    this.video.style.height = this.height //* window.devicePixelRatio
+    this.video.style.width = this.width //* window.devicePixelRatio
     this.video.style.transform = `scale(0.0001, 0.0001)`
     this.video.style.position = `fixed`
     this.video.style.top = `6em`
@@ -280,8 +283,8 @@ export default class Screen {
         video: {
           facingMode: 'environment',
           aspectRatio: aspect,
-          height: this.height * this.config.pixelRatio,
-          width: this.width * this.config.pixelRatio,
+          height: this.height, //* window.devicePixelRatio,
+          width: this.width //* window.devicePixelRatio
         }
       };
 

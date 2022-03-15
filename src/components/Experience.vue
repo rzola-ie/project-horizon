@@ -90,6 +90,10 @@ export default {
       targetElement: this.$refs.container,
       mode: this.experience,
     });
+
+    document.addEventListener('resize', () => {
+      this.selectMode(this.experience)
+    })
   },
   unmounted() {
     this.scene.destroy();
@@ -97,6 +101,7 @@ export default {
   },
   methods: {
     selectMode(mode) {
+      console.log('biblically accurate nuxt app')
       this.experience = mode;
 
       this.scene.destroy();
@@ -112,12 +117,9 @@ export default {
 
 <style lang="scss" scoped>
 .live {
-  $header-offset: 60px;
-
   position: relative;
   height: 100%;
   width: 100%;
-  margin-top: $header-offset;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -129,7 +131,7 @@ export default {
 .container {
   position: fixed;
   overflow: hidden;
-  inset: 60px 0 0;
+  inset: 0;
   z-index: 1;
 
   @media screen and (min-width: 768px) {
@@ -137,11 +139,9 @@ export default {
     height: auto;
     aspect-ratio: 16 / 9;
     width: 100%;
-    // inset: 50%;
-    // transform: translate(-50%, -50%);
   }
 }
-.container #three-canvas {
+.container canvas {
   height: 100%;
   width: 100%;
 }
