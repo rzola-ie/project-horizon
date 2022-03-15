@@ -170,6 +170,8 @@ export default {
   }
 }
 .container canvas {
+  position: fixed;
+  inset: 0;
   height: 100%;
   width: 100%;
 }
