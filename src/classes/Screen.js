@@ -112,7 +112,8 @@ export default class Screen {
         this.mesh.scale.set(this.width, (this.width * 1.777777), 1)
       }
       console.log('be not afraid bestie')
-      // this.setVideoFeed()
+      this.setVideoFeed()
+      this.material.needsUpdate = true
     }
   }
 
@@ -246,8 +247,8 @@ export default class Screen {
       this.video = document.createElement('video');
     }
 
-    this.video.style.height = this.height //* window.devicePixelRatio
-    this.video.style.width = this.width //* window.devicePixelRatio
+    this.video.style.height = this.height * window.devicePixelRatio
+    this.video.style.width = this.width * window.devicePixelRatio
     this.video.style.transform = `scale(0.0001, 0.0001)`
     this.video.style.position = `fixed`
     this.video.style.top = `6em`
@@ -279,8 +280,8 @@ export default class Screen {
         video: {
           facingMode: 'environment',
           aspectRatio: aspect,
-          height: this.height, //* window.devicePixelRatio,
-          width: this.width //* window.devicePixelRatio
+          height: this.height * this.config.pixelRatio,
+          width: this.width * this.config.pixelRatio,
         }
       };
 
