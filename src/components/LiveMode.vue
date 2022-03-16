@@ -39,7 +39,7 @@
 
       <router-link
         class="symptom"
-        :to="{ name: 'faceExperience', params: { experience: 'eyes' } }"
+        :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
       >
         <img src="/assets/proptosis-icon.svg" alt="" />
         Bulging Eyes / <br > Proptosis

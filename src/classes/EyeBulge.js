@@ -11,6 +11,8 @@ export default class EyeBulge {
   constructor(_options) {
 
     this.canvasId = _options.canvasId
+    this.targetElement = document.getElementById(_options.canvasId)
+    this.gl = this.targetElement.getContext('experimental-webgl')
 
     this.init()
   }
@@ -152,6 +154,9 @@ export default class EyeBulge {
   update() { }
 
   destroy() {
+
     JEELIZFACEFILTER.destroy()
+    console.log('bye bestie')
+    this.gl.clear(0x000000)
   }
 }

@@ -95,17 +95,23 @@
         />
       </svg>
     </router-link>
+
+    <div class="horizontal-message">
+      <img src="/assets/rotate.png" alt="">
+      <h2>For better viewing experience, turn phone to landscape mode.</h2>
+    </div>
   </div>
 </template>
 
 <script>
 import MainThreeScene from "@/classes/MainThreeScene";
+import EyeBulge from "../classes/EyeBulge";
 
 export default {
   data() {
     return {
       experience: "",
-      hideControls: false,
+      hideControls: true,
     };
   },
   mounted() {
@@ -114,11 +120,16 @@ export default {
 
     console.log(this.experience);
 
-    this.scene = new MainThreeScene({
-      targetElement: this.$refs.container,
-      mode: this.experience,
-    });
 
+    if(this.experience != 'eyes') {
+      this.scene = new MainThreeScene({
+        targetElement: this.$refs.container,
+        mode: this.experience,
+      });
+    } else {
+      this.scene = new EyeBulge({ canvasId: "three-canvas" });
+    }
+    
     document.addEventListener('resize', () => {
       this.selectMode(this.experience)
     })
@@ -131,13 +142,19 @@ export default {
     selectMode(mode) {
       console.log('biblically accurate nuxt app')
       this.experience = mode;
+      document.querySelector('.live').setAttribute('id', mode);
 
       this.scene.destroy();
 
-      this.scene = new MainThreeScene({
-        targetElement: this.$refs.container,
-        mode: this.experience,
-      });
+      if(mode != 'eyes') {
+        this.scene = new MainThreeScene({
+          targetElement: this.$refs.container,
+          mode: this.experience,
+        });
+      } else {
+        this.scene = new EyeBulge({ canvasId: "three-canvas" });
+      }
+
     },
   },
 };
@@ -171,18 +188,45 @@ export default {
     width: 100%;
   }
 }
+
 .container canvas {
   position: fixed;
   inset: 0;
   height: 100%;
   width: 100%;
+  z-index: 9998;
+}
+
+.live:not(#eyes) .horizontal-message {
+  position: fixed;
+  inset: 1em;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2em;
+  z-index: 9999;
+  border-radius: 0.25em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  img {
+    height: 150px;
+    width: 150px;
+  }
+
+  h2 {
+    font-family: "Barlow", sans-serif;
+    color: $color2;
+    text-align: center;
+    font-weight: 500;
+  }
 }
 
 @media screen and (orientation: portrait) {
   // CSS applied when the device is in portrait mode
   .horizontal-message {
-    // color: red;
-    display: static;
+    display: flex;
+
   }
 }
 
