@@ -15,9 +15,14 @@ export default class EyeBulge {
     this.gl = this.targetElement.getContext('experimental-webgl')
 
     this.init()
+
+
+    // handle device orientation change:
+    window.addEventListener('orientationchange', this.orientationChange.bind(this), false);
   }
 
   init() {
+    console.log('flenin')
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: (isError, bestVideoSettings) => {
@@ -30,6 +35,14 @@ export default class EyeBulge {
       }
     })
   }
+
+  orientationChange() {
+    setTimeout(() => {
+      JEELIZFACEFILTER.destroy()
+      this.init()
+    }, 300)
+  }
+
 
   initFaceFilter(videoSettings) {
     JEELIZFACEFILTER.init({
@@ -154,9 +167,9 @@ export default class EyeBulge {
   update() { }
 
   destroy() {
-
     JEELIZFACEFILTER.destroy()
     console.log('bye bestie')
     this.gl.clear(0x000000)
+
   }
 }

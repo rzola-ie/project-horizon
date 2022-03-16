@@ -100,6 +100,8 @@ export default class Screen {
   }
 
   resize() {
+    if(this.mode == 'eyes') return
+
     const boundings = this.container.getBoundingClientRect()
     this.width = window.innerWidth
     this.height =  window.innerHeight
@@ -425,6 +427,7 @@ export default class Screen {
   }
 
   destroy() {
+    if(this.mode == 'eyes') return
 
     // remove the video texture
     if (this.VideoTexture) {

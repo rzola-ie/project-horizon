@@ -129,7 +129,7 @@ export default {
     } else {
       this.scene = new EyeBulge({ canvasId: "three-canvas" });
     }
-    
+
     document.addEventListener('resize', () => {
       this.selectMode(this.experience)
     })
@@ -141,6 +141,7 @@ export default {
   methods: {
     selectMode(mode) {
       console.log('biblically accurate nuxt app')
+
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);
 
@@ -155,6 +156,7 @@ export default {
         this.scene = new EyeBulge({ canvasId: "three-canvas" });
       }
 
+      this.hideControls = true
     },
   },
 };
