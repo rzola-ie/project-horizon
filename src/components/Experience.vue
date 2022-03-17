@@ -1,7 +1,7 @@
 <template>
   <div class="live" :id="$route.params.experience">
     <div class="container" ref="container">
-      <canvas id="three-canvas"></canvas>
+
     </div>
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
@@ -11,7 +11,7 @@
               hideControls = !hideControls;
             }
           "
-        >
+        >Menu
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -67,6 +67,7 @@
         Eye Bulge
       </button>
     </div>
+
     <router-link class="back-button" to="/live">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
         <line
@@ -96,9 +97,20 @@
       </svg>
     </router-link>
 
-    <div class="horizontal-message">
+    <div class="orientation-modal" id="turn-landscape">
       <img src="/assets/rotate.png" alt="">
-      <h2>For better viewing experience, turn phone to landscape mode.</h2>
+      <div class="content">
+        <h2>Please turn your phone.</h2>
+        <p>This experience cannot be used in portrait mode</p>
+      </div>
+    </div>
+
+    <div class="orientation-modal" id="turn-portrait">
+      <img src="/assets/rotate.png" alt="">
+      <div class="content">
+        <h2>Please turn your phone.</h2>
+        <p>This experience cannot be used in landscape mode</p>
+      </div>
     </div>
   </div>
 </template>
@@ -119,10 +131,10 @@ export default {
       this.$route.params.experience || sessionStorage.getItem("mode");
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    console.log(this.experience, this.isMobile);
 
     if(!this.isMobile) {
-      document.querySelector('.horizontal-message').style.display = 'none'
+      document.querySelector('.turn-landscape-message').style.display = 'none'
+      document.querySelector('.turn-portrait-message').style.display = 'none'
     }
 
 
@@ -145,8 +157,6 @@ export default {
   },
   methods: {
     selectMode(mode) {
-      console.log('biblically accurate nuxt app')
-
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);
 
@@ -204,7 +214,7 @@ export default {
   z-index: 9998;
 }
 
-.live:not(#eyes) .horizontal-message {
+.orientation-modal {
   position: fixed;
   inset: 1em;
   background-color: white;
@@ -221,27 +231,52 @@ export default {
     width: 150px;
   }
 
+  .content {
+    padding: 0 3.5em;
+
+    * {
+      color: $color2;
+      text-align: center;
+    }
+  }
+
   h2 {
-    font-family: "Barlow", sans-serif;
-    color: $color2;
     text-align: center;
-    font-weight: 500;
+    margin-bottom: 0.4em;
+  }
+
+  p {
+    font-size: 1.2em;
+    text-align: center;
   }
 }
 
 @media screen and (orientation: portrait) {
   // CSS applied when the device is in portrait mode
-  .horizontal-message {
+.live:not(#eyes) .orientation-modal#turn-landscape {
     display: flex;
-
+  }
+.live:not(#eyes) .orientation-modal#turn-portrait {
+    display: none;
+  }
+.live#eyes .orientation-modal#turn-portrait {
+    display: none;
+  }
+.live#eyes .orientation-modal#turn-landscape {
+    display: none;
   }
 }
 
 @media screen and (orientation: landscape) {
   // CSS applied when the device is in landscape mode
-  .horizontal-message {
-    // color: red;
+.live:not(#eyes) .orientation-modal#turn-landscape {
     display: none;
+  }
+.live:not(#eyes) .orientation-modal#turn-portrait {
+    display: none;
+  }
+.live#eyes .orientation-modal#turn-portrait {
+    display: flex;
   }
 }
 
@@ -250,23 +285,98 @@ export default {
   width: 100%;
   padding: 0.4em 1em 1.4em 1em;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 40px);
   gap: 1em;
   justify-items: center;
   bottom: 0;
   left: 0;
   z-index: 9999;
-  background-color: rgba(black, 0.5);
+  background-color: $color2;
   transition: all 150ms ease-in-out;
 
   &.hidden {
-    bottom: -110px;
+    bottom: 0px;
 
-    .controls button {
+    .controls button svg {
       transform: rotate(180deg);
     }
   }
+}
+
+@media screen and (orientation: portrait) {
+  .button-group {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 50px);
+
+    &.hidden {
+      bottom: -350px;
+    }
+  }
+
+  button#blur {
+    grid-row: 2;
+
+  }
+  button#light {
+    grid-row: 3;
+
+  }
+  button#double {
+    grid-row: 4;
+
+  }
+  button#color {
+    grid-row: 5;
+
+  }
+  button#eyes {
+    grid-row: 6;
+  }
+
+  .button-group .controls {
+    grid-row: 1;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .button-group {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+
+    &.hidden {
+      bottom: -155px;
+    }
+  }
+
+  button#blur {
+    grid-row: 2;
+    grid-column: 1 / 3;
+
+  }
+  button#light {
+    grid-row: 2;
+    grid-column: 3/5;
+
+  }
+  button#double {
+    grid-row: 2;
+    grid-column: 5/7;
+  }
+  button#color {
+    grid-row: 3;
+    grid-column: 2/4
+
+  }
+  button#eyes {
+    grid-row: 3;
+    grid-column: 4/6;
+  }
+
+.button-group .controls {
+  grid-row: 1;
+  grid-column: 3 / 5;
+}
 }
 
 button {
@@ -276,66 +386,57 @@ button {
   color: $color2;
   background-color: white;
   border: 1px solid $color2;
-  border-radius: 30px;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.2em;
 
   &.selected {
     border: 1px solid white;
-    color: white;
-    background-color: $color2;
+    color: $color4;
+
     font-weight: bold;
   }
 }
 
-button#blur {
-  grid-row: 2 / 3;
-  grid-column: 1 / 3;
-}
-button#light {
-  grid-row: 2 / 3;
-  grid-column: 3 / 5;
-}
-button#double {
-  grid-row: 2 / 3;
-  grid-column: 5 / 7;
-}
-button#color {
-  grid-row: 3 / 4;
-  grid-column: 2 / 4;
-}
-button#eyes {
-  grid-row: 3 / 4;
-  grid-column: 4 / 6;
-}
-
 .button-group .controls {
-  grid-row: 1 / 2;
-  grid-column: 6 / 7;
 
   button {
-    height: 30px;
-    width: 30px;
     border: none;
     background-color: transparent;
+    align-self: end;
+    color: white;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    font-size: 1.3em;
 
     svg {
-      height: 100%;
-      width: 100%;
+   height: 30px;
+    width: 30px;
     }
   }
 }
 
 .back-button {
-  height: 21px;
-  width: 29px;
+  height: 40px;
+  width: 40px;
   position: fixed;
+  padding: 10px;
+  border-radius: 50%;
   top: 1em;
   left: 1em;
   z-index: 9999;
-  background-color: transparent;
+  background-color: rgba(white, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: none;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>

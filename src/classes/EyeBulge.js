@@ -9,16 +9,30 @@ import fragment from '../shaders/bulge/fragment.glsl'
 
 export default class EyeBulge {
   constructor(_options) {
-
+    this.container = document.querySelector('.container')
     this.canvasId = _options.canvasId
-    this.targetElement = document.getElementById(_options.canvasId)
-    this.gl = this.targetElement.getContext('experimental-webgl')
 
+
+
+    this.setCanvas()
     this.init()
 
 
     // handle device orientation change:
     window.addEventListener('orientationchange', this.orientationChange.bind(this), false);
+  }
+
+  setCanvas() {
+    this.canvas = document.createElement('canvas')
+    this.canvas.setAttribute('id', this.canvasId)
+    this.canvas.style.position = 'fixed'
+    this.canvas.style.inset = 0
+    this.canvas.style.height = '100%'
+    this.canvas.style.width = '100%'
+    this.container.appendChild(this.canvas)
+
+    this.targetElement = document.getElementById(this.canvasId)
+    this.gl = this.targetElement.getContext('experimental-webgl')
   }
 
   init() {

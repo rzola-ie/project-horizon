@@ -52,6 +52,7 @@ export default class Renderer {
     this.instance.domElement.style.left = 0
     this.instance.domElement.style.width = '100%'
     this.instance.domElement.style.height = '100%'
+    this.instance.domElement.setAttribute('id', 'three-canvas')
 
     // this.instance.setClearColor(0x414141, 1)
     this.instance.setClearColor(this.clearColor, 1)
