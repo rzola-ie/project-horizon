@@ -133,8 +133,7 @@ export default {
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if(!this.isMobile) {
-      document.querySelector('.turn-landscape-message').style.display = 'none'
-      document.querySelector('.turn-portrait-message').style.display = 'none'
+      document.querySelector('.orientation-modal').style.display = 'none'
     }
 
 
@@ -386,6 +385,7 @@ button {
   color: $color2;
   background-color: white;
   border: 1px solid $color2;
+  border-radius: 4px;
   font-family: "Oswald", sans-serif;
   font-size: 1.2em;
 
