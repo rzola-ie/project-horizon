@@ -118,7 +118,12 @@ export default {
     this.experience =
       this.$route.params.experience || sessionStorage.getItem("mode");
 
-    console.log(this.experience);
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    console.log(this.experience, this.isMobile);
+
+    if(!this.isMobile) {
+      document.querySelector('.horizontal-message').style.display = 'none'
+    }
 
 
     if(this.experience != 'eyes') {
