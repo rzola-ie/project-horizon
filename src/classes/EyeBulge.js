@@ -12,24 +12,20 @@ export default class EyeBulge {
     this.container = document.querySelector('.container')
     this.canvasId = _options.canvasId
 
-
-
     this.setCanvas()
     this.init()
-
-
-    // handle device orientation change:
-    window.addEventListener('orientationchange', this.orientationChange.bind(this), false);
   }
 
   setCanvas() {
-    this.canvas = document.createElement('canvas')
-    this.canvas.setAttribute('id', this.canvasId)
-    this.canvas.style.position = 'fixed'
-    this.canvas.style.inset = 0
-    this.canvas.style.height = '100%'
-    this.canvas.style.width = '100%'
-    this.container.appendChild(this.canvas)
+    if(document.querySelector('three-canvas') == null) {
+      this.canvas = document.createElement('canvas')
+      this.canvas.setAttribute('id', this.canvasId)
+      this.canvas.style.position = 'fixed'
+      this.canvas.style.inset = 0
+      this.canvas.style.height = '100%'
+      this.canvas.style.width = '100%'
+      this.container.appendChild(this.canvas)
+    }
 
     this.targetElement = document.getElementById(this.canvasId)
     this.gl = this.targetElement.getContext('experimental-webgl')
@@ -48,15 +44,9 @@ export default class EyeBulge {
         this.initFaceFilter(bestVideoSettings);
       }
     })
-  }
 
-  orientationChange() {
-    setTimeout(() => {
-      JEELIZFACEFILTER.destroy()
-      this.init()
-    }, 300)
-  }
 
+  }
 
   initFaceFilter(videoSettings) {
     JEELIZFACEFILTER.init({
@@ -106,7 +96,6 @@ export default class EyeBulge {
     this.camera = JeelizThreeHelper.create_camera();
     console.log(threeStuffs)
   }
-
 
   buildMaskMaterial(videoTransformMat2) {
     /*
@@ -182,8 +171,21 @@ export default class EyeBulge {
 
   destroy() {
     JEELIZFACEFILTER.destroy()
-    console.log('bye bestie')
-    this.gl.clear(0x000000)
+    this.container.removeChild(this.canvas)
+    this.canvas = null
+    this.camera = null
+    this.gl = null
+    // this.threeStuffs = null
+//     for( var i = this.threeStuffs.scene.children.length - 1; i >= 0; i--) { 
+//       obj = this.threeStuffs.scene.children[i];
+//       this.threeStuffs.scene.remove(obj); 
+//  }
 
+    const video = document.querySelector('video')
+    if(video) {
+      document.body.removeChild(video)
+    }
+
+    console.log('bye bestie')
   }
 }

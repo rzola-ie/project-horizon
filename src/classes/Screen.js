@@ -107,17 +107,22 @@ export default class Screen {
     this.height =  window.innerHeight
     console.log('watashi me too, me too, ooo eee ooo')
 
-    if (this.mesh) {
-      this.destroy()
-    }
+    console.log(this.container.querySelector('canvas'))
 
-      this.setShaders()
-      this.setUniforms()
-      this.setGeometry()
-      this.setMaterial()
-      this.setMesh()
-      this.setVideoFeed()
-      this.setPostProcessing()
+
+
+
+    this.destroy()
+
+    this.setShaders()
+    this.setUniforms()
+    this.setGeometry()
+    this.setMaterial()
+    this.setMesh()
+    this.setVideoFeed()
+    this.setPostProcessing()
+
+    this.renderer.instance.needsUpdate = true
   }
 
   setShaders() {
@@ -429,6 +434,8 @@ export default class Screen {
   destroy() {
     if(this.mode == 'eyes') return
 
+    console.log('should we be here')
+
     // remove the video texture
     if (this.VideoTexture) {
       this.videoTexture.dispose()
@@ -459,7 +466,7 @@ export default class Screen {
     }
 
     // remove screen mesh
-    if (this.mesh) {
+    if (this.mesh && this.mode !== 'eyes') {
       const object = this.scene.getObjectByProperty('name', 'screen');
       object.geometry.dispose();
       object.material.dispose();

@@ -98,7 +98,7 @@
     </router-link>
 
     <div class="orientation-modal" id="turn-landscape">
-      <img src="/assets/rotate.png" alt="">
+      <img src="/assets/landscape-mode.svg" alt="">
       <div class="content">
         <h2>Please turn your phone.</h2>
         <p>This experience cannot be used in portrait mode</p>
@@ -106,7 +106,7 @@
     </div>
 
     <div class="orientation-modal" id="turn-portrait">
-      <img src="/assets/rotate.png" alt="">
+      <img src="/assets/portrait-mode.svg" alt="">
       <div class="content">
         <h2>Please turn your phone.</h2>
         <p>This experience cannot be used in landscape mode</p>
@@ -160,6 +160,8 @@ export default {
       document.querySelector('.live').setAttribute('id', mode);
 
       this.scene.destroy();
+      if(document.querySelector('canvas'))
+        document.querySelector('canvas').remove()
 
       if(mode != 'eyes') {
         this.scene = new MainThreeScene({
