@@ -417,9 +417,6 @@ export default class Screen {
 
   update() {
     this.updateUniforms()
-
-    if (this.cube)
-      this.cube.update()
   }
 
   selectMode(mode) {
@@ -427,24 +424,12 @@ export default class Screen {
     sessionStorage.setItem('mode', mode);
 
     // double
-    if (this.doubleEffect)
-      this.renderer.postProcess.composer.removePass(this.doubleEffect)
-
-    // blur
-    if (this.bokehPass)
-      this.renderer.postProcess.composer.removePass(this.bokehPass)
-
-    // light
-    if (this.bloomPass)
-      this.renderer.postProcess.composer.removePass(this.bloomPass)
-
-    // color
-    if (this.colorEffect)
-      this.renderer.postProcess.composer.removePass(this.colorEffect)
+    if (this.pass)
+      this.renderer.postProcess.composer.removePass(this.pass)
 
     this.renderer.instance.needsUpdate = true;
+    this.renderer.postProcess.needsUpdate = true;
 
-    // this.setShaders()
     this.setUniforms()
     this.setPostProcessing()
   }
