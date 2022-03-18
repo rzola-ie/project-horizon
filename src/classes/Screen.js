@@ -323,23 +323,35 @@ export default class Screen {
   }
 
   addColorPass() {
-    this.colorEffect = new ShaderPass(ColorLossShader)
+    // remove any previous effects
+    if(this.pass)
+      this.renderer.postProcess.composer.removePass(this.pass)
 
-    this.renderer.postProcess.composer.addPass(this.colorEffect)
+    // add new effect
+    this.pass = new ShaderPass(ColorLossShader)
+    this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   addDoublePass() {
-    this.doubleEffect = new ShaderPass(DoubleVisionShader)
-    this.doubleEffect.uniforms.uOffset.value = this.settings.offset
-    this.doubleEffect.uniforms.uMix.value = this.settings.mix
+    // remove any previous effects
+    if(this.pass)
+      this.renderer.postProcess.composer.addPass(this.pass)
 
-    this.renderer.postProcess.composer.addPass(this.doubleEffect)
-    this.doubleEffect.needsSwap = true;
-    console.log('double pass')
+    // add new effect
+    this.pass = new ShaderPass(DoubleVisionShader)
+    this.pass.uniforms.uOffset.value = this.settings.offset
+    this.pass.uniforms.uMix.value = this.settings.mix
+
+    this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   addBlurPass() {
-    this.bokehPass = new BokehPass(this.scene, this.camera.instance, {
+    // remove any previous effects
+    if(this.pass)
+      this.renderer.postProcess.composer.addPass(this.pass)
+
+    // add new effect
+    this.pass = new BokehPass(this.scene, this.camera.instance, {
       focus: 2000.0,
       aperture: 0.01, // any non-zero number
       maxblur: 0.05,
@@ -348,17 +360,22 @@ export default class Screen {
     });
     this.bokehBlurOffset = 0;
 
-    this.renderer.postProcess.composer.addPass(this.bokehPass)
+    this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   addLightPass() {
-    this.bloomPass = new UnrealBloomPass(
+    // remove any previous effects
+    if(this.pass)
+      this.renderer.postProcess.composer.addPass(this.pass)
+
+    // add new effect
+    this.pass = new UnrealBloomPass(
       new THREE.Vector2(this.width, this.height),
       0.3, // strength
       1.5, // radius
       0.6 // threshold
     )
-    this.renderer.postProcess.composer.addPass(this.bloomPass)
+    this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   updateUniforms() {
@@ -367,33 +384,34 @@ export default class Screen {
 
       switch (this.mode) {
         case 'blur':
-          if (this.bokehPass) {
-            this.bokehPass.uniforms.focus.value = this.settings.focus
-            this.bokehPass.uniforms.aperture.value = this.settings.aperture
-            this.bokehPass.uniforms.maxblur.value = this.settings.maxBlur
+          if (this.pass) {
+            this.pass.uniforms.focus.value = this.settings.focus
+            this.pass.uniforms.aperture.value = this.settings.aperture
+            this.pass.uniforms.maxblur.value = this.settings.maxBlur
           }
           break;
         case 'color':
-          if (this.colorEffect) {
-            this.colorEffect.uniforms.uDesaturate.value = this.settings.desaturate
+          if (this.pass) {
+            this.pass.uniforms.uDesaturate.value = this.settings.desaturate
           }
           break
         case 'double':
-          if (this.doubleEffect) {
-            this.doubleEffect.uniforms.uOffset.value = this.settings.doubleOffset
-            this.doubleEffect.uniforms.uMix.value = this.settings.doubleMix
-            this.doubleEffect.uniforms.uTime.value = this.time.elapsed * 0.001
+          if (this.pass) {
+            this.pass.uniforms.uOffset.value = this.settings.doubleOffset
+            this.pass.uniforms.uMix.value = this.settings.doubleMix
+            this.pass.uniforms.uTime.value = this.time.elapsed * 0.001
           }
           break
         case 'light':
-          this.bloomPass.strength = this.settings.strength
-          this.bloomPass.radius = this.settings.radius
-          this.bloomPass.threshold = this.settings.threshold
+          this.pass.strength = this.settings.strength
+          this.pass.radius = this.settings.radius
+          this.pass.threshold = this.settings.threshold
           break
       }
 
       this.material.needsUpdate = true
       this.renderer.instance.needsUpdate = true
+      this.renderer.postProcess.needsUpdate = true
     }
   }
 
