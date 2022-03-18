@@ -105,14 +105,11 @@ export default class Screen {
     const boundings = this.container.getBoundingClientRect()
     this.width = window.innerWidth
     this.height =  window.innerHeight
-    console.log('watashi me too, me too, ooo eee ooo')
-
-    console.log(this.container.querySelector('canvas'))
 
 
 
 
-    this.destroy()
+    // this.destroy()
 
     this.setShaders()
     this.setUniforms()
@@ -122,7 +119,11 @@ export default class Screen {
     this.setVideoFeed()
     this.setPostProcessing()
 
+    this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
+    this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
+
     this.renderer.instance.needsUpdate = true
+    this.renderer.postProcess.needsUpdate = true
   }
 
   setShaders() {
@@ -305,6 +306,10 @@ export default class Screen {
   }
 
   setPostProcessing() {
+    // remove any previous effects
+    if(this.pass)
+      this.renderer.postProcess.composer.removePass(this.pass)
+
     switch (this.mode) {
       case 'blur':
         this.addBlurPass()
@@ -323,20 +328,12 @@ export default class Screen {
   }
 
   addColorPass() {
-    // remove any previous effects
-    if(this.pass)
-      this.renderer.postProcess.composer.removePass(this.pass)
-
     // add new effect
     this.pass = new ShaderPass(ColorLossShader)
     this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   addDoublePass() {
-    // remove any previous effects
-    if(this.pass)
-      this.renderer.postProcess.composer.addPass(this.pass)
-
     // add new effect
     this.pass = new ShaderPass(DoubleVisionShader)
     this.pass.uniforms.uOffset.value = this.settings.offset
@@ -346,10 +343,6 @@ export default class Screen {
   }
 
   addBlurPass() {
-    // remove any previous effects
-    if(this.pass)
-      this.renderer.postProcess.composer.addPass(this.pass)
-
     // add new effect
     this.pass = new BokehPass(this.scene, this.camera.instance, {
       focus: 2000.0,
@@ -364,10 +357,6 @@ export default class Screen {
   }
 
   addLightPass() {
-    // remove any previous effects
-    if(this.pass)
-      this.renderer.postProcess.composer.addPass(this.pass)
-
     // add new effect
     this.pass = new UnrealBloomPass(
       new THREE.Vector2(this.width, this.height),
@@ -437,8 +426,6 @@ export default class Screen {
   destroy() {
     if(this.mode == 'eyes') return
 
-    console.log('should we be here')
-
     // remove the video texture
     if (this.VideoTexture) {
       this.videoTexture.dispose()
@@ -476,6 +463,7 @@ export default class Screen {
       this.scene.remove(object);
     }
 
+    // remove debug properties
     if (this.debug) {
       this.debugFolder = null
       this.debug = null
