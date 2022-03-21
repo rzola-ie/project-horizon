@@ -1,8 +1,6 @@
 <template>
   <div class="live" :id="$route.params.experience">
-    <div class="container" ref="container">
-
-    </div>
+    <div class="container" ref="container"></div>
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
         <button
@@ -98,18 +96,80 @@
     </router-link>
 
     <div class="orientation-modal" id="turn-landscape">
-      <img src="/assets/landscape-mode.svg" alt="">
-      <div class="content">
-        <h2>Please turn your phone.</h2>
-        <p>This experience cannot be used in portrait mode</p>
+      <router-link class="back-button" to="/live">
+        <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
+          <line
+            x1="2"
+            y1="14.5"
+            x2="16"
+            y2="2"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <line
+            x1="2"
+            y1="14.5"
+            x2="38"
+            y2="14.5"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <line
+            x1="2"
+            y1="14.5"
+            x2="16"
+            y2="27"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+        </svg>
+      </router-link>
+
+      <div class="body">
+        <img src="/assets/landscape-mode.svg" alt="">
+        <div class="content">
+          <h2>Please turn your phone.</h2>
+          <p>This experience cannot be used in portrait mode</p>
+        </div>
       </div>
     </div>
 
     <div class="orientation-modal" id="turn-portrait">
-      <img src="/assets/portrait-mode.svg" alt="">
-      <div class="content">
-        <h2>Please turn your phone.</h2>
-        <p>This experience cannot be used in landscape mode</p>
+      <router-link class="back-button" to="/live">
+        <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
+          <line
+            x1="2"
+            y1="14.5"
+            x2="16"
+            y2="2"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <line
+            x1="2"
+            y1="14.5"
+            x2="38"
+            y2="14.5"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <line
+            x1="2"
+            y1="14.5"
+            x2="16"
+            y2="27"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+        </svg>
+      </router-link>
+
+      <div class="body">
+        <img src="/assets/portrait-mode.svg" alt="">
+        <div class="content">
+          <h2>Please turn your phone.</h2>
+          <p>This experience cannot be used in landscape mode</p>
+        </div>
       </div>
     </div>
   </div>
@@ -232,8 +292,15 @@ export default {
     width: 150px;
   }
 
-  .content {
+  .header {
+    padding: 1em
+  }
+
+  .body {
     padding: 0 3.5em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     * {
       color: $color2;
