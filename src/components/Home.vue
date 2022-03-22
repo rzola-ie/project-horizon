@@ -66,8 +66,14 @@ h1 {
   margin-bottom: 1.5em;
 }
 
+.info {
+
+}
+
 .info p {
   padding: 0 1em;
+    font-size: 0.95em;
+    line-height: 1.4;
 }
 
 h2 {
@@ -105,7 +111,7 @@ p {
   padding: 2em;
   text-decoration: none;
   transition: background-color 250ms ease-in-out;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 0.4em;
   display: flex;
   flex-direction: column;
@@ -123,7 +129,7 @@ a img {
 }
 
 .modes a.live {
-  background-color: $color3;
+  background-color: #F7F5E5;
   color: $color2;
 
   h2 {
