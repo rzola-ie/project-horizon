@@ -75,7 +75,7 @@ export default {};
 
 h1 {
   margin-bottom: 0.5em;
-  padding: 0.5em 2em;
+  padding: 0.8em 2em;
   font-weight: 500;
   font-size: 1.2em;
   font-family: "Barlow", sans-serif;
@@ -89,7 +89,7 @@ h1 {
 
 .symptoms {
   width: 100%;
-  padding: 1.6em 0.5em;
+  padding: 1.6em 0.8em;
   display: grid;
   flex: 1;
   grid-template-rows: repeat(5, auto);
@@ -115,10 +115,9 @@ h1 {
   justify-content: space-between;
   justify-items: center;
   align-items: center;
-  border-radius: 0.4em;
   color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  background-color: white;
+  background-color: $color3;
   font-family: "Oswald", sans-serif;
   font-size: 1.3em;
   font-weight: bold;

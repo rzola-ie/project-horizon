@@ -66,10 +66,6 @@ h1 {
   margin-bottom: 1.5em;
 }
 
-.info {
-
-}
-
 .info p {
   padding: 0 1em;
     font-size: 0.95em;
@@ -129,7 +125,7 @@ a img {
 }
 
 .modes a.live {
-  background-color: #F7F5E5;
+  background-color: $color3;
   color: $color2;
 
   h2 {
