@@ -1,7 +1,7 @@
 <template>
   <header id="header" v-show="!isExperiencePage">
     <button v-if="!isHomePage" class="back" @click="goBack">
-      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
+      <svg height="28" width="40" viewBox="0 0 40 29" :stroke="isExperiencePage ? '#3d7664' : '#ffffff'">
         <line
           x1="2"
           y1="14.5"
@@ -44,6 +44,9 @@ export default {
     },
     isExperiencePage() {
       return this.$route.name == "liveExperience";
+    },
+    isSymptomsPage() {
+      return this.$route.name == 'liveMode'
     }
   },
   methods: {

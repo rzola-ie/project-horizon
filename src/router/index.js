@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/live',
-    name: 'Live Mode',
+    name: 'liveMode',
     component: LiveMode
   },
   {
