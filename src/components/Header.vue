@@ -1,34 +1,6 @@
 <template>
   <header id="header" v-show="!isExperiencePage">
-    <button v-if="isHomePage">
-      <svg height="32" width="32" viewBox="0 0 32 32" stroke="#3d7664">
-        <line
-          x1="3"
-          y1="3"
-          x2="28"
-          y2="3"
-          stroke-width="6"
-          stroke-linecap="round"
-        />
-        <line
-          x1="3"
-          y1="15.5"
-          x2="16"
-          y2="15.5"
-          stroke-width="6"
-          stroke-linecap="round"
-        />
-        <line
-          x1="3"
-          y1="29"
-          x2="28"
-          y2="29"
-          stroke-width="6"
-          stroke-linecap="round"
-        />
-      </svg>
-    </button>
-    <button v-else class="back" @click="goBack">
+    <button v-if="!isHomePage" class="back" @click="goBack">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
         <line
           x1="2"
@@ -56,7 +28,6 @@
         />
       </svg>
     </button>
-    <img src="/assets/tepezza.svg" alt="" />
   </header>
 </template>
 
@@ -90,12 +61,13 @@ export default {
   left: 0;
   right: 0;
   max-height: 60px;
-
+  min-height: 60px;
   padding: 0.5em 1em;
-
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   /* justify-content: center; */
+  background-color: $color2;
+  z-index: 9999;
 }
 
 #header > img {

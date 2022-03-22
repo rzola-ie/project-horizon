@@ -31,9 +31,8 @@ $header-clearing: 6em;
 body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   font-family: "Barlow", sans-serif;
-  background-color: $color3;
+  // background-color: $color3;
 }
 
 * {

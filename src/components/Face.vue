@@ -7,8 +7,7 @@
 </template>
 
 <script>
-import EyeBulge from "../classes/EyeBulge";
-import EyeRed from "../classes/EyeRed";
+import JeelizTest from '../classes/JeelizTest'
 
 export default {
   data() {
@@ -18,14 +17,7 @@ export default {
     };
   },
   mounted() {
-    this.experience =
-      this.$route.params.experience || sessionStorage.getItem("mode");
-
-    if (this.experience == "eyes")
-      this.scene = new EyeBulge({ canvasId: "three-canvas" });
-
-    if (this.experience == "red")
-      this.scene = new EyeRed({ canvasId: "three-canvas" });
+      this.scene = new JeelizTest({ canvasId: "three-canvas" });
   },
   unmounted() {
     this.scene.destroy();
@@ -55,15 +47,6 @@ export default {
   overflow: hidden;
   inset: 6em 0 0;
   z-index: 1;
-
-  @media screen and (min-width: 768px) {
-    position: relative;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    // inset: 50%;
-    // transform: translate(-50%, -50%);
-  }
 }
 
 .container canvas {
