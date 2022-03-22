@@ -29,8 +29,6 @@ export default {
 $header-clearing: 6em;
 
 body {
-  width: 100vw;
-  height: 100vh;
   font-family: "Barlow", sans-serif;
   // background-color: $color3;
 }

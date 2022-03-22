@@ -10,7 +10,7 @@
         :to="{ name: 'liveExperience', params: { experience: 'blur' } }"
       >
         <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
-        Blurry Vision
+        Blurred Vision
       </router-link>
 
       <router-link
@@ -75,7 +75,7 @@ export default {};
 
 h1 {
   margin-bottom: 0.5em;
-  padding: 0 2em;
+  padding: 0.5em 2em;
   font-weight: 500;
   font-size: 1.2em;
   font-family: "Barlow", sans-serif;
@@ -108,7 +108,7 @@ h1 {
   position: relative;
 
   width: 100%;
-  padding: 1em;
+  padding: 0 1em;
   display: grid;
   grid-template-columns: auto 1fr;
   // flex-direction: column;
@@ -119,6 +119,8 @@ h1 {
   color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background-color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.3em;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
