@@ -1,7 +1,6 @@
 <template>
   <div class="face">
     <div class="container" ref="container">
-      <canvas id="three-canvas"></canvas>
     </div>
   </div>
 </template>
@@ -17,7 +16,7 @@ export default {
     };
   },
   mounted() {
-      this.scene = new JeelizTest({ canvasId: "three-canvas" });
+      this.scene = new JeelizTest({ targetElement: this.$refs.container });
   },
   unmounted() {
     this.scene.destroy();
@@ -27,13 +26,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.face {
-  $header-offset: 6em;
+$header-offset: 60px;
 
-  position: relative;
+.face {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
-  margin-top: $header-offset;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -43,15 +43,10 @@ export default {
 }
 
 .container {
-  position: fixed;
-  overflow: hidden;
-  inset: 6em 0 0;
-  z-index: 1;
-}
-
-.container canvas {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+  z-index: 1;
 }
 
 @media screen and (orientation: portrait) {
@@ -67,32 +62,6 @@ export default {
   .horizontal-message {
     // color: red;
     display: none;
-  }
-}
-
-.button-group {
-  position: fixed;
-  width: 100%;
-  padding: 1em;
-  display: flex;
-  gap: 1em;
-  bottom: 1em;
-  left: 0;
-  z-index: 9999;
-}
-
-button {
-  color: white;
-  width: 33%;
-  padding: 0.2em;
-  color: yellow;
-  background-color: rgba(#4bc0e1, 0.4);
-  border: 1px solid yellow;
-
-  &.selected {
-    border: 1px solid #4bc0e1;
-    color: teal;
-    background-color: yellow;
   }
 }
 </style>
