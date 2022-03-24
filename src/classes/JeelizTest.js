@@ -6,6 +6,8 @@ import fragment from '../shaders/jeelizTest/fragment.glsl'
 
 export default class JeelizTest {
     constructor(_options) {
+      this.bind()
+
       this.targetElement = _options.targetElement
       this.canvasId = 'three-canvas'
       this.width = this.targetElement.clientWidth
@@ -48,7 +50,7 @@ export default class JeelizTest {
     }
 
     setResize() {
-      window.addEventListener('resize', this.resize.bind(this))
+      window.addEventListener('resize', this.resize)
     }
     
     setScene() {
@@ -92,9 +94,7 @@ export default class JeelizTest {
 
     setMaterial() {
       // this.material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-      this.material = new THREE.MeshBasicMaterial({
-        map: null
-      })
+      this.material = new THREE.MeshBasicMaterial()
     }
 
     setMesh() {
@@ -159,6 +159,12 @@ export default class JeelizTest {
     render() {
       this.renderer.render(this.scene, this.camera)
       this.material.map = this.videoTexture
-      requestAnimationFrame(this.render.bind(this))
+      this.material.needsUpdate = true
+      requestAnimationFrame(this.render)
+    }
+
+    bind() {
+      this.resize = this.resize.bind(this)
+      this.render = this.render.bind(this)
     }
 }
