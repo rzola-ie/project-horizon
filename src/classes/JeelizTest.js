@@ -6,6 +6,8 @@ import fragment from '../shaders/jeelizTest/fragment.glsl'
 
 export default class JeelizTest {
     constructor(_options) {
+      this.bind()
+
       this.targetElement = _options.targetElement
       this.canvasId = 'three-canvas'
       this.width = this.targetElement.clientWidth
@@ -26,6 +28,7 @@ export default class JeelizTest {
           this.setGeometry()
           this.setMaterial()
           this.setMesh()
+          this.setDebug()
           this.resize()
           this.setResize()
           this.setVideoTexture()
@@ -36,19 +39,58 @@ export default class JeelizTest {
     }
 
     resize() {
-      this.width = this.targetElement.clientWidth
-      this.height = this.targetElement.clientHeight
+      JeelizResizer.size_canvas({
+        canvasId: this.canvasId,
+        callback: (isError, bestVideoSettings) => {
+          if (isError) {
+            console.log('failed to init canvas')
+            return
+          }
+          this.setIdealDimensions(bestVideoSettings.idealWidth, bestVideoSettings.idealHeight)
+          this.video.style.height = this.idealWidth //* window.devicePixelRatio
+          this.video.style.width = this.idealHeight //* window.devicePixelRatio
+          this.width = this.targetElement.clientWidth
+          this.height = this.targetElement.clientHeight
+    
+          this.camera.aspect = this.width / this.height
+          this.camera.fov = 2 * Math.atan((this.height / 2) / 600) * 180 / Math.PI
+          this.camera.updateProjectionMatrix()
+    
+          this.renderer.domElement.style.width = `100%`
+          this.renderer.domElement.style.height = `100%`
+          this.renderer.setSize(this.width, this.height)
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          this.renderer.needsUpdate = true
+          console.log('lesgooooo', this.width, this.height)
 
-      this.camera.aspect = this.width / this.height
-      this.camera.fov = 2 * Math.atan((this.height / 2) / 600) * 180 / Math.PI
-      this.camera.updateProjectionMatrix()
+          this.mesh.scale.set(this.width, this.height, 1)
 
-      this.renderer.setSize(this.width, this.height)
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          this.panel.innerHTML = `
+          <p>${this.width} x ${this.height}</p>
+        `
+        }
+      })
+    }
+
+    setDebug() {
+      this.panel = document.createElement('div')
+      this.panel.style.position = 'absolute'
+      this.panel.style.bottom = '1em'
+      this.panel.style.right = '1em'
+      this.panel.style.padding = '0.5em'
+      this.panel.style.backgroundColor = 'rgba(0, 0, 0, 0.3)'
+      this.panel.style.color = 'white'
+      this.panel.style.zIndex = 9999
+      
+      this.panel.innerHTML = `
+        <p>${this.width} x ${this.height}</p>
+      `
+
+      this.targetElement.appendChild(this.panel)
     }
 
     setResize() {
-      window.addEventListener('resize', this.resize.bind(this))
+      window.addEventListener('resize', this.resize)
     }
     
     setScene() {
@@ -92,9 +134,7 @@ export default class JeelizTest {
 
     setMaterial() {
       // this.material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-      this.material = new THREE.MeshBasicMaterial({
-        map: null
-      })
+      this.material = new THREE.MeshBasicMaterial()
     }
 
     setMesh() {
@@ -105,12 +145,12 @@ export default class JeelizTest {
 
     setVideoTexture() {
       this.video = document.createElement('video')
+
       this.video.style.height = this.idealWidth //* window.devicePixelRatio
       this.video.style.width = this.idealHeight //* window.devicePixelRatio
       this.video.style.transform = `scale(0.0001, 0.0001)`
       this.video.style.position = `fixed`
       this.video.style.top = `-1000em`
-      // this.video.style.top = `0`
       this.video.style.left = `0`
       this.video.style.bottom = `0`
       this.video.style.right = `0`
@@ -127,7 +167,6 @@ export default class JeelizTest {
     }
 
     setVideoFeed() {
-      console.log('flenin', this.idealWidth, this.idealHeight)
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const constraints = {
           audio: false,
@@ -144,8 +183,6 @@ export default class JeelizTest {
           // this.localStream = stream
           this.video.srcObject = stream
           window.localStream = stream
-
-          console.log('in here god dammit')
   
         }).catch((error) => {
           console.error('Unable to access the camera/webcam', error)
@@ -160,8 +197,14 @@ export default class JeelizTest {
     }
 
     render() {
-      this.material.map = this.videoTexture
       this.renderer.render(this.scene, this.camera)
-      requestAnimationFrame(this.render.bind(this))
+      this.material.map = this.videoTexture
+      this.material.needsUpdate = true
+      requestAnimationFrame(this.render)
+    }
+
+    bind() {
+      this.resize = this.resize.bind(this)
+      this.render = this.render.bind(this)
     }
 }
