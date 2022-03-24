@@ -3,7 +3,8 @@ import Home from '../components/Home.vue'
 import StoryMode from '../components/StoryMode.vue'
 import LiveMode from '../components/LiveMode.vue'
 import Experience from '@/components/Experience.vue'
-import Face from '@/components/Face.vue'
+import Debug from '@/components/Debug.vue'
+import Frame from '@/components/Frame.vue'
 
 const routes = [
   {
@@ -27,10 +28,16 @@ const routes = [
     component: Experience,
   },
   {
-    path: '/face',
-    name: 'faceExperience',
-    component: Face,
+    path: '/debug',
+    name: 'debugExperience',
+    component: Debug,
   },
+  {
+    path: '/frame',
+    name: 'iframeExperience',
+    component: Frame,
+  },
+
 ]
 
 const router = createRouter({

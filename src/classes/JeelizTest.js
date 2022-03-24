@@ -28,6 +28,7 @@ export default class JeelizTest {
           this.setGeometry()
           this.setMaterial()
           this.setMesh()
+          this.setDebug()
           this.resize()
           this.setResize()
           this.setVideoTexture()
@@ -63,8 +64,29 @@ export default class JeelizTest {
           console.log('lesgooooo', this.width, this.height)
 
           this.mesh.scale.set(this.width, this.height, 1)
+
+          this.panel.innerHTML = `
+          <p>${this.width} x ${this.height}</p>
+        `
         }
       })
+    }
+
+    setDebug() {
+      this.panel = document.createElement('div')
+      this.panel.style.position = 'absolute'
+      this.panel.style.bottom = '1em'
+      this.panel.style.right = '1em'
+      this.panel.style.padding = '0.5em'
+      this.panel.style.backgroundColor = 'rgba(0, 0, 0, 0.3)'
+      this.panel.style.color = 'white'
+      this.panel.style.zIndex = 9999
+      
+      this.panel.innerHTML = `
+        <p>${this.width} x ${this.height}</p>
+      `
+
+      this.targetElement.appendChild(this.panel)
     }
 
     setResize() {
