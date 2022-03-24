@@ -105,12 +105,12 @@ export default class JeelizTest {
 
     setVideoTexture() {
       this.video = document.createElement('video')
+
       this.video.style.height = this.idealWidth //* window.devicePixelRatio
       this.video.style.width = this.idealHeight //* window.devicePixelRatio
       this.video.style.transform = `scale(0.0001, 0.0001)`
       this.video.style.position = `fixed`
       this.video.style.top = `-1000em`
-      // this.video.style.top = `0`
       this.video.style.left = `0`
       this.video.style.bottom = `0`
       this.video.style.right = `0`
@@ -127,7 +127,6 @@ export default class JeelizTest {
     }
 
     setVideoFeed() {
-      console.log('flenin', this.idealWidth, this.idealHeight)
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const constraints = {
           audio: false,
@@ -144,8 +143,6 @@ export default class JeelizTest {
           // this.localStream = stream
           this.video.srcObject = stream
           window.localStream = stream
-
-          console.log('in here god dammit')
   
         }).catch((error) => {
           console.error('Unable to access the camera/webcam', error)
@@ -160,8 +157,8 @@ export default class JeelizTest {
     }
 
     render() {
-      this.material.map = this.videoTexture
       this.renderer.render(this.scene, this.camera)
+      this.material.map = this.videoTexture
       requestAnimationFrame(this.render.bind(this))
     }
 }
