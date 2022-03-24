@@ -38,15 +38,33 @@ export default class JeelizTest {
     }
 
     resize() {
-      this.width = this.targetElement.clientWidth
-      this.height = this.targetElement.clientHeight
+      JeelizResizer.size_canvas({
+        canvasId: this.canvasId,
+        callback: (isError, bestVideoSettings) => {
+          if (isError) {
+            console.log('failed to init canvas')
+            return
+          }
+          this.setIdealDimensions(bestVideoSettings.idealWidth, bestVideoSettings.idealHeight)
+          this.video.style.height = this.idealWidth //* window.devicePixelRatio
+          this.video.style.width = this.idealHeight //* window.devicePixelRatio
+          this.width = this.targetElement.clientWidth
+          this.height = this.targetElement.clientHeight
+    
+          this.camera.aspect = this.width / this.height
+          this.camera.fov = 2 * Math.atan((this.height / 2) / 600) * 180 / Math.PI
+          this.camera.updateProjectionMatrix()
+    
+          this.renderer.domElement.style.width = `100%`
+          this.renderer.domElement.style.height = `100%`
+          this.renderer.setSize(this.width, this.height)
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          this.renderer.needsUpdate = true
+          console.log('lesgooooo', this.width, this.height)
 
-      this.camera.aspect = this.width / this.height
-      this.camera.fov = 2 * Math.atan((this.height / 2) / 600) * 180 / Math.PI
-      this.camera.updateProjectionMatrix()
-
-      this.renderer.setSize(this.width, this.height)
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          this.mesh.scale.set(this.width, this.height, 1)
+        }
+      })
     }
 
     setResize() {
