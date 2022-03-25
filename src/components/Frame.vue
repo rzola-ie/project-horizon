@@ -26,7 +26,7 @@ export default {
         iframe.getAttribute('src'),
         iframe.getAttribute('name'),
 				`height=844,
-				width=390
+				width=408
 				directories=no,
 				titlebar=1,
 				location=0,
