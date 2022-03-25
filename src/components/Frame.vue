@@ -25,7 +25,7 @@ export default {
       const newWindow = window.open(
         iframe.getAttribute('src'),
         iframe.getAttribute('name'),
-				`height=844,
+				`height=864,
 				width=408
 				directories=no,
 				titlebar=1,
