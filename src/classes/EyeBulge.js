@@ -11,9 +11,11 @@ export default class EyeBulge {
   constructor(_options) {
     this.container = document.querySelector('.container')
     this.canvasId = _options.canvasId
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.setCanvas()
     this.init()
+    console.log(screen.orientation.type.includes('portrait'), isMobile)
   }
 
   setCanvas() {
@@ -32,7 +34,6 @@ export default class EyeBulge {
   }
 
   init() {
-    console.log('flenin')
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: (isError, bestVideoSettings) => {
@@ -94,7 +95,6 @@ export default class EyeBulge {
     });
 
     this.camera = JeelizThreeHelper.create_camera();
-    console.log(threeStuffs)
   }
 
   buildMaskMaterial(videoTransformMat2) {
@@ -185,7 +185,5 @@ export default class EyeBulge {
     if(video) {
       document.body.removeChild(video)
     }
-
-    console.log('bye bestie')
   }
 }

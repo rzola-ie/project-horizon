@@ -51,6 +51,7 @@
         <img src="/assets/Red.svg" alt="" />
         Redness
       </router-link> -->
+      <div class="symptom"></div>
     </div>
   </div>
 </template>
@@ -68,9 +69,7 @@ export default {};
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 768px) {
-    padding: 2em;
-  }
+
 }
 
 h1 {
@@ -82,9 +81,16 @@ h1 {
   text-align: center;
   color: $color2;
 
-  @media screen and (min-width: 768px) {
-    font-size: 2em
+  @media screen and (orientation: portrait) {
+
   }
+
+  @media screen and (orientation: landscape) {
+    margin: auto;
+    max-width: 500px;
+    padding: 0.4em 2em;
+  }
+
 }
 
 .symptoms {
@@ -92,14 +98,19 @@ h1 {
   padding: 1.6em 0.8em;
   display: grid;
   flex: 1;
+  grid-template-columns: 1fr;
   grid-template-rows: repeat(5, auto);
   background-color: $color2;
-  // grid-template-columns: repeat(2, auto);
   gap: 0.5em;
 
-  @media screen and (min-width: 768px) {
-    gap: 2em;
-    grid-template-rows: repeat(5, 1fr);
+
+  @media screen and (orientation: portrait) {
+    width: clamp(375px, 100%, 550px);
+  }
+
+  @media screen and (orientation: landscape) {
+    gap: 1em;
+    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -107,12 +118,10 @@ h1 {
 .symptom {
   position: relative;
 
-  width: 100%;
-  padding: 0 1em;
   display: grid;
   grid-template-columns: auto 1fr;
-  // flex-direction: column;
   justify-content: space-between;
+  justify-self: center;
   justify-items: center;
   align-items: center;
   color: $color2;
@@ -139,9 +148,24 @@ h1 {
     color: white;
   }
 
-  & img {
-    height: 90px;
-    width: 90px;
+  @media screen and (orientation: portrait) {
+    width: clamp(375px, 100%, 550px);
+    padding: 0 1em;
+
+    & img {
+      height: 90px;
+      width: 90px;
+    }
+  }
+
+  @media screen and (orientation: landscape) {
+    width: 100%;
+    padding: 0 0.5em;
+
+    & img {
+      height: 60px;
+      width: 60px;
+    }
   }
 }
 </style>
