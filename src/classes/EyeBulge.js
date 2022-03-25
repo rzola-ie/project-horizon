@@ -15,7 +15,7 @@ export default class EyeBulge {
 
     this.setCanvas()
     this.init()
-    console.log(screen.orientation.type.includes('portrait'), isMobile)
+    console.log(screen.orientation.type.includes('portrait'),this.isMobile)
   }
 
   setCanvas() {

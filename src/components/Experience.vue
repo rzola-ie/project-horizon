@@ -1,6 +1,21 @@
 <template>
   <div class="live" :id="$route.params.experience">
     <div class="container" ref="container"></div>
+
+    <svg viewBox="0 0 8 17" class="overlay" v-if="!hideOverlay">
+      <defs>
+        <mask id="eye-mask" maskUnits="objectBoundingBox">
+          <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
+          <rect x="0.1" y="4.5" width="7.8" height="2.5" fill="black" />
+        </mask>
+      </defs>
+      <g mask="url(#eye-mask)">
+        <rect x="0" y="0" width="8" height="17" fill="black" />
+      </g>  
+
+      <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
+    </svg>
+
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
         <button
@@ -184,11 +199,14 @@ export default {
     return {
       experience: "",
       hideControls: true,
+      hideOverlay: false
     };
   },
   mounted() {
     this.experience =
       this.$route.params.experience || sessionStorage.getItem("mode");
+
+    this.hideOverlay = this.experience !== 'eyes'
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -251,6 +269,13 @@ export default {
     justify-content: center;
     align-items: center;
   }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
 .container {
