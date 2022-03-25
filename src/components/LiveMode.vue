@@ -156,6 +156,10 @@ h1 {
       height: 90px;
       width: 90px;
     }
+
+    &:last-child {
+      display: none;
+    }
   }
 
   @media screen and (orientation: landscape) {
