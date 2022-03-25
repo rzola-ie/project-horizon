@@ -15,7 +15,7 @@ export default {
       iframe.setAttribute("height", "844px");
       iframe.setAttribute("width", "390px");
       iframe.setAttribute("scrolling", "auto");
-      iframe.setAttribute("src", "http://localhost:8083");
+      iframe.setAttribute("src", window.origin);
       iframe.setAttribute("frameborder", "1");
       iframe.setAttribute("name", "symptoms simulator");
       iframe.setAttribute("marginheight", "0px");
@@ -23,18 +23,20 @@ export default {
       iframe.style.border = "0px none #ffffff";
 
       const newWindow = window.open(
-        "http://localhost:8083",
-        "symptoms simulator",
+        iframe.getAttribute('src'),
+        iframe.getAttribute('name'),
 				`height=844,
 				width=390
 				directories=no,
-				titlebar=no,
+				titlebar=1,
 				location=0,
 				status=no,
 				menubar=no,
-				scrollbars,
+				scrollbars=no,
 				resizable=no`
       );
+		console.log(newWindow)
+			newWindow.document.write(iframe.outerHTML);
     },
   },
 };
