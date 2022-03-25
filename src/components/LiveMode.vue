@@ -51,6 +51,7 @@
         <img src="/assets/Red.svg" alt="" />
         Redness
       </router-link> -->
+      <div class="symptom"></div>
     </div>
   </div>
 </template>
@@ -147,14 +148,14 @@ h1 {
     color: white;
   }
 
-  & img {
-    height: 90px;
-    width: 90px;
-  }
-
   @media screen and (orientation: portrait) {
     width: clamp(375px, 100%, 550px);
     padding: 0 1em;
+
+    & img {
+      height: 90px;
+      width: 90px;
+    }
   }
 
   @media screen and (orientation: landscape) {
