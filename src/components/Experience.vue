@@ -2,7 +2,7 @@
   <div class="live" :id="$route.params.experience">
     <div class="container" ref="container"></div>
 
-    <svg viewBox="0 0 8 17" class="overlay" v-if="!hideOverlay">
+    <svg viewBox="0 0 8 17" class="overlay" v-if="hideOverlay == false">
       <defs>
         <mask id="eye-mask" maskUnits="objectBoundingBox">
           <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
@@ -245,11 +245,13 @@ export default {
         document.querySelector('video').remove()
 
       if(mode != 'eyes') {
+        this.hideOverlay = true
         this.scene = new MainThreeScene({
           targetElement: this.$refs.container,
           mode: this.experience,
         });
       } else {
+        this.hideOverlay = false
         this.scene = new EyeBulge({ canvasId: "three-canvas" });
       }
 

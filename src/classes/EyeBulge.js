@@ -183,9 +183,8 @@ export default class EyeBulge {
     this.camera = null
     this.gl = null
 
-    const video = document.querySelector('video')
-    if(video) {
-      document.body.removeChild(video)
+    if(document.querySelector('video')) {
+      document.querySelector('video').remove()
     }
   }
 
