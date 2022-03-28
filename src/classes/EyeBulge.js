@@ -9,12 +9,15 @@ import fragment from '../shaders/bulge/fragment.glsl'
 
 export default class EyeBulge {
   constructor(_options) {
+    this.bind()
+
     this.container = document.querySelector('.container')
     this.canvasId = _options.canvasId
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.setCanvas()
     this.init()
+    this.setResize()
     console.log(screen.orientation.type.includes('portrait'),this.isMobile)
   }
 
@@ -33,7 +36,12 @@ export default class EyeBulge {
     this.gl = this.targetElement.getContext('experimental-webgl')
   }
 
+  setResize() {
+    window.addEventListener('resize', this.init, false)
+  }
+
   init() {
+    console.log('flibity doooooo')
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: (isError, bestVideoSettings) => {
@@ -45,15 +53,13 @@ export default class EyeBulge {
         this.initFaceFilter(bestVideoSettings);
       }
     })
-
-
   }
 
-  initFaceFilter(videoSettings) {
+  initFaceFilter(bestVideoSettings) {
     JEELIZFACEFILTER.init({
       canvasId: this.canvasId,
       NNCPath: '/neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
-      videoSettings: videoSettings,
+      videoSettings: bestVideoSettings,
       callbackReady: (errCode, spec) => {
         if (errCode) {
           console.log('AN ERROR HAPPENS. ERROR CODE =', errCode);
@@ -170,20 +176,20 @@ export default class EyeBulge {
   update() { }
 
   destroy() {
+    window.removeEventListener('resize', this.init, false)
     JEELIZFACEFILTER.destroy()
     this.container.removeChild(this.canvas)
     this.canvas = null
     this.camera = null
     this.gl = null
-    // this.threeStuffs = null
-//     for( var i = this.threeStuffs.scene.children.length - 1; i >= 0; i--) { 
-//       obj = this.threeStuffs.scene.children[i];
-//       this.threeStuffs.scene.remove(obj); 
-//  }
 
     const video = document.querySelector('video')
     if(video) {
       document.body.removeChild(video)
     }
+  }
+
+  bind() {
+    this.init = this.init.bind(this)
   }
 }

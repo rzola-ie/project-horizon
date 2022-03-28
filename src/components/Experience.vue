@@ -238,8 +238,11 @@ export default {
       document.querySelector('.live').setAttribute('id', mode);
 
       this.scene.destroy();
-      if(document.querySelector('canvas'))
-        document.querySelector('canvas').remove()
+      if(document.querySelector('#three-canvas'))
+        document.querySelector('#three-canvas').remove()
+
+      if(document.querySelector('video'))
+        document.querySelector('video').remove()
 
       if(mode != 'eyes') {
         this.scene = new MainThreeScene({
