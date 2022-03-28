@@ -73,7 +73,7 @@ export default {};
 }
 
 h1 {
-  margin-bottom: 0.5em;
+  margin: auto;
   padding: 0.8em 2em;
   font-weight: 500;
   font-size: 1.2em;
@@ -83,10 +83,10 @@ h1 {
 
   @media screen and (orientation: portrait) {
 
+    width: clamp(375px, 100%, 550px);
   }
 
   @media screen and (orientation: landscape) {
-    margin: auto;
     max-width: 500px;
     padding: 0.4em 2em;
   }
