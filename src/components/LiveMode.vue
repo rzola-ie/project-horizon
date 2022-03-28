@@ -104,9 +104,6 @@ h1 {
   gap: 0.5em;
 
 
-  @media screen and (orientation: portrait) {
-    width: clamp(375px, 100%, 550px);
-  }
 
   @media screen and (orientation: landscape) {
     gap: 1em;
