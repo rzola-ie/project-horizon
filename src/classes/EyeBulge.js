@@ -19,7 +19,7 @@ export default class EyeBulge {
   }
 
   setCanvas() {
-    if(document.querySelector('three-canvas') == null) {
+    if(document.querySelector('#three-canvas') == null) {
       this.canvas = document.createElement('canvas')
       this.canvas.setAttribute('id', this.canvasId)
       this.canvas.style.position = 'fixed'
