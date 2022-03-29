@@ -74,7 +74,7 @@ export default {};
 
 h1 {
   margin: auto;
-  padding: 0.8em 2em;
+  padding: 0.8em 1em;
   font-weight: 500;
   font-size: 1.2em;
   font-family: "Barlow", sans-serif;
