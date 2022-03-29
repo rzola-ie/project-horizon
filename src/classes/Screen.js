@@ -26,9 +26,9 @@ export default class Screen {
         fragment: defaultFragment,
         vertex: defaultVertex,
         settings: {
-          focus: 2000.0,
-          aperture: 0.01,
-          maxBlur: 0.05
+          focus: 2000.0,  // this does not matter
+          aperture: 0.01, // any non-zero number
+          maxBlur: 0.02
         }
       },
       color: {
@@ -345,9 +345,9 @@ export default class Screen {
   addBlurPass() {
     // add new effect
     this.pass = new BokehPass(this.scene, this.camera.instance, {
-      focus: 2000.0,
+      focus: 2000.0, // this doesnt matter
       aperture: 0.01, // any non-zero number
-      maxblur: 0.05,
+      maxblur: 0.01,
       width: this.config.width,
       height: this.config.height
     });
