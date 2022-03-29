@@ -120,11 +120,12 @@ h1 {
   justify-self: center;
   justify-items: center;
   align-items: center;
+  gap: 0.5em;
   color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background-color: $color3;
   font-family: "Oswald", sans-serif;
-  font-size: 1.3em;
+  font-size: 1em;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
@@ -133,9 +134,9 @@ h1 {
     background-color: lighten($color2, 60%);
     &::after {
       content: "";
-      inset: 8px;
+      inset: 4px;
       position: absolute;
-      border: 4px solid $color2;
+      border: 2px solid $color2;
     }
   }
 
@@ -163,8 +164,8 @@ h1 {
     padding: 0 0.5em;
 
     & img {
-      height: 60px;
-      width: 60px;
+      height: 50px;
+      width: 50px;
     }
   }
 }
