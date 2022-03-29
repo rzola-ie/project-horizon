@@ -213,6 +213,7 @@ export default {
     if(!this.isMobile) {
       document.querySelector('#turn-landscape').style.display = 'none'
       document.querySelector('#turn-portrait').style.display = 'none'
+      document.querySelector('.overlay').style.display = 'none'
     }
 
 
