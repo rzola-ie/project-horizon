@@ -46,14 +46,7 @@ export default class EyeBulge {
   init() {
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
-      callback: (isError, bestVideoSettings) => {
-        if (isError) {
-          console.log('failed to init canvas')
-          return
-        }
-
-        this.initFaceFilter(bestVideoSettings);
-      },
+      callback: this.initFaceFilter,
       // onResize: () => {
       //   console.log('het')
       //   JeelizThreeHelper.update_camera(this.camera);
@@ -71,6 +64,7 @@ export default class EyeBulge {
         'maxWidth': 1920,    // max video width in pixels
         'maxHeight': 1920    // max video height in pixels
       },
+      followZRot: true,
       callbackReady: (errCode, spec) => {
         if (errCode) {
           console.log('AN ERROR HAPPENS. ERROR CODE =', errCode);
@@ -193,7 +187,7 @@ export default class EyeBulge {
   update() { }
 
   destroy() {
-    window.removeEventListener('resize', this.init, false)
+    window.removeEventListener('resize', this.resize, false)
     JEELIZFACEFILTER.destroy()
     this.container.removeChild(this.canvas)
     this.canvas = null
@@ -207,5 +201,7 @@ export default class EyeBulge {
 
   bind() {
     this.init = this.init.bind(this)
+    this.resize = this.resize.bind(this)
+    this.initFaceFilter = this.initFaceFilter.bind(this)
   }
 }
