@@ -48,7 +48,6 @@ h4 {
 }
 
 #main {
-  margin-top: 60px;
   height: calc(100vh - 60px);
   width: 100vw;
 }

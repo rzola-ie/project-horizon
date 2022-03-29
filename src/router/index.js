@@ -5,6 +5,7 @@ import LiveMode from '../components/LiveMode.vue'
 import Experience from '@/components/Experience.vue'
 import Debug from '@/components/Debug.vue'
 import Frame from '@/components/Frame.vue'
+import Embedded from '@/components/Embedded.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/frame',
     name: 'iframeExperience',
     component: Frame,
+  },
+  {
+    path: '/embed',
+    name: 'embed',
+    component: Embedded,
   },
 
 ]

@@ -62,7 +62,7 @@ export default {};
 
 <style lang="scss" scoped>
 #live {
-  height: calc(100vh - 60px);
+  height: 100vh;
   width: 100%;
   background-color: white;
 
@@ -83,7 +83,7 @@ h1 {
 
   @media screen and (orientation: portrait) {
 
-    width: clamp(375px, 100%, 550px);
+    width: clamp(300px, 100%, 550px);
   }
 
   @media screen and (orientation: landscape) {
@@ -114,7 +114,6 @@ h1 {
 
 .symptom {
   position: relative;
-
   display: grid;
   grid-template-columns: auto 1fr;
   justify-content: space-between;
@@ -146,7 +145,7 @@ h1 {
   }
 
   @media screen and (orientation: portrait) {
-    width: clamp(375px, 100%, 550px);
+    width: clamp(300px, 100%, 550px);
     padding: 0 1em;
 
     & img {
