@@ -150,8 +150,8 @@ h1 {
     padding: 0 1em;
 
     & img {
-      height: 90px;
-      width: 90px;
+      height: 80px;
+      width: 80px;
     }
 
     &:last-child {
