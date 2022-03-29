@@ -16,7 +16,7 @@
       <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
     </svg>
 
-    <div :class="['button-group', { hidden: true }]">
+    <!-- <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
         <button
           @click="
@@ -79,7 +79,7 @@
       >
         Eye Bulge
       </button>
-    </div>
+    </div> -->
 
     <router-link class="back-button" to="/live">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
