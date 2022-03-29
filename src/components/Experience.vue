@@ -211,7 +211,8 @@ export default {
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if(!this.isMobile) {
-      document.querySelector('.orientation-modal').style.display = 'none'
+      document.querySelector('#turn-landscape').style.display = 'none'
+      document.querySelector('#turn-portrait').style.display = 'none'
     }
 
 
