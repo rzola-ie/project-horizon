@@ -18,7 +18,14 @@ export default class EyeBulge {
     this.setCanvas()
     this.init()
     this.setResize()
+    this.resize()
     console.log(screen.orientation.type.includes('portrait'),this.isMobile)
+  }
+
+  setResize() {
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
   }
 
   setCanvas() {
@@ -36,12 +43,7 @@ export default class EyeBulge {
     this.gl = this.targetElement.getContext('experimental-webgl')
   }
 
-  setResize() {
-    window.addEventListener('resize', this.init, false)
-  }
-
   init() {
-    console.log('flibity doooooo')
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: (isError, bestVideoSettings) => {
@@ -51,7 +53,11 @@ export default class EyeBulge {
         }
 
         this.initFaceFilter(bestVideoSettings);
-      }
+      },
+      // onResize: () => {
+      //   console.log('het')
+      //   JeelizThreeHelper.update_camera(this.camera);
+      // }
     })
   }
 
@@ -59,7 +65,12 @@ export default class EyeBulge {
     JEELIZFACEFILTER.init({
       canvasId: this.canvasId,
       NNCPath: '/neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
-      videoSettings: bestVideoSettings,
+      videoSettings: { // increase the default video resolution since we are in full screen
+        'idealWidth': 1280,  // ideal video width in pixels
+        'idealHeight': 800,  // ideal video height in pixels
+        'maxWidth': 1920,    // max video width in pixels
+        'maxHeight': 1920    // max video height in pixels
+      },
       callbackReady: (errCode, spec) => {
         if (errCode) {
           console.log('AN ERROR HAPPENS. ERROR CODE =', errCode);
@@ -78,6 +89,12 @@ export default class EyeBulge {
         JeelizThreeHelper.render(detectState, this.camera);
       } //end callbackTrack()
     });
+  }
+
+  resize() {
+    console.log('het')
+    if(this.camera)
+      JeelizThreeHelper.update_camera(this.camera);
   }
 
   initThreeScene(spec) {
@@ -166,11 +183,11 @@ export default class EyeBulge {
   }
 
   detectCallback(isDetected) {
-    if (isDetected) {
-      console.log('INFO in detect_callback(): DETECTED');
-    } else {
-      console.log('INFO in detect_callback(): LOST');
-    }
+    // if (isDetected) {
+    //   console.log('INFO in detect_callback(): DETECTED');
+    // } else {
+    //   console.log('INFO in detect_callback(): LOST');
+    // }
   }
 
   update() { }
