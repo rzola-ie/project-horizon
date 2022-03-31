@@ -53,8 +53,8 @@ export default class EyeBulge {
       canvasId: this.canvasId,
       callback: this.initFaceFilter,
       onResize: () => {
-        console.log('het jacko')
-        // JeelizThreeHelper.update_camera(this.camera);
+        console.log('why does this not work, piece of junk!')
+        JeelizThreeHelper.update_camera(this.camera);
       }
     })
   }
@@ -157,16 +157,19 @@ export default class EyeBulge {
   update() { }
 
   destroy() {
-    window.removeEventListener('resize', this.resize, false)
     JEELIZFACEFILTER.destroy()
-    this.container.removeChild(this.canvas)
+
+    if(document.querySelector('canvas'))
+      document.querySelector('canvas').remove()
+
+    if(document.querySelector('video'))
+      document.querySelector('video').remove()
+
     this.canvas = null
     this.camera = null
     this.gl = null
 
-    if(document.querySelector('video')) {
-      document.querySelector('video').remove()
-    }
+    window.removeEventListener('resize', this.resize, false)
   }
 
   bind() {
