@@ -93,7 +93,6 @@ export default class Renderer {
         encoding: THREE.sRGBEncoding
       }
     )
-
     // effect composer
     this.postProcess.composer = new EffectComposer(this.instance, renderTarget)
 

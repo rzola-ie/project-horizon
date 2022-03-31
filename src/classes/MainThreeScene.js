@@ -7,10 +7,8 @@ import Renderer from './Renderer'
 import Sizes from '../utils/Sizes'
 import Stats from '../utils/Stats'
 import Time from '../utils/Time'
-
 import RAF from '../utils/RAF'
 
-import Room from './Room'
 import Screen from './Screen'
 import EyeBulge from "./EyeBulge"
 
@@ -45,9 +43,10 @@ export default class MainThreeScene {
 
 		this.mode = _options.mode || sessionStorage.getItem('mode');
 		sessionStorage.setItem('mode', this.mode)
-		this.setScreen()
-		RAF.subscribe('threeSceneUpdate', this.update)
 
+		this.setScreen()
+
+		RAF.subscribe('threeSceneUpdate', this.update)
 		window.addEventListener('resize', this.resize)
 	}
 
@@ -94,16 +93,7 @@ export default class MainThreeScene {
 	}
 
 	setScreen() {
-		if (this.mode !== 'eyes') {
-			this.screen = new Screen({ mode: this.mode })
-		} else {
-			console.log('het')
-			this.screen = new EyeBulge({ canvas: this.renderer.instance.domElement })
-		}
-	}
-
-	setRoom() {
-		this.room = new Room()
+		this.screen = new Screen({ mode: this.mode })
 	}
 
 	update() {
@@ -118,9 +108,6 @@ export default class MainThreeScene {
 
 		if (this.screen)
 			this.screen.update()
-
-		if (this.room)
-			this.room.update()
 	}
 
 	resize() {
@@ -132,13 +119,11 @@ export default class MainThreeScene {
 		if (this.camera)
 			this.camera.resize()
 
-		if (this.renderer) {
+		if (this.renderer)
 			this.renderer.resize()
-		}
 
-		if(this.screen) {
+		if(this.screen)
 			this.screen.resize()
-		}
 	}
 
 	destroy() {
@@ -148,15 +133,11 @@ export default class MainThreeScene {
 		if (this.renderer)
 			this.renderer.destroy()
 
-		if (this.room)
-			this.room.destroy()
-
 		if (this.screen)
 			this.screen.destroy()
 
-		if (this.mode) {
+		if (this.mode)
 			sessionStorage.removeItem('mode')
-		}
 
 		MainThreeScene.instance = null
 	}

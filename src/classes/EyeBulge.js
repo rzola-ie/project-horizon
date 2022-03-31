@@ -16,16 +16,18 @@ export default class EyeBulge {
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.setCanvas()
-    this.init()
-    this.setResize()
-    this.resize()
-    console.log(screen.orientation.type.includes('portrait'),this.isMobile)
-  }
 
-  setResize() {
-    window.addEventListener('resize', () => {
-      this.resize()
-    })
+    if(this.isMobile) {
+      console.log(this.isMobile)
+      if(screen.orientation.type.includes('landscape')) {
+        console.log('isLandscape')
+        window.addEventListener('resize', this.setUp, false)
+      } else {
+        this.setUp()
+      }
+    } else {
+      this.setUp()
+    }
   }
 
   setCanvas() {
@@ -47,12 +49,30 @@ export default class EyeBulge {
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: this.initFaceFilter,
-      // onResize: () => {
-      //   console.log('het')
-      //   JeelizThreeHelper.update_camera(this.camera);
-      // }
+      onResize: () => {
+        console.log('het jacko')
+        // JeelizThreeHelper.update_camera(this.camera);
+      }
     })
   }
+
+  setUp() {
+    this.init()
+
+    console.log('seeya listener')
+    window.removeEventListener('resize', this.setUp, false)
+
+    this.setResize()
+    this.resize()
+  }
+
+  setResize() {
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
+  }
+
+
 
   initFaceFilter(bestVideoSettings) {
     JEELIZFACEFILTER.init({
@@ -64,7 +84,7 @@ export default class EyeBulge {
         'maxWidth': 1920,    // max video width in pixels
         'maxHeight': 1920    // max video height in pixels
       },
-      followZRot: true,
+      maxFacesDetected: 1,
       callbackReady: (errCode, spec) => {
         if (errCode) {
           console.log('AN ERROR HAPPENS. ERROR CODE =', errCode);
@@ -99,7 +119,7 @@ export default class EyeBulge {
     /*
     faceLowPoly.json has been exported from dev/faceLowPoly.blend using THREE.JS blender exporter with Blender v2.76
     */
-    maskLoader.load('/models/faceLowPoly.json', (geometry) => {
+    maskLoader.load('/models/face.json', (geometry) => {
       geometry.computeVertexNormals();
 
       const threeMask = new THREE.Mesh(geometry, this.buildMaskMaterial(spec.videoTransformMat2));
@@ -177,11 +197,11 @@ export default class EyeBulge {
   }
 
   detectCallback(isDetected) {
-    // if (isDetected) {
-    //   console.log('INFO in detect_callback(): DETECTED');
-    // } else {
-    //   console.log('INFO in detect_callback(): LOST');
-    // }
+    if (isDetected) {
+      console.log('INFO in detect_callback(): DETECTED');
+    } else {
+      console.log('INFO in detect_callback(): LOST');
+    }
   }
 
   update() { }
@@ -203,5 +223,7 @@ export default class EyeBulge {
     this.init = this.init.bind(this)
     this.resize = this.resize.bind(this)
     this.initFaceFilter = this.initFaceFilter.bind(this)
+    this.setCanvas = this.setCanvas.bind(this)
+    this.setUp = this.setUp.bind(this)
   }
 }

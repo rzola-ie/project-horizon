@@ -8,23 +8,15 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { DoubleVisionShader } from '../shaders/double/DoubleShader';
 import { ColorLossShader } from '../shaders/color/ColorLossShader'
 
-// shaders
-import defaultVertex from '../shaders/default/vertex.glsl'
-import defaultFragment from '../shaders/default/fragment.glsl'
-
-
-
-
 export default class Screen {
   constructor(_options) {
     this.mode = _options.mode
-
     sessionStorage.setItem('mode', this.mode)
+
+    this.bind();
 
     this.shaders = {
       blur: {
-        fragment: defaultFragment,
-        vertex: defaultVertex,
         settings: {
           focus: 2000.0,  // this does not matter
           aperture: 0.01, // any non-zero number
@@ -32,23 +24,17 @@ export default class Screen {
         }
       },
       color: {
-        fragment: defaultFragment,
-        vertex: defaultVertex,
         settings: {
           desaturate: -0.7
         }
       },
       double: {
-        fragment: defaultFragment,
-        vertex: defaultVertex,
         settings: {
           offset: 0.1,
           mix: 0.4,
         }
       },
       light: {
-        fragment: defaultFragment,
-        vertex: defaultVertex,
         settings: {
           strength: 0.3,
           radius: 1.5,
@@ -58,19 +44,20 @@ export default class Screen {
       bulge: {}
     }
 
-    this.bind();
-
     this.experience = new MainThreeScene();
+
     this.container = this.experience.targetElement
     this.camera = this.experience.camera
     this.scene = this.experience.scene
     this.renderer = this.experience.renderer
+
+    this.sizes = this.experience.sizes
     this.time = this.experience.time
     this.config = this.experience.config
     this.debug = this.experience.debug
+
     this.height = this.config.height
     this.width = this.config.width
-    this.sizes = this.experience.sizes
 
     this.camera.instance.position.set(0, 0, 600)
     this.camera.instance.aspect = this.config.width / this.config.height;
@@ -87,29 +74,12 @@ export default class Screen {
       })
     }
 
-    this.hasPostProcessing = true
-
-    // this.setShaders()
-    // this.setUniforms()
-    // this.setGeometry()
-    // this.setMaterial()
-    // this.setMesh()
-    // this.setVideoFeed()
-    // this.setPostProcessing()
     this.resize()
   }
 
   resize() {
-    if(this.mode == 'eyes') return
-
-    const boundings = this.container.getBoundingClientRect()
     this.width = window.innerWidth
     this.height =  window.innerHeight
-
-
-
-
-    // this.destroy()
 
     this.setShaders()
     this.setUniforms()
@@ -240,15 +210,10 @@ export default class Screen {
 
   setMaterial() {
     this.material = new THREE.MeshBasicMaterial()
-
     this.setDebug()
   }
 
   setMesh() {
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xff0000
-    })
-
     this.mesh = new THREE.Mesh(this.geometry, this.material)
     this.mesh.name = 'screen'
     this.scene.add(this.mesh)
@@ -367,6 +332,20 @@ export default class Screen {
     this.renderer.postProcess.composer.addPass(this.pass)
   }
 
+  selectMode(mode) {
+    this.mode = mode;
+    sessionStorage.setItem('mode', mode);
+
+    if (this.pass)
+      this.renderer.postProcess.composer.removePass(this.pass)
+
+    this.renderer.instance.needsUpdate = true;
+    this.renderer.postProcess.needsUpdate = true;
+
+    this.setUniforms()
+    this.setPostProcessing()
+  }
+
   updateUniforms() {
     if (this.material) {
       this.material.map = this.videoTexture
@@ -408,24 +387,7 @@ export default class Screen {
     this.updateUniforms()
   }
 
-  selectMode(mode) {
-    this.mode = mode;
-    sessionStorage.setItem('mode', mode);
-
-    // double
-    if (this.pass)
-      this.renderer.postProcess.composer.removePass(this.pass)
-
-    this.renderer.instance.needsUpdate = true;
-    this.renderer.postProcess.needsUpdate = true;
-
-    this.setUniforms()
-    this.setPostProcessing()
-  }
-
   destroy() {
-    if(this.mode == 'eyes') return
-
     // remove the video texture
     if (this.VideoTexture) {
       this.videoTexture.dispose()
@@ -441,7 +403,7 @@ export default class Screen {
 
     // remove video tracks
     if (tracks && tracks.length > 0) {
-      tracks.forEach(function (track) {
+      tracks.forEach(track => {
         track.stop();
         track.enabled = false
       });
@@ -456,7 +418,7 @@ export default class Screen {
     }
 
     // remove screen mesh
-    if (this.mesh && this.mode !== 'eyes') {
+    if (this.mesh) {
       const object = this.scene.getObjectByProperty('name', 'screen');
       object.geometry.dispose();
       object.material.dispose();

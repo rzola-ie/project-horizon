@@ -16,7 +16,7 @@
       <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
     </svg>
 
-    <!-- <div :class="['button-group', { hidden: hideControls }]">
+    <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
         <button
           @click="
@@ -79,7 +79,7 @@
       >
         Eye Bulge
       </button>
-    </div> -->
+    </div>
 
     <router-link class="back-button" to="/live">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
@@ -216,21 +216,21 @@ export default {
       document.querySelector('.overlay').style.display = 'none'
     }
 
+    if(this.experience === 'eyes')
+      this.scene = new EyeBulge({ canvasId: "three-canvas" });
 
-    if(this.experience != 'eyes') {
+    if(this.experience !== 'eyes')
       this.scene = new MainThreeScene({
         targetElement: this.$refs.container,
         mode: this.experience,
       });
-    } else {
-      this.scene = new EyeBulge({ canvasId: "three-canvas" });
-    }
 
-    document.addEventListener('resize', () => {
-      this.selectMode(this.experience)
-    })
+    // document.addEventListener('resize', () => {
+    //   this.selectMode(this.experience)
+    // })
   },
   unmounted() {
+    
     this.scene.destroy();
     this.scene = null;
   },
@@ -246,17 +246,16 @@ export default {
       if(document.querySelector('video'))
         document.querySelector('video').remove()
 
-      if(mode != 'eyes') {
-        this.hideOverlay = true
+      if(mode === 'eyes')
+        this.scene = new EyeBulge({ canvasId: "three-canvas" });
+
+      if(mode !== 'eyes')
         this.scene = new MainThreeScene({
           targetElement: this.$refs.container,
           mode: this.experience,
         });
-      } else {
-        this.hideOverlay = false
-        this.scene = new EyeBulge({ canvasId: "three-canvas" });
-      }
 
+      this.hideOverlay = false
       this.hideControls = true
     },
   },

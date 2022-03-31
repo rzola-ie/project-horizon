@@ -16,21 +16,8 @@ export default {
 </script>
 
 <style lang="scss">
-:root {
-  --mobile-breakpoint: 567px;
-  --tablet-breakpoint: 768px;
-  --desktop-up: 992px;
-  --big-desktop: 1200px;
-
-  --main-padding: 0.2em;
-  --header-clearing: 6em;
-}
-
-$header-clearing: 6em;
-
 body {
-  font-family: "Barlow", sans-serif;
-  // background-color: $color3;
+  font-family: $font1;
 }
 
 * {
@@ -43,12 +30,12 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Oswald", sans-serif;
+  font-family: $font2;
   color: $color1;
 }
 
 #main {
-  height: calc(100vh - 60px);
+  height: 100vh;
   width: 100vw;
 }
 </style>
