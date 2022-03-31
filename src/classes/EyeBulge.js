@@ -17,6 +17,7 @@ export default class EyeBulge {
 
     this.setCanvas()
 
+    // dont load until device is in the correct orientation
     if(this.isMobile) {
       console.log(this.isMobile)
       if(screen.orientation.type.includes('landscape')) {
@@ -67,12 +68,8 @@ export default class EyeBulge {
   }
 
   setResize() {
-    window.addEventListener('resize', () => {
-      this.resize()
-    })
+    window.addEventListener('resize', this.resize, false)
   }
-
-
 
   initFaceFilter(bestVideoSettings) {
     JEELIZFACEFILTER.init({
