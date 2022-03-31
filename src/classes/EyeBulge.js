@@ -17,13 +17,15 @@ export default class EyeBulge {
 
     this.setCanvas()
 
-    document.querySelector('#debug').innerText = 'het'
+    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'not supported'
+
+    console.log(window.matchMedia('(orientation: portrait)'))
 
 
     // dont load until device is in the correct orientation
     if(this.isMobile) {
       console.log(this.isMobile)
-      if(screen.orientation.type.includes('landscape')) {
+      if(window.matchMedia('(orientation: landscape)').matches) {
         console.log('isLandscape')
         window.addEventListener('resize', this.setUp, false)
       } else {
@@ -64,6 +66,7 @@ export default class EyeBulge {
     this.init()
 
     console.log('seeya listener')
+    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'not supported'
     window.removeEventListener('resize', this.setUp, false)
 
     this.setResize()
