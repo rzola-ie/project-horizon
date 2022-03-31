@@ -17,7 +17,10 @@ export default class EyeBulge {
 
     this.setCanvas()
 
-    document.querySelector('#debug').innerText = screen.orientation.type || 'not supported'
+    if(screen)
+      document.querySelector('#debug').innerText = screen.orientation.type || 'not supported'
+    else
+      document.querySelector('#debug').innerText = 'not supported'
 
     // dont load until device is in the correct orientation
     if(this.isMobile) {
