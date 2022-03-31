@@ -187,6 +187,8 @@
         </div>
       </div>
     </div>
+
+    <div id="debug">DEBUG TEST</div>
   </div>
 </template>
 
@@ -263,6 +265,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#debug {
+  position: fixed;
+  bottom: 6em;
+  right: 1em;
+  background-color: rgba(black, 0.4);
+  color: white;
+  z-index: 9999999;
+  padding: 0.5em 1em;
+}
+
 .live {
   position: fixed;
   inset: 0;
