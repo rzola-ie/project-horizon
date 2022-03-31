@@ -17,10 +17,7 @@ export default class EyeBulge {
 
     this.setCanvas()
 
-    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'not supported'
-
-    console.log(window.matchMedia('(orientation: portrait)'))
-
+    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'uh oh, landscape mode'
 
     // dont load until device is in the correct orientation
     if(this.isMobile) {
@@ -66,7 +63,7 @@ export default class EyeBulge {
     this.init()
 
     console.log('seeya listener')
-    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'not supported'
+    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'uh oh, landscape mode'
     window.removeEventListener('resize', this.setUp, false)
 
     this.setResize()
@@ -75,6 +72,11 @@ export default class EyeBulge {
 
   setResize() {
     window.addEventListener('resize', this.resize, false)
+  }
+
+  resize() {
+    if(this.camera)
+      JeelizThreeHelper.update_camera(this.camera);
   }
 
   initFaceFilter(bestVideoSettings) {
@@ -106,12 +108,6 @@ export default class EyeBulge {
         JeelizThreeHelper.render(detectState, this.camera);
       } //end callbackTrack()
     });
-  }
-
-  resize() {
-    console.log('het')
-    if(this.camera)
-      JeelizThreeHelper.update_camera(this.camera);
   }
 
   initThreeScene(spec) {
