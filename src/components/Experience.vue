@@ -229,8 +229,8 @@ export default {
     //   this.selectMode(this.experience)
     // })
   },
-  unmounted() {
-    
+  beforeUnmount() {
+    console.log('blubblw')
     this.scene.destroy();
     this.scene = null;
   },
