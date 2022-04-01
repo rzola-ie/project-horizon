@@ -203,9 +203,7 @@ const JeelizThreeHelper = (function () {
     // launched with the same spec object than callbackReady. set spec.threeCanvasId to the ID of the threeCanvas to be in 2 canvas mode:
     init: function (spec, detectCallback) {
       destroy();
-
-      console.log('spec', spec)
-
+      
       _maxFaces = spec.maxFacesDetected;
       _glVideoTexture = spec.videoTexture;
       _videoTransformMat2 = spec.videoTransformMat2;

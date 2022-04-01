@@ -36,7 +36,6 @@ export default class EyeBulge {
     }
 
     this.targetElement = document.getElementById(this.canvasId)
-    this.gl = this.targetElement.getContext('experimental-webgl')
   }
 
   init() {
