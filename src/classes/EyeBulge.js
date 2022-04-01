@@ -15,6 +15,11 @@ export default class EyeBulge {
     this.canvasId = _options.canvasId
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+    this.debug = document.querySelector('#debug')
+
+    this.debug.innerText = "Ready"
+    this.resizeCount = 0
+
     this.setCanvas()
     this.init()
   }
@@ -42,6 +47,12 @@ export default class EyeBulge {
       isFullScreen: true,
       onResize: () => {
         JeelizThreeHelper.update_camera(this.camera);
+
+        this.debug.innerText = `resize ${this.resizeCount++}`
+
+        const randomColor = `#${(Math.random()*0xFFFFFF<<0).toString(16)}`;
+        this.debug.style.color = randomColor
+        this.debug.style.border = `1px solid ${randomColor}`
       }
     })
   }
