@@ -10,7 +10,6 @@ import Time from '../utils/Time'
 import RAF from '../utils/RAF'
 
 import Screen from './Screen'
-import EyeBulge from "./EyeBulge"
 
 export default class MainThreeScene {
 	static instance

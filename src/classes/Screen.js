@@ -86,7 +86,7 @@ export default class Screen {
     this.setGeometry()
     this.setMaterial()
     this.setMesh()
-    this.setVideoFeed()
+    this.setVideoStream()
     this.setPostProcessing()
 
     this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
@@ -220,7 +220,7 @@ export default class Screen {
     this.mesh.scale.set(this.width, this.height, 1)
   }
 
-  setVideoFeed() {
+  setVideoStream() {
     if (!this.video) {
       this.video = document.createElement('video');
     }
@@ -399,6 +399,7 @@ export default class Screen {
     if (window.localStream) {
       stream = window.localStream
       tracks = stream.getTracks();
+      console.log(tracks)
     }
 
     // remove video tracks
@@ -408,6 +409,8 @@ export default class Screen {
         track.enabled = false
       });
     }
+
+    window.localStream = null
 
     if (this.video) {
       // remove video source
@@ -439,7 +442,7 @@ export default class Screen {
     this.setUniforms = this.setUniforms.bind(this)
     this.setMaterial = this.setMaterial.bind(this)
     this.updateUniforms = this.updateUniforms.bind(this)
-    this.setVideoFeed = this.setVideoFeed.bind(this)
+    this.setVideoStream = this.setVideoStream.bind(this)
     this.update = this.update.bind(this)
   }
 }

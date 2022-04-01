@@ -232,7 +232,6 @@ export default {
     // })
   },
   beforeUnmount() {
-    console.log('blubblw')
     this.scene.destroy();
     this.scene = null;
   },

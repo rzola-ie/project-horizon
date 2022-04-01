@@ -16,21 +16,7 @@ export default class EyeBulge {
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.setCanvas()
-
-    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'uh oh, landscape mode'
-
-    // dont load until device is in the correct orientation
-    if(this.isMobile) {
-      console.log(this.isMobile)
-      if(window.matchMedia('(orientation: landscape)').matches) {
-        console.log('isLandscape')
-        window.addEventListener('resize', this.setUp, false)
-      } else {
-        this.setUp()
-      }
-    } else {
-      this.setUp()
-    }
+    this.init()
   }
 
   setCanvas() {
@@ -52,31 +38,12 @@ export default class EyeBulge {
     JeelizResizer.size_canvas({
       canvasId: this.canvasId,
       callback: this.initFaceFilter,
+      overSamplingFactor: Math.min(Math.max(window.devicePixelRatio, 1), 2),
+      isFullScreen: true,
       onResize: () => {
-        console.log('why does this not work, piece of junk!')
         JeelizThreeHelper.update_camera(this.camera);
       }
     })
-  }
-
-  setUp() {
-    this.init()
-
-    console.log('seeya listener')
-    document.querySelector('#debug').innerText = window.matchMedia('(orientation: portrait)').matches ? 'cool portrait mode' : 'uh oh, landscape mode'
-    window.removeEventListener('resize', this.setUp, false)
-
-    this.setResize()
-    this.resize()
-  }
-
-  setResize() {
-    window.addEventListener('resize', this.resize, false)
-  }
-
-  resize() {
-    if(this.camera)
-      JeelizThreeHelper.update_camera(this.camera);
   }
 
   initFaceFilter(bestVideoSettings) {
@@ -173,9 +140,6 @@ export default class EyeBulge {
   }
 
   bind() {
-    this.init = this.init.bind(this)
-    this.resize = this.resize.bind(this)
     this.initFaceFilter = this.initFaceFilter.bind(this)
-    this.setUp = this.setUp.bind(this)
   }
 }
