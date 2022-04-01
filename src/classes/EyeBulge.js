@@ -56,12 +56,6 @@ export default class EyeBulge {
       isFullScreen: true,
       onResize: () => {
         JeelizThreeHelper.update_camera(this.camera);
-
-        this.debug.innerText = `resize ${this.resizeCount++}`
-
-        const randomColor = `#${(Math.random()*0xFFFFFF<<0).toString(16)}`;
-        this.debug.style.color = randomColor
-        this.debug.style.border = `1px solid ${randomColor}`
       }
     })
   }
