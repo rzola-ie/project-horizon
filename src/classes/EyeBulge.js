@@ -20,8 +20,26 @@ export default class EyeBulge {
     this.debug.innerText = "Ready"
     this.resizeCount = 0
 
+
+
     this.setCanvas()
-    this.init()
+
+    if(this.isMobile) {
+      this.orientationCheck()
+    } else {
+      this.init()
+    }
+  }
+
+  orientationCheck() {
+    if(window.matchMedia('(orientation: portrait)').matches) {
+      this.init()
+    } else {
+      window.addEventListener('resize', () => {
+        console.log('finallyyyyyyyyy')
+        this.init()
+      }, { once: true })
+    }
   }
 
   setCanvas() {
