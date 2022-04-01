@@ -399,7 +399,6 @@ export default class Screen {
     if (window.localStream) {
       stream = window.localStream
       tracks = stream.getTracks();
-      console.log(tracks)
     }
 
     // remove video tracks

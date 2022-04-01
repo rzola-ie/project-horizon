@@ -1,5 +1,5 @@
 
-import '../lib/jeeliz/jeelizFaceFilter'
+import '../lib/jeeliz/dist/jeelizFaceFilter'
 import * as THREE from '../lib/three/v112/three.min.js'
 import JeelizResizer from '../lib/jeeliz/helpers/JeelizResizer.js'
 import '../lib/jeeliz/helpers/JeelizThreeHelper.js'
