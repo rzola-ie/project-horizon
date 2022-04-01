@@ -15,13 +15,6 @@ export default class EyeBulge {
     this.canvasId = _options.canvasId
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    this.debug = document.querySelector('#debug')
-
-    this.debug.innerText = "Ready"
-    this.resizeCount = 0
-
-
-
     this.setCanvas()
 
     if(this.isMobile) {
@@ -36,7 +29,6 @@ export default class EyeBulge {
       this.init()
     } else {
       window.addEventListener('resize', () => {
-        console.log('finallyyyyyyyyy')
         this.init()
       }, { once: true })
     }

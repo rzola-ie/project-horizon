@@ -187,8 +187,6 @@
         </div>
       </div>
     </div>
-
-    <div id="debug">DEBUG TEST</div>
   </div>
 </template>
 
