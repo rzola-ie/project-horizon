@@ -371,9 +371,10 @@ export default class Screen {
           }
           break
         case 'light':
-          this.pass.strength = this.settings.strength
-          this.pass.radius = this.settings.radius
-          this.pass.threshold = this.settings.threshold
+          if(this.pass)
+            this.pass.strength = this.settings.strength
+            this.pass.radius = this.settings.radius
+            this.pass.threshold = this.settings.threshold
           break
       }
 
