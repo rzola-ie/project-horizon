@@ -13,10 +13,9 @@ export default class Screen {
     this.mode = _options.mode
     sessionStorage.setItem('mode', this.mode)
 
-    console.log(this.mode)
-
     this.bind();
 
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     this.shaders = {
       blur: {
         settings: {
@@ -65,8 +64,6 @@ export default class Screen {
     this.camera.instance.aspect = this.config.width / this.config.height;
     this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
     this.camera.instance.updateProjectionMatrix();
-
-    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.selectedShader = this.shaders[this.mode]
 
