@@ -38,9 +38,9 @@ export default class Screen {
       },
       light: {
         settings: {
-          strength: 0.3,
-          radius: 1.5,
-          threshold: 0.6
+          strength: this.isMobile ? 0.8 : 0.3,
+          radius: this.isMobile ? 0.3:  1.5,
+          threshold: this.isMobile ? 0.0 : 0.6
         }
       },
       bulge: {}
@@ -61,13 +61,12 @@ export default class Screen {
     this.height = this.config.height
     this.width = this.config.width
 
-    console.log(this.width, this.height)
-    console.log(this.renderer.instance.domElement.height)
-
     this.camera.instance.position.set(0, 0, 600)
     this.camera.instance.aspect = this.config.width / this.config.height;
     this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
     this.camera.instance.updateProjectionMatrix();
+
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.selectedShader = this.shaders[this.mode]
 
@@ -333,9 +332,9 @@ export default class Screen {
         this.renderer.instance.domElement.width,
         this.renderer.instance.domElement.height
       ),
-      0.3, // strength
-      1.5, // radius
-      0.6 // threshold
+      this.isMobile ? 0.8 : 0.3, // strength
+      this.isMobile ? 0.3 : 1.5, // radius
+      this.isMobile ? 0.0 : 0.6 // threshold
     )
 
     const debug = document.createElement('div')
