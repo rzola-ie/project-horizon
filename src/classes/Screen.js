@@ -59,6 +59,9 @@ export default class Screen {
     this.height = this.config.height
     this.width = this.config.width
 
+    console.log(this.width, this.height)
+    console.log(this.renderer.instance.domElement.height)
+
     this.camera.instance.position.set(0, 0, 600)
     this.camera.instance.aspect = this.config.width / this.config.height;
     this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
@@ -324,7 +327,10 @@ export default class Screen {
   addLightPass() {
     // add new effect
     this.pass = new UnrealBloomPass(
-      new THREE.Vector2(this.config.width / 2, this.config.height / 2),
+      new THREE.Vector2(
+        this.renderer.instance.domElement.width,
+        this.renderer.instance.domElement.height
+      ),
       0.3, // strength
       1.5, // radius
       0.6 // threshold
