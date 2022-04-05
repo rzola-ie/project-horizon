@@ -324,7 +324,7 @@ export default class Screen {
   addLightPass() {
     // add new effect
     this.pass = new UnrealBloomPass(
-      new THREE.Vector2(this.config.width, this.config.height),
+      new THREE.Vector2(this.config.width * 2, this.config.height * 2),
       0.3, // strength
       1.5, // radius
       0.6 // threshold
