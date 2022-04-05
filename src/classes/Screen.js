@@ -13,6 +13,8 @@ export default class Screen {
     this.mode = _options.mode
     sessionStorage.setItem('mode', this.mode)
 
+    console.log(this.mode)
+
     this.bind();
 
     this.shaders = {
@@ -114,12 +116,12 @@ export default class Screen {
 
     switch (this.mode) {
       case 'blur':
-        if (this.bokehPass) {
-          this.bokehPass.focus = this.settings.focus
-          this.bokehPass.aperture = this.settings.aperture
-          this.bokehPass.maxblur = this.settings.maxBlur
-          this.bokehPass.width = this.width
-          this.bokehPass.height = this.height
+        if (this.pass) {
+          this.pass.focus = this.settings.focus
+          this.pass.aperture = this.settings.aperture
+          this.pass.maxblur = this.settings.maxBlur
+          this.pass.width = this.width
+          this.pass.height = this.height
         }
         break
       case 'color':
@@ -136,13 +138,13 @@ export default class Screen {
       case 'light':
         // this.uniforms.uSensetivity = {}
         // this.uniforms.uSensetivity.value = this.settings.sensetivity
-        if (this.bloomPass) {
-          this.bloomPass.strength = this.settings.strength
-          this.bloomPass.radius = this.settings.strength
-          this.bloomPass.threshold = this.settings.strength
-          // this.bloomPass.scene = this.scene
-          // this.bloomPass.camera = this.camera.instance
+        if (this.pass) {
+          this.pass.strength = this.settings.strength
+          this.pass.radius = this.settings.strength
+          this.pass.threshold = this.settings.strength  
         }
+
+
         break
     }
   }
@@ -335,6 +337,25 @@ export default class Screen {
       1.5, // radius
       0.6 // threshold
     )
+
+    const debug = document.createElement('div')
+    debug.innerText = `strength ${this.pass.strength}
+    radius ${this.pass.radius}
+    threshold ${this.pass.threshold}
+    `
+
+    debug.style.position = 'absolute'
+    debug.style.bottom = '4em'
+    debug.style.right = '1em'
+    debug.style.padding = '1em'
+    debug.style.color = '#ffffff'
+    debug.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    debug.style.zIndex = '99999'
+
+    document.body.appendChild(debug)
+    console.log('shit')
+
+
     this.renderer.postProcess.composer.addPass(this.pass)
   }
 

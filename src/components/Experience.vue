@@ -220,14 +220,7 @@ export default {
       this.scene = new EyeBulge({ canvasId: "three-canvas" });
 
     if(this.experience !== 'eyes')
-      this.scene = new MainThreeScene({
-        targetElement: this.$refs.container,
-        mode: this.experience,
-      });
-
-    // document.addEventListener('resize', () => {
-    //   this.selectMode(this.experience)
-    // })
+      this.selectMode(this.experience)
   },
   beforeUnmount() {
     this.scene.destroy();
@@ -238,7 +231,9 @@ export default {
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);
 
-      this.scene.destroy();
+      if(this.scene)
+        this.scene.destroy();
+
       if(document.querySelector('#three-canvas'))
         document.querySelector('#three-canvas').remove()
 
