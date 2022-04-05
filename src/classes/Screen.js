@@ -47,36 +47,6 @@ export default class Screen {
     this.experience = new MainThreeScene();
 
     this.container = this.experience.targetElement
-
-
-    if (this.debug) {
-      this.debugFolder = this.debug.addFolder({
-        title: this.mode
-      })
-    }
-
-    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if(this.isMobile) {
-      this.orientationCheck()
-    } else {
-      this.resize()
-    }
-  }
-
-  orientationCheck() {
-    if(window.matchMedia('(orientation: landscape)').matches) {
-      this.resize()
-    } else {
-      window.addEventListener('resize', () => {
-        this.resize()
-      }, { once: true })
-    }
-  }
-
-  resize() {
-    this.width = window.innerWidth
-    this.height =  window.innerHeight
     this.camera = this.experience.camera
     this.scene = this.experience.scene
     this.renderer = this.experience.renderer
@@ -86,6 +56,9 @@ export default class Screen {
     this.config = this.experience.config
     this.debug = this.experience.debug
 
+    this.height = this.config.height
+    this.width = this.config.width
+
     this.camera.instance.position.set(0, 0, 600)
     this.camera.instance.aspect = this.config.width / this.config.height;
     this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
@@ -94,6 +67,19 @@ export default class Screen {
     this.selectedShader = this.shaders[this.mode]
 
     this.settings = { ...this.selectedShader.settings }
+
+    if (this.debug) {
+      this.debugFolder = this.debug.addFolder({
+        title: this.mode
+      })
+    }
+
+    this.resize()
+  }
+
+  resize() {
+    this.width = window.innerWidth
+    this.height =  window.innerHeight
 
     this.setShaders()
     this.setUniforms()
@@ -151,8 +137,8 @@ export default class Screen {
           this.bloomPass.strength = this.settings.strength
           this.bloomPass.radius = this.settings.strength
           this.bloomPass.threshold = this.settings.strength
-          this.bloomPass.scene = this.scene
-          this.bloomPass.camera = this.camera.instance
+          // this.bloomPass.scene = this.scene
+          // this.bloomPass.camera = this.camera.instance
         }
         break
     }
