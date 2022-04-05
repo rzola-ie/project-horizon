@@ -74,7 +74,23 @@ export default class Screen {
       })
     }
 
-    this.resize()
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if(this.isMobile) {
+      this.orientationCheck()
+    } else {
+      this.resize()
+    }
+  }
+
+  orientationCheck() {
+    if(window.matchMedia('(orientation: landscape)').matches) {
+      this.resize()
+    } else {
+      window.addEventListener('resize', () => {
+        this.resize()
+      }, { once: true })
+    }
   }
 
   resize() {
