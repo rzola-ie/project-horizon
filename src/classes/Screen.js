@@ -47,26 +47,7 @@ export default class Screen {
     this.experience = new MainThreeScene();
 
     this.container = this.experience.targetElement
-    this.camera = this.experience.camera
-    this.scene = this.experience.scene
-    this.renderer = this.experience.renderer
 
-    this.sizes = this.experience.sizes
-    this.time = this.experience.time
-    this.config = this.experience.config
-    this.debug = this.experience.debug
-
-    this.height = this.config.height
-    this.width = this.config.width
-
-    this.camera.instance.position.set(0, 0, 600)
-    this.camera.instance.aspect = this.config.width / this.config.height;
-    this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
-    this.camera.instance.updateProjectionMatrix();
-
-    this.selectedShader = this.shaders[this.mode]
-
-    this.settings = { ...this.selectedShader.settings }
 
     if (this.debug) {
       this.debugFolder = this.debug.addFolder({
@@ -96,6 +77,23 @@ export default class Screen {
   resize() {
     this.width = window.innerWidth
     this.height =  window.innerHeight
+    this.camera = this.experience.camera
+    this.scene = this.experience.scene
+    this.renderer = this.experience.renderer
+
+    this.sizes = this.experience.sizes
+    this.time = this.experience.time
+    this.config = this.experience.config
+    this.debug = this.experience.debug
+
+    this.camera.instance.position.set(0, 0, 600)
+    this.camera.instance.aspect = this.config.width / this.config.height;
+    this.camera.instance.fov = 2 * Math.atan((this.config.height / 2) / 600) * 180 / Math.PI
+    this.camera.instance.updateProjectionMatrix();
+
+    this.selectedShader = this.shaders[this.mode]
+
+    this.settings = { ...this.selectedShader.settings }
 
     this.setShaders()
     this.setUniforms()
