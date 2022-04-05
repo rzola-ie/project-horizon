@@ -4,7 +4,7 @@ import MainThreeScene from './MainThreeScene'
 // post processing effects
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+import { UnrealBloomPass } from '../shaders/light/LightSensitivity'
 import { DoubleVisionShader } from '../shaders/double/DoubleShader';
 import { ColorLossShader } from '../shaders/color/ColorLossShader'
 
