@@ -207,6 +207,7 @@ header .logo img {
     grid-template-rows: 1fr;
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -215,6 +216,7 @@ header .logo img {
     grid-template-rows: 1fr;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
+    align-items: unset;
   }
 
 
