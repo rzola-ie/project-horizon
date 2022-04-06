@@ -31,7 +31,6 @@ h2,
 h3,
 h4 {
   font-family: $font2;
-  color: $color1;
 }
 
 #main {

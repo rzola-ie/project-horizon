@@ -1,9 +1,22 @@
 <template>
   <div id="live">
-    <h1>
-      Choose a symptom to see your world through the eyes of someone with a
-      retinal eye condition
-    </h1>
+    <header>
+        <div class="hcp">For US Healthcare Professionals</div>
+        <div class="logo">
+            <img src="/assets/ted-logo.png" alt="">
+        </div>
+    </header>
+    <div class="text-container">
+      <h1 class="mobile">
+        LOOK CLOSER, the danger can be hard to see.
+        Choose a symptom to get started.
+      </h1>
+
+      <div class="desktop">
+        <h1>LOOK CLOSER,<br />the danger can be hard to see.</h1>
+        <p>Choose a symptom to get started.</p>
+      </div>
+    </div>
     <div class="symptoms">
       <router-link
         class="symptom"
@@ -51,7 +64,6 @@
         <img src="/assets/Red.svg" alt="" />
         Redness
       </router-link> -->
-      <div class="symptom"></div>
     </div>
   </div>
 </template>
@@ -61,78 +73,162 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+$breakpoint: 900px;
+
+/* CONTAINER
+================================ */
 #live {
   height: 100vh;
   width: 100%;
-  background-color: white;
-
+  background-color: $color2;
   display: flex;
   flex-direction: column;
 
-
 }
 
-h1 {
+/* HEADER
+================================ */
+header {
+  display: none;
+    width: 100%;
+    background-color: $color1;
+    color: white;
+
+  @media screen and (min-width: $breakpoint) {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    z-index: 10;
+  }
+}
+
+header .hcp {
+    padding: 0.8em 1em;
+    line-height: 1;
+    border-bottom: 1px solid rgba(white, 0.2);
+
+            @media screen and (min-width: 900px) {
+                padding: 0.8rem 6rem
+            }
+}
+
+header .logo {
+    height: 80px;
+    padding: 0.8em 1em;
+
+    @media screen and (min-width: 900px) {
+        padding: 0.8rem 6rem
+    }
+}
+
+header .logo img {
+    height: 100%;
+}
+
+/* TEXT CONTAINER
+================================ */
+.text-container {
+  padding: 2rem 1rem;
+  background-color: white;
+
+  @media screen and (min-width: $breakpoint) {
+    padding: 2em 1em 1em;
+    background-color: transparent;
+  }
+}
+
+.text-container .mobile {
   margin: auto;
-  padding: 0.8em 4em 0.8em 1em;
   font-weight: 500;
   font-size: 1.2em;
-  font-family: "Barlow", sans-serif;
-  text-align: left;
+  font-family: $font2;
+  text-align: center;
   color: $color2;
+  margin: auto;
 
-  @media screen and (min-width: 900px) {
-    text-align: center;
+  @media screen and (min-width: $breakpoint) {
+    display: none;
   }
 
   @media screen and (orientation: portrait) {
-
-    width: clamp(300px, 100%, 550px);
+    width: clamp(300px, 100%, $breakpoint);
   }
 
   @media screen and (orientation: landscape) {
     max-width: 500px;
     padding: 0.4em 2em;
+    text-align: center;
+  }
+}
+
+.text-container .desktop {
+  display: none;
+  color: white;
+
+  text-align: center;
+  line-height: 1.2;
+
+
+  @media screen and (min-width: $breakpoint) {
+    display: block;
+    background-color: $color2;
   }
 
+  h1 {
+    font-size: 4em; 
+    text-transform: uppercase;
+  }
+
+  p {
+    font-family: "Helvetica", sans-serif;
+    padding: 1em;
+    font-size: 1.5em;
+    color: rgba(white, 0.6);
+  }
 }
 
 .symptoms {
-  width: 100%;
   padding: 1.6em 0.8em;
   display: grid;
   flex: 1;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, auto);
-  background-color: $color2;
+  grid-template-rows: repeat(5, 1fr);
   gap: 0.5em;
 
-
-
-  @media screen and (orientation: landscape) {
-    gap: 1em;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(3, 1fr);
+  @media screen and (min-width: $breakpoint) {
+    padding: 0 5rem;
+      grid-template-rows: 1fr;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
   }
 }
 
 .symptom {
+  width: 100%;
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   justify-self: center;
-  justify-items: center;
   align-items: center;
   gap: 0.5em;
   color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background-color: $color3;
-  font-family: "Oswald", sans-serif;
+  font-family: $font2;
   font-size: 1em;
   font-weight: bold;
   text-decoration: none;
+  padding: 1rem;
   cursor: pointer;
+
+  @media screen and (min-width: $breakpoint) {
+      height: 230px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+        justify-items: center;
+      font-size: 1.5vw;
+  }
 
   &:hover {
     background-color: lighten($color2, 60%);
@@ -144,33 +240,8 @@ h1 {
     }
   }
 
-  & a {
-    text-decoration: none;
-    color: white;
-  }
-
-  @media screen and (orientation: portrait) {
-    width: clamp(300px, 100%, 550px);
-    padding: 0 1em;
-
-    & img {
-      height: 80px;
-      width: 80px;
-    }
-
-    &:last-child {
-      display: none;
-    }
-  }
-
-  @media screen and (orientation: landscape) {
-    width: 100%;
-    padding: 0 0.5em;
-
-    & img {
-      height: 50px;
-      width: 50px;
-    }
+  & img {
+    width: 50%;
   }
 }
 </style>
