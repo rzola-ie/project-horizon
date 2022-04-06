@@ -8,7 +8,7 @@
     </header>
     <div class="text-container">
       <h1 class="mobile">
-        LOOK CLOSER, the danger can be hard to see.
+        LOOK CLOSER, the danger can be hard to see. <br />
         Choose a symptom to get started.
       </h1>
 
@@ -135,6 +135,10 @@ header .logo img {
     padding: 2em 1em 1em;
     background-color: transparent;
   }
+
+  @media screen and (orientation: landscape) {
+    padding: 1rem;
+  }
 }
 
 .text-container .mobile {
@@ -152,11 +156,14 @@ header .logo img {
 
   @media screen and (orientation: portrait) {
     width: clamp(300px, 100%, $breakpoint);
+
+    br {
+      display: none;
+    }
   }
 
   @media screen and (orientation: landscape) {
-    max-width: 500px;
-    padding: 0.4em 2em;
+
     text-align: center;
   }
 }
@@ -195,12 +202,22 @@ header .logo img {
   grid-template-rows: repeat(5, 1fr);
   gap: 0.5em;
 
+  @media screen and (orientation: landscape) {
+    padding: 2rem;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    gap: 1rem;
+  }
+
   @media screen and (min-width: $breakpoint) {
     padding: 0 5rem;
-      grid-template-rows: 1fr;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
   }
+
+
 }
 
 .symptom {
@@ -222,13 +239,23 @@ header .logo img {
   padding: 1rem;
   cursor: pointer;
 
+  @media screen and (orientation: landscape) {
+      height: 120px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      justify-items: center;
+      font-size: 1.5vw;
+  }
+
   @media screen and (min-width: $breakpoint) {
       height: 230px;
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
-        justify-items: center;
+      justify-items: center;
       font-size: 1.5vw;
   }
+
+
 
   &:hover {
     background-color: lighten($color2, 60%);
@@ -242,6 +269,10 @@ header .logo img {
 
   & img {
     width: 50%;
+
+      @media screen and (orientation: landscape) {
+        width: 65%;
+  }
   }
 }
 </style>
