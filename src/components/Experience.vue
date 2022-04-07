@@ -343,7 +343,6 @@ export default {
 }
 
 .menu .header {
-  display: none;
   padding: 5rem 2rem 2rem;
   background-color: white;
 
