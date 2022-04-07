@@ -421,7 +421,7 @@ export default {
   inset: 0;
   z-index: 1;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: $breakpoint) {
     position: relative;
     height: auto;
     height: 100%;

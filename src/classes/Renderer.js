@@ -90,7 +90,7 @@ export default class Renderer {
         generateMipmaps: false,
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
-        format: THREE.RGBFAormat,
+        format: THREE.RGBAFormat,
         encoding: THREE.sRGBEncoding
       }
     )
