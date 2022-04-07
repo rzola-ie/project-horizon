@@ -338,6 +338,7 @@ export default {
     min-width: 350px;
     width: 25%;
     background-color: $color2;
+    z-index: 9999;
   }
 }
 

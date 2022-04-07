@@ -35,6 +35,8 @@ export default class EyeBulge {
   }
 
   setCanvas() {
+    const breakpoint = window.innerWidth >= 900
+
     if(document.querySelector('#three-canvas') == null) {
       this.canvas = document.createElement('canvas')
       this.canvas.setAttribute('id', this.canvasId)
@@ -42,6 +44,7 @@ export default class EyeBulge {
       this.canvas.style.inset = 0
       this.canvas.style.height = '100%'
       this.canvas.style.width = '100%'
+      this.canvas.style.zIndex = '9998'
       this.container.appendChild(this.canvas)
     }
 
