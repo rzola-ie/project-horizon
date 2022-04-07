@@ -334,24 +334,6 @@ export default class Screen {
       this.isMobile ? 0.0 : 0.6 // threshold
     )
 
-    const debug = document.createElement('div')
-    debug.innerText = `strength ${this.pass.strength}
-    radius ${this.pass.radius}
-    threshold ${this.pass.threshold}
-    `
-
-    debug.style.position = 'absolute'
-    debug.style.bottom = '4em'
-    debug.style.right = '1em'
-    debug.style.padding = '1em'
-    debug.style.color = '#ffffff'
-    debug.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    debug.style.zIndex = '99999'
-
-    document.body.appendChild(debug)
-    console.log('shit')
-
-
     this.renderer.postProcess.composer.addPass(this.pass)
   }
 
