@@ -319,6 +319,7 @@ export default {
   inset: 0;
   height: 100%;
   width: 100%;
+  background-color: black;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -328,12 +329,16 @@ export default {
 }
 
 .menu {
-  height: 100%;
-  min-width: 350px;
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  background-color: $color2;
+  display: none;
+
+  @media screen and (min-width: $breakpoint) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 350px;
+    width: 25%;
+    background-color: $color2;
+  }
 }
 
 .menu .header {
@@ -351,10 +356,6 @@ export default {
     font-family: "Helvetica", sans-serif;
     font-size: 1.1rem;
     color: #666;
-  }
-
-  @media screen and (min-width: $breakpoint) {
-    display: block;
   }
 }
 
