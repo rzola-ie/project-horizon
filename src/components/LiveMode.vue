@@ -38,7 +38,7 @@
         class="symptom"
         :to="{ name: 'liveExperience', params: { experience: 'color' } }"
       >
-        <img src="/assets/eye-pressure-pain-icon.svg" alt="" />
+        <img src="/assets/color-loss.svg" alt="" />
         Color Vision Loss
       </router-link>
 
