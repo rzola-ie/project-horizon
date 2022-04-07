@@ -57,13 +57,6 @@
         <img src="/assets/proptosis-icon.svg" alt="" />
         Bulging Eyes / <br > Proptosis
       </router-link>
-      <!-- <router-link
-        class="symptom"
-        :to="{ name: 'faceExperience', params: { experience: 'red' } }"
-      >
-        <img src="/assets/Red.svg" alt="" />
-        Redness
-      </router-link> -->
     </div>
   </div>
 </template>
@@ -73,8 +66,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-$breakpoint: 900px;
-
 /* CONTAINER
 ================================ */
 #live {

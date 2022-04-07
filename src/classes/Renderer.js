@@ -48,10 +48,11 @@ export default class Renderer {
       antialias: true,
     })
     this.instance.domElement.style.position = 'absolute'
-    this.instance.domElement.style.top = 0
-    this.instance.domElement.style.left = 0
-    this.instance.domElement.style.width = '100%'
-    this.instance.domElement.style.height = '100%'
+    // this.instance.domElement.style.top = 0
+    // this.instance.domElement.style.left = 0
+    // this.instance.domElement.style.width = '100%'
+    // this.instance.domElement.style.height = '100%'
+    this.instance.domElement.style.inset = '0'
     this.instance.domElement.setAttribute('id', 'three-canvas')
 
     // this.instance.setClearColor(0x414141, 1)
@@ -89,7 +90,7 @@ export default class Renderer {
         generateMipmaps: false,
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
-        format: THREE.RGBFormat,
+        format: THREE.RGBFAormat,
         encoding: THREE.sRGBEncoding
       }
     )

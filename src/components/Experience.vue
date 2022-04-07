@@ -1,5 +1,62 @@
 <template>
   <div class="live" :id="$route.params.experience">
+    <div class="menu">
+      <div class="header">
+        <h1>LOOK CLOSER,<br />the danger can be hard to see.</h1>
+        <p>Choose a symptom to get started.</p>
+      </div>
+      <div class="menu-group">
+        <button
+          id="blur"
+          :class="{ selected: experience === 'blur' }"
+          :disabled=" experience === 'blur'"
+          @click="selectMode('blur')"
+        >
+        <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
+          Blurred Vision
+        </button>
+
+        <button
+          id="double"
+          :class="{ selected: experience === 'double' }"
+          :disabled=" experience === 'double'"
+          @click="selectMode('double')"
+        >
+          <img src="/assets/diplopia-icon.svg" alt="" />
+          Double Vision / <br > Diplopia
+        </button>
+
+        <button
+          id="color"
+          :class="{ selected: experience === 'color' }"
+          :disabled=" experience === 'color'"
+          @click="selectMode('color')"
+        >
+          <img src="/assets/eye-pressure-pain-icon.svg" alt="" />
+          Color Vision Loss
+        </button>
+
+        <button
+          id="light"
+          :class="{ selected: experience === 'light' }"
+          :disabled=" experience === 'light'"
+          @click="selectMode('light')"
+        >
+          <img src="/assets/photophobia-icon.svg" alt="" />
+          Light Sensetivity / <br > Photophobia
+        </button>
+
+        <button
+          id="eyes"
+          :class="{ selected: experience === 'eyes' }"
+          :disabled=" experience === 'eyes'"
+          @click="selectMode('eyes')"
+        >
+          <img src="/assets/proptosis-icon.svg" alt="" />
+          Bulging Eyes / <br > Proptosis
+        </button>
+      </div>
+    </div>
     <div class="container" ref="container"></div>
 
     <svg viewBox="0 0 8 17" class="overlay" v-if="hideOverlay == false">
@@ -257,22 +314,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#debug {
-  position: fixed;
-  bottom: 6em;
-  right: 1em;
-  background-color: rgba(black, 0.4);
-  color: white;
-  z-index: 9999999;
-  padding: 0.5em 1em;
-}
-
 .live {
   position: fixed;
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: black;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -281,11 +327,92 @@ export default {
   }
 }
 
+.menu {
+  height: 100%;
+  min-width: 350px;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color2;
+}
+
+.menu .header {
+  display: none;
+  padding: 5rem 2rem 2rem;
+  background-color: white;
+
+  h1 {
+    color: $color2;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-family: "Helvetica", sans-serif;
+    font-size: 1.1rem;
+    color: #666;
+  }
+
+  @media screen and (min-width: $breakpoint) {
+    display: block;
+  }
+}
+
+.menu .menu-group {
+  padding: 1rem 1rem 5rem;
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.menu .menu-group button {
+  position: relative;
+  padding: 1rem 1rem 1rem 20px;
+  border-radius: 0;
+  border: none;
+  background-color: $color3;
+  font-size: 1.2em;
+  font-family: $font2;
+  color: $color2;
+  font-weight: bold;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1em;
+  box-shadow: 0 4px 10px rgb(black, 0.3);
+  cursor: pointer;
+
+
+  &.selected {
+    background-color: white;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 100%;
+      background-color: $color4;
+    }
+  }
+
+  & img {
+    width: 100px;
+  }
+}
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
+
+  @media screen and (min-width: $breakpoint) {
+    display: none;
+  }
 }
 
 .container {
@@ -297,7 +424,7 @@ export default {
   @media screen and (min-width: 768px) {
     position: relative;
     height: auto;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     width: 100%;
   }
 }
@@ -405,6 +532,10 @@ export default {
       transform: rotate(180deg);
     }
   }
+
+  @media screen and (min-width: $breakpoint) {
+    display: none
+  }
 }
 
 @media screen and (orientation: portrait) {
@@ -415,26 +546,27 @@ export default {
     &.hidden {
       bottom: -350px;
     }
-  }
 
-  button#blur {
-    grid-row: 2;
 
-  }
-  button#light {
-    grid-row: 3;
+    button#blur {
+      grid-row: 2;
 
-  }
-  button#double {
-    grid-row: 4;
+    }
+    button#light {
+      grid-row: 3;
 
-  }
-  button#color {
-    grid-row: 5;
+    }
+    button#double {
+      grid-row: 4;
 
-  }
-  button#eyes {
-    grid-row: 6;
+    }
+    button#color {
+      grid-row: 5;
+
+    }
+    button#eyes {
+      grid-row: 6;
+    }
   }
 
   .button-group .controls {
@@ -450,7 +582,7 @@ export default {
     &.hidden {
       bottom: -155px;
     }
-  }
+
 
   button#blur {
     grid-row: 2;
@@ -475,6 +607,7 @@ export default {
     grid-row: 3;
     grid-column: 4/6;
   }
+  }
 
 .button-group .controls {
   grid-row: 1;
@@ -482,7 +615,7 @@ export default {
 }
 }
 
-button {
+.button-group button {
   color: white;
   width: 100%;
   padding: 0.5em;
