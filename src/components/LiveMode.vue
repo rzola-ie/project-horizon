@@ -31,7 +31,7 @@
         :to="{ name: 'liveExperience', params: { experience: 'double' } }"
       >
         <img src="/assets/diplopia-icon.svg" alt="" />
-        Double Vision / <br > Diplopia
+        Diplopia
       </router-link>
 
       <router-link
@@ -47,7 +47,7 @@
         :to="{ name: 'liveExperience', params: { experience: 'light' } }"
       >
         <img src="/assets/photophobia-icon.svg" alt="" />
-        Light Sensetivity / <br > Photophobia
+        Photophobia
       </router-link>
 
       <router-link
@@ -55,7 +55,7 @@
         :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
       >
         <img src="/assets/proptosis-icon.svg" alt="" />
-        Bulging Eyes / <br > Proptosis
+        Proptosis
       </router-link>
     </div>
   </div>

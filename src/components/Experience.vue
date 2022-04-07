@@ -23,7 +23,7 @@
           @click="selectMode('double')"
         >
           <img src="/assets/diplopia-icon.svg" alt="" />
-          Double Vision / <br > Diplopia
+          Diplopia
         </button>
 
         <button
@@ -43,7 +43,7 @@
           @click="selectMode('light')"
         >
           <img src="/assets/photophobia-icon.svg" alt="" />
-          Light Sensetivity / <br > Photophobia
+          Photophobia
         </button>
 
         <button
@@ -53,7 +53,7 @@
           @click="selectMode('eyes')"
         >
           <img src="/assets/proptosis-icon.svg" alt="" />
-          Bulging Eyes / <br > Proptosis
+          Proptosis
         </button>
       </div>
     </div>
@@ -102,15 +102,7 @@
         :class="{ selected: experience === 'blur' }"
         @click="selectMode('blur')"
       >
-        Blurry
-      </button>
-
-      <button
-        id="light"
-        :class="{ selected: experience === 'light' }"
-        @click="selectMode('light')"
-      >
-        Light
+        Blurred Vision
       </button>
 
       <button
@@ -118,7 +110,7 @@
         :class="{ selected: experience === 'double' }"
         @click="selectMode('double')"
       >
-        Double
+        Diplopia
       </button>
 
       <button
@@ -126,7 +118,15 @@
         :class="{ selected: experience === 'color' }"
         @click="selectMode('color')"
       >
-        Color
+        Color Vision Loss
+      </button>
+
+      <button
+        id="light"
+        :class="{ selected: experience === 'light' }"
+        @click="selectMode('light')"
+      >
+        Photophobia
       </button>
 
       <button
@@ -134,7 +134,7 @@
         :class="{ selected: experience === 'eyes' }"
         @click="selectMode('eyes')"
       >
-        Eye Bulge
+        Proptosis
       </button>
     </div>
 
@@ -548,22 +548,18 @@ export default {
       bottom: -350px;
     }
 
-
     button#blur {
       grid-row: 2;
-
     }
-    button#light {
-      grid-row: 3;
 
+    button#light {
+      grid-row: 5;
     }
     button#double {
-      grid-row: 4;
-
+      grid-row: 3;
     }
     button#color {
-      grid-row: 5;
-
+      grid-row: 4;
     }
     button#eyes {
       grid-row: 6;
@@ -591,17 +587,17 @@ export default {
 
   }
   button#light {
-    grid-row: 2;
-    grid-column: 3/5;
+    grid-row: 3;
+    grid-column: 2/4;
 
   }
   button#double {
     grid-row: 2;
-    grid-column: 5/7;
+    grid-column: 3/5;
   }
   button#color {
-    grid-row: 3;
-    grid-column: 2/4
+    grid-row: 2;
+    grid-column: 5/7
 
   }
   button#eyes {
