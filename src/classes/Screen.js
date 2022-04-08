@@ -79,7 +79,6 @@ export default class Screen {
   }
 
   resize() {
-    console.log('flagrant')
     this.width = window.innerWidth
     this.height =  window.innerHeight
 

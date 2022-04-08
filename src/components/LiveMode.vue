@@ -71,7 +71,6 @@ export default {
   methods: {
     sendGTM(data) {
       try {
-        console.log('nice')
         let postObject = JSON.stringify({
           event: 'click',
           data: data
