@@ -217,7 +217,7 @@ header .logo img {
   width: 100%;
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   justify-self: center;
   align-items: center;
@@ -262,6 +262,7 @@ header .logo img {
 
   & img {
     width: 50%;
+    min-width: 90px;
 
       @media screen and (orientation: landscape) {
         width: 65%;
