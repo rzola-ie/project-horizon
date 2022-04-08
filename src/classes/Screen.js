@@ -91,6 +91,9 @@ export default class Screen {
       this.renderer.instance.renderLists.dispose()
     }
 
+    this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
+    this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
+
     this.setShaders()
     this.setUniforms()
     this.setGeometry()
@@ -98,9 +101,6 @@ export default class Screen {
     this.setMesh()
     this.setVideoStream()
     this.setPostProcessing()
-
-    this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
-    this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
 
     this.renderer.postProcess.needsUpdate = true
   }

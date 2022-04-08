@@ -580,7 +580,6 @@ export default {
       bottom: -155px;
     }
 
-
   button#blur {
     grid-row: 2;
     grid-column: 1 / 3;
@@ -613,21 +612,32 @@ export default {
 }
 
 .button-group button {
+  position: relative;
   color: white;
   width: 100%;
   padding: 0.5em;
   color: $color2;
   background-color: white;
   border: 1px solid $color2;
-  border-radius: 4px;
   font-family: "Oswald", sans-serif;
   font-size: 1.2em;
 
   &.selected {
-    border: 1px solid white;
-    color: $color4;
+    background-color: $color3;
 
-    font-weight: bold;
+    &::before {
+      $border-size: 4px;
+      $border-width: 2px;
+      $border-offset: calc($border-size * 2 - $border-width) * 2;
+
+      content: '';
+      position: absolute;
+      border: $border-width solid $color2;
+      top: $border-size;
+      left: $border-size;
+      height: calc(100% - $border-offset);
+      width: calc(100% - $border-offset);
+    }
   }
 }
 
