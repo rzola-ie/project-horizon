@@ -8,7 +8,7 @@
       <div class="menu-group">
         <button
           id="blur"
-          :class="{ selected: experience === 'blur' }"
+          :class="['menu-button', {selected: experience === 'blur' }]"
           :disabled=" experience === 'blur'"
           @click="selectMode('blur')"
         >
@@ -18,7 +18,7 @@
 
         <button
           id="double"
-          :class="{ selected: experience === 'double' }"
+          :class="['menu-button', { selected: experience === 'double' }]"
           :disabled=" experience === 'double'"
           @click="selectMode('double')"
         >
@@ -28,7 +28,7 @@
 
         <button
           id="color"
-          :class="{ selected: experience === 'color' }"
+          :class="['menu-button', { selected: experience === 'color' }]"
           :disabled=" experience === 'color'"
           @click="selectMode('color')"
         >
@@ -38,7 +38,7 @@
 
         <button
           id="light"
-          :class="{ selected: experience === 'light' }"
+          :class="['menu-button', { selected: experience === 'light' }]"
           :disabled=" experience === 'light'"
           @click="selectMode('light')"
         >
@@ -48,7 +48,7 @@
 
         <button
           id="eyes"
-          :class="{ selected: experience === 'eyes' }"
+          :class="['menu-button', { selected: experience === 'eyes' }]"
           :disabled=" experience === 'eyes'"
           @click="selectMode('eyes')"
         >
@@ -99,7 +99,7 @@
       </div>
       <button
         id="blur"
-        :class="{ selected: experience === 'blur' }"
+        :class="['menu-button', { selected: experience === 'blur' }]"
         @click="selectMode('blur')"
       >
         Blurred Vision
@@ -107,7 +107,7 @@
 
       <button
         id="double"
-        :class="{ selected: experience === 'double' }"
+        :class="['menu-button', { selected: experience === 'double' }]"
         @click="selectMode('double')"
       >
         Diplopia
@@ -115,7 +115,7 @@
 
       <button
         id="color"
-        :class="{ selected: experience === 'color' }"
+        :class="['menu-button', { selected: experience === 'color' }]"
         @click="selectMode('color')"
       >
         Color Vision Loss
@@ -123,7 +123,7 @@
 
       <button
         id="light"
-        :class="{ selected: experience === 'light' }"
+        :class="['menu-button', { selected: experience === 'light' }]"
         @click="selectMode('light')"
       >
         Photophobia
@@ -131,7 +131,7 @@
 
       <button
         id="eyes"
-        :class="{ selected: experience === 'eyes' }"
+        :class="['menu-button', { selected: experience === 'eyes' }]"
         @click="selectMode('eyes')"
       >
         Proptosis
