@@ -308,7 +308,20 @@ export default {
 
       this.hideOverlay = false
       this.hideControls = true
+
+      this.sendGTM(mode)
     },
+    sendGTM(data) {
+      try {
+        let postObject = JSON.stringify({
+          event: 'click',
+          data: data
+        })
+        parent.postMessage(postObject, window.origin)
+      } catch(e) {
+        window.console && window.console.log(e)
+      }
+    }
   },
 };
 </script>
