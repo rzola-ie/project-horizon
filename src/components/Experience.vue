@@ -256,7 +256,7 @@ export default {
     return {
       experience: "",
       hideControls: true,
-      hideOverlay: false
+      hideOverlay: false,
     };
   },
   mounted() {
@@ -277,7 +277,7 @@ export default {
       this.scene = new EyeBulge({ canvasId: "three-canvas" });
 
     if(this.experience !== 'eyes')
-      this.selectMode(this.experience)
+      this.selectMode(this.experience, true)
   },
   beforeUnmount() {
     this.scene.destroy();
@@ -311,7 +311,9 @@ export default {
 
       this.sendGTM(mode)
     },
-    sendGTM(data) {
+    sendGTM(data, isFirstCall = false) {
+      if(isFirstCall) return
+
       try {
         let postObject = JSON.stringify({
           event: 'click',
