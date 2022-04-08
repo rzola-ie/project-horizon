@@ -111,12 +111,23 @@
             }
         },
         mounted() {
-
+            window.addEventListener('message', message => {
+                try {
+                    let data = JSON.parse(message.data)
+                    console.log(data)
+                    let dataLayer = window.dataLayer || (window.dataLayer = [])
+                    if(data.event) {
+                        dataLayer.push({
+                            event: data.event,
+                            postMessageData: data
+                        })
+                    }
+                } catch(e) {}
+            })
         },
         methods: {
             activateSim() {
                 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
 
                 this.showIframe = true
                 this.iFrame = document.createElement('iframe')

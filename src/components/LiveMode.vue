@@ -17,9 +17,10 @@
         <p>Choose a symptom to get started.</p>
       </div>
     </div>
-    <div class="symptoms">
+    <nav class="symptoms">
       <router-link
         class="symptom"
+        @click="sendGTM('blur')"
         :to="{ name: 'liveExperience', params: { experience: 'blur' } }"
       >
         <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
@@ -28,6 +29,7 @@
 
       <router-link
         class="symptom"
+        @click="sendGTM('double')"
         :to="{ name: 'liveExperience', params: { experience: 'double' } }"
       >
         <img src="/assets/diplopia-icon.svg" alt="" />
@@ -36,6 +38,7 @@
 
       <router-link
         class="symptom"
+        @click="sendGTM('color')"
         :to="{ name: 'liveExperience', params: { experience: 'color' } }"
       >
         <img src="/assets/color-loss.svg" alt="" />
@@ -44,6 +47,7 @@
 
       <router-link
         class="symptom"
+        @click="sendGTM('light')"
         :to="{ name: 'liveExperience', params: { experience: 'light' } }"
       >
         <img src="/assets/photophobia-icon.svg" alt="" />
@@ -52,17 +56,33 @@
 
       <router-link
         class="symptom"
+        @click="sendGTM('eyes')"
         :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
       >
         <img src="/assets/proptosis-icon.svg" alt="" />
         Proptosis
       </router-link>
-    </div>
+    </nav>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    sendGTM(data) {
+      try {
+        console.log('nice')
+        let postObject = JSON.stringify({
+          event: 'click',
+          data: data
+        })
+        parent.postMessage(postObject, window.origin)
+      } catch(e) {
+        window.console && window.console.log(e)
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
