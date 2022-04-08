@@ -79,8 +79,17 @@ export default class Screen {
   }
 
   resize() {
+    console.log('flagrant')
     this.width = window.innerWidth
     this.height =  window.innerHeight
+
+    if(this.mesh) {
+      console.log('bye')
+      this.mesh.geometry.dispose()
+      this.mesh.material.dispose()
+      this.scene.remove(this.mesh)
+      this.renderer.instance.renderLists.dispose()
+    }
 
     this.setShaders()
     this.setUniforms()
@@ -93,7 +102,6 @@ export default class Screen {
     this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
     this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
 
-    this.renderer.instance.needsUpdate = true
     this.renderer.postProcess.needsUpdate = true
   }
 
