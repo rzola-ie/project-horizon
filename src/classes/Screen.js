@@ -89,18 +89,21 @@ export default class Screen {
       this.renderer.instance.renderLists.dispose()
     }
 
-    this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
-    this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
-
-    this.setShaders()
-    this.setUniforms()
-    this.setGeometry()
-    this.setMaterial()
-    this.setMesh()
-    this.setVideoStream()
-    this.setPostProcessing()
-
-    this.renderer.postProcess.needsUpdate = true
+    setTimeout(() => {
+      this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
+      this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
+  
+      this.setShaders()
+      this.setUniforms()
+      this.setGeometry()
+      this.setMaterial()
+      this.setMesh()
+      this.setVideoStream()
+      this.setPostProcessing()
+  
+      this.renderer.postProcess.needsUpdate = true
+      console.log('nice timeout')
+    }, 1000)
   }
 
   setShaders() {
