@@ -91,13 +91,14 @@ export default class Screen {
     // this.renderer.postProcess.composer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
 
+    this.setVideoStream()
+    this.setShaders()
+
     setTimeout(() => {
-      this.setShaders()
       this.setUniforms()
       this.setGeometry()
       this.setMaterial()
       this.setMesh()
-      this.setVideoStream()
       this.setPostProcessing()
       console.log('nice timeout')
     }, 1000)
@@ -354,9 +355,6 @@ export default class Screen {
 
     if (this.pass)
       this.renderer.postProcess.composer.removePass(this.pass)
-
-    this.renderer.instance.needsUpdate = true;
-    this.renderer.postProcess.needsUpdate = true;
 
     this.setUniforms()
     this.setPostProcessing()
