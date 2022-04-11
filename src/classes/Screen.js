@@ -345,9 +345,12 @@ export default class Screen {
       0.85 // threshold
     )
 
-    this.pass.strength = this.isMobile ? 0.75 : 0.3
-    this.pass.radius = this.isMobile ? 0.3 : 1.5;
-    this.pass.threshold = this.isMobile ? 0.0 : 0.6;
+    this.pass.strength = 0
+    this.pass.radius = 0;
+    this.pass.threshold = 0;
+    // this.pass.strength = this.isMobile ? 0.75 : 0.3
+    // this.pass.radius = this.isMobile ? 0.3 : 1.5;
+    // this.pass.threshold = this.isMobile ? 0.0 : 0.6;
 
     this.renderer.postProcess.composer.addPass(this.pass)
   }
@@ -389,9 +392,12 @@ export default class Screen {
           break
         case 'light':
           if(this.pass)
-            this.pass.strength = this.settings.strength
-            this.pass.radius = this.settings.radius
-            this.pass.threshold = this.settings.threshold
+            this.pass.strength = 0
+            this.pass.radius = 0
+            this.pass.threshold = 0
+            // this.pass.strength = this.settings.strength
+            // this.pass.radius = this.settings.radius
+            // this.pass.threshold = this.settings.threshold
           break
       }
 
