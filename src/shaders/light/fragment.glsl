@@ -11,7 +11,7 @@ void main() {
 
   color = texture2D(feed, vUv).rgb;
 
-  if(color.r > 0.1 && color.g > 0.1 && color.b > 0.1) {
+  if(color.r > 0.05 && color.g > 0.05 && color.b > 0.05) {
     color += mix(color, vec3(uSensetivity), color);
   }
 
