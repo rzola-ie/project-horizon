@@ -98,8 +98,6 @@ export default class Screen {
       this.scene.remove(this.mesh)
       this.renderer.instance.renderLists.dispose()
     }
-    // this.renderer.postProcess.composer.setSize(window.innerWidth, window.innerHeight)
-    // this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
 
     this.setVideoStream()
     this.setShaders()
@@ -341,25 +339,24 @@ export default class Screen {
 
   addLightPass() {
     // add new effect
-    console.log(window.innerWidth, window.innerHeight)
-    this.pass = new UnrealBloomPass(
-      new THREE.Vector2(
-        window.innerWidth,
-        window.innerHeight
-      ),
-      // 1.5, // strength
-      // 0.4, // radius
-      // 0.85 // threshold
-      0, // strength
-      0, // radius
-      0 // threshold
-    )
-
-    this.pass.strength = this.shaders.light.settings.strength
-    this.pass.radius = this.shaders.light.settings.radius
-    this.pass.threshold = this.shaders.light.settings.threshold
-
-    this.renderer.postProcess.composer.addPass(this.pass)
+    console.log('isMobile', this.isMobile)
+    if(!this.isMobile) {
+      this.pass = new UnrealBloomPass(
+        new THREE.Vector2(
+          window.innerWidth,
+          window.innerHeight
+        ),
+        0.5, // strength
+        0, // radius
+        0 // threshold
+      )
+  
+      this.pass.strength = this.shaders.light.settings.strength
+      this.pass.radius = this.shaders.light.settings.radius
+      this.pass.threshold = this.shaders.light.settings.threshold
+  
+      this.renderer.postProcess.composer.addPass(this.pass)
+    }
   }
 
   selectMode(mode) {
@@ -398,16 +395,15 @@ export default class Screen {
           }
           break
         case 'light':
-          if(this.pass)
+          if(!this.isMobile && this.pass) {
             this.pass.strength = this.settings.strength
             this.pass.radius = this.settings.radius
             this.pass.threshold = this.settings.threshold
+          }
           break
       }
 
       this.material.needsUpdate = true
-      this.renderer.instance.needsUpdate = true
-      this.renderer.postProcess.needsUpdate = true
     }
   }
 
