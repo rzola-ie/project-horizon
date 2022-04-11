@@ -143,8 +143,8 @@ export default class Screen {
         // this.uniforms.uSensetivity.value = this.settings.sensetivity
         if (this.pass) {
           this.pass.strength = this.settings.strength
-          this.pass.radius = this.settings.strength
-          this.pass.threshold = this.settings.strength  
+          this.pass.radius = this.settings.radius
+          this.pass.threshold = this.settings.threshold  
         }
         break
     }
