@@ -82,6 +82,9 @@ export default class Screen {
     this.width = window.innerWidth
     this.height =  window.innerHeight
 
+    const debug = document.getElementById('debug')
+    debug.innerText = `${this.width} x ${this.height}`
+
     if(this.mesh) {
       this.mesh.geometry.dispose()
       this.mesh.material.dispose()

@@ -244,6 +244,8 @@
         </div>
       </div>
     </div>
+
+    <div id="debug"></div>
   </div>
 </template>
 
@@ -330,6 +332,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#debug {
+  position: absolute;
+  right: 1rem;
+  bottom: 5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 99999;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
 .live {
   position: fixed;
   inset: 0;
