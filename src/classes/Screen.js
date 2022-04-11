@@ -88,11 +88,10 @@ export default class Screen {
       this.scene.remove(this.mesh)
       this.renderer.instance.renderLists.dispose()
     }
+    // this.renderer.postProcess.composer.setSize(window.innerWidth, window.innerHeight)
+    // this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
 
     setTimeout(() => {
-      this.renderer.postProcess.composer.setSize(window.innerWidth, window.innerHeight)
-      this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
-  
       this.setShaders()
       this.setUniforms()
       this.setGeometry()
