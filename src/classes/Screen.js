@@ -83,7 +83,6 @@ export default class Screen {
     this.height =  window.innerHeight
 
     if(this.mesh) {
-      console.log('bye')
       this.mesh.geometry.dispose()
       this.mesh.material.dispose()
       this.scene.remove(this.mesh)
@@ -280,6 +279,8 @@ export default class Screen {
     // remove any previous effects
     if(this.pass)
       this.renderer.postProcess.composer.removePass(this.pass)
+      this.pass = null
+      console.log('bye', this.pass)
 
     switch (this.mode) {
       case 'blur':
@@ -335,10 +336,14 @@ export default class Screen {
         window.innerWidth,
         window.innerHeight
       ),
-      this.isMobile ? 0.75 : 0.3, // strength
-      this.isMobile ? 0.3 : 1.5, // radius
-      this.isMobile ? 0.0 : 0.6 // threshold
+      1.5, // strength
+      0.4, // radius
+      0.85 // threshold
     )
+
+    this.pass.strength = this.isMobile ? 0.75 : 0.3
+    this.pass.radius = this.isMobile ? 0.3 : 1.5;
+    this.pass.threshold = this.isMobile ? 0.0 : 0.6;
 
     this.renderer.postProcess.composer.addPass(this.pass)
   }

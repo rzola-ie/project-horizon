@@ -59,7 +59,7 @@
     </div>
     <div class="container" ref="container"></div>
 
-    <svg viewBox="0 0 8 17" class="overlay" v-if="hideOverlay == false">
+    <svg viewBox="0 0 8 17" class="overlay" v-if="hideOverlay === false">
       <defs>
         <mask id="eye-mask" maskUnits="objectBoundingBox">
           <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
@@ -256,14 +256,12 @@ export default {
     return {
       experience: "",
       hideControls: true,
-      hideOverlay: false,
+      hideOverlay: true,
     };
   },
   mounted() {
     this.experience =
       this.$route.params.experience || sessionStorage.getItem("mode");
-
-    this.hideOverlay = this.experience !== 'eyes'
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -288,6 +286,8 @@ export default {
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);
 
+      this.hideControls = true
+
       if(this.scene)
         this.scene.destroy();
 
@@ -297,17 +297,18 @@ export default {
       if(document.querySelector('video'))
         document.querySelector('video').remove()
 
-      if(mode === 'eyes')
+      if(mode === 'eyes') {
         this.scene = new EyeBulge({ canvasId: "three-canvas" });
+        this.hideOverlay = false
+      }
 
-      if(mode !== 'eyes')
+      if(mode !== 'eyes') {
         this.scene = new MainThreeScene({
           targetElement: this.$refs.container,
           mode: this.experience,
         });
-
-      this.hideOverlay = false
-      this.hideControls = true
+        this.hideOverlay = true
+      }
 
       this.sendGTM(mode)
     },
