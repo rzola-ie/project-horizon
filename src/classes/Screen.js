@@ -90,7 +90,7 @@ export default class Screen {
     }
 
     setTimeout(() => {
-      this.renderer.postProcess.composer.setSize(this.config.width, this.config.height)
+      this.renderer.postProcess.composer.setSize(window.innerWidth, window.innerHeight)
       this.renderer.postProcess.composer.setPixelRatio(this.config.pixelRatio)
   
       this.setShaders()
@@ -100,8 +100,6 @@ export default class Screen {
       this.setMesh()
       this.setVideoStream()
       this.setPostProcessing()
-  
-      this.renderer.postProcess.needsUpdate = true
       console.log('nice timeout')
     }, 1000)
   }
