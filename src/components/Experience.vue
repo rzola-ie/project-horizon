@@ -59,7 +59,7 @@
     </div>
     <div class="container" ref="container"></div>
 
-    <svg viewBox="0 0 8 17" class="overlay" v-if="hideOverlay === false">
+    <svg viewBox="0 0 8 17" id="overlay" v-if="hideOverlay === false">
       <defs>
         <mask id="eye-mask" maskUnits="objectBoundingBox">
           <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
@@ -270,7 +270,7 @@ export default {
     if(!this.isMobile) {
       document.querySelector('#turn-landscape').style.display = 'none'
       document.querySelector('#turn-portrait').style.display = 'none'
-      document.querySelector('.overlay').style.display = 'none'
+      // document.querySelector('#overlay').style.display = 'none'
     }
 
     if(this.experience === 'eyes')
@@ -434,7 +434,7 @@ export default {
   }
 }
 
-.overlay {
+#overlay {
   position: fixed;
   top: 0;
   left: 0;

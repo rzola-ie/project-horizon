@@ -4,9 +4,10 @@ import MainThreeScene from './MainThreeScene'
 // post processing effects
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
-import { UnrealBloomPass } from '../shaders/light/LightSensitivity'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { DoubleVisionShader } from '../shaders/double/DoubleShader';
 import { ColorLossShader } from '../shaders/color/ColorLossShader'
+import { LightShader } from '../shaders/light/LightShader'
 
 export default class Screen {
   constructor(_options) {
@@ -355,8 +356,10 @@ export default class Screen {
       this.pass.radius = this.shaders.light.settings.radius
       this.pass.threshold = this.shaders.light.settings.threshold
   
-      this.renderer.postProcess.composer.addPass(this.pass)
+    } else {
+      this.pass = new ShaderPass(LightShader)
     }
+    this.renderer.postProcess.composer.addPass(this.pass)
   }
 
   selectMode(mode) {
