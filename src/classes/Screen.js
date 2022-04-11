@@ -35,20 +35,20 @@ export default class Screen {
           mix: 0.4,
         }
       },
-      // light: {
-      //   settings: {
-      //     strength: this.isMobile ? 0.75 : 0.3,
-      //     radius: this.isMobile ? 0.3:  1.5,
-      //     threshold: this.isMobile ? 0.0 : 0.6
-      //   }
-      // },
       light: {
         settings: {
-          strength:0,
-          radius: 0,
-          threshold: 0
+          strength: this.isMobile ? 0.6 : 0.3,
+          radius: this.isMobile ? 0.0:  1.5,
+          threshold: this.isMobile ? 0.0 : 0.6
         }
       },
+      // light: {
+      //   settings: {
+      //     strength:0,
+      //     radius: 0,
+      //     threshold: 0
+      //   }
+      // },
       bulge: {}
     }
 
