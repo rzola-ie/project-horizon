@@ -98,11 +98,11 @@ export default class Screen {
     this.setShaders()
 
     setTimeout(() => {
-      this.setUniforms()
       this.setGeometry()
       this.setMaterial()
       this.setMesh()
       this.setPostProcessing()
+      this.setUniforms()
       console.log('nice timeout')
     }, 1000)
   }
@@ -340,9 +340,12 @@ export default class Screen {
         window.innerWidth,
         window.innerHeight
       ),
-      1.5, // strength
-      0.4, // radius
-      0.85 // threshold
+      // 1.5, // strength
+      // 0.4, // radius
+      // 0.85 // threshold
+      0, // strength
+      0, // radius
+      0 // threshold
     )
 
     this.pass.strength = 0
@@ -362,8 +365,8 @@ export default class Screen {
     if (this.pass)
       this.renderer.postProcess.composer.removePass(this.pass)
 
-    this.setUniforms()
-    this.setPostProcessing()
+      this.setPostProcessing()
+      this.setUniforms()
   }
 
   updateUniforms() {
