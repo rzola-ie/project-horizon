@@ -114,7 +114,7 @@
             window.addEventListener('message', message => {
                 try {
                     let data = JSON.parse(message.data)
-                    console.log(data)
+
                     let dataLayer = window.dataLayer || (window.dataLayer = [])
                     if(data.event) {
                         dataLayer.push({

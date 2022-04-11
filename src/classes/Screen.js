@@ -37,7 +37,7 @@ export default class Screen {
       },
       light: {
         settings: {
-          strength: this.isMobile ? 0.8 : 0.3,
+          strength: this.isMobile ? 0.75 : 0.3,
           radius: this.isMobile ? 0.3:  1.5,
           threshold: this.isMobile ? 0.0 : 0.6
         }
@@ -146,8 +146,6 @@ export default class Screen {
           this.pass.radius = this.settings.strength
           this.pass.threshold = this.settings.strength  
         }
-
-
         break
     }
   }
@@ -331,12 +329,13 @@ export default class Screen {
 
   addLightPass() {
     // add new effect
+    console.log(window.innerWidth, window.innerHeight)
     this.pass = new UnrealBloomPass(
       new THREE.Vector2(
-        this.renderer.instance.domElement.width,
-        this.renderer.instance.domElement.height
+        window.innerWidth,
+        window.innerHeight
       ),
-      this.isMobile ? 0.8 : 0.3, // strength
+      this.isMobile ? 0.75 : 0.3, // strength
       this.isMobile ? 0.3 : 1.5, // radius
       this.isMobile ? 0.0 : 0.6 // threshold
     )
