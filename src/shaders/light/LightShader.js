@@ -10,7 +10,7 @@ import fragment from './fragment.glsl'
 const LightShader = {
 
   uniforms: {
-    uSensetivity: { value: 0.4 }
+    uSensetivity: { value: 0.6 }
   },
   vertexShader: vertex,
   fragmentShader: fragment
