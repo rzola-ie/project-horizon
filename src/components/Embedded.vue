@@ -19,11 +19,19 @@
             <!-- hero -->
 
             <section id="simulator">
-                <img src="/assets/launch.png" class="iframe-launch" @click="activateSim">
-
                 <div class="content">
-                    <h2>Experience the world through your patients' eyes</h2>
-                    <p>Use the Symptom Simulator to see how TED symptoms present themselves in a virtual world.</p>
+                    <div class="content-container">
+                        <h2>Experience the world through your patients' eyes</h2>
+                        <p>Use the Symptom Simulator to see how TED symptoms present themselves in a virtual world.</p>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button>
+                        <span>
+                            Experience the symptoms now
+                        </span>
+                    </button>
                 </div>
             </section>
             <!-- simulator -->
@@ -248,7 +256,6 @@ p {
     }
 }
 
-
 section {
     padding: 1em;
 
@@ -327,45 +334,118 @@ main .hero p {
 /* SIMULATOR
 ================================ */
 #simulator {
+    min-height: 600px;
     background-color: $color3;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    padding: 0;
     @media screen and (min-width: 900px) {
-        flex-direction: row;
-        padding: 4em 6em;
-        gap: 2em;
+        min-height: 400px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
 
 #simulator .content {
-    position: relative;
-    padding: 0 1.6em;
+    padding: 1.6rem;
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    color: $color1;
+
+    @media screen and (min-width: 900px) {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+#simulator .content .content-container {
+    position: relative;
+    padding: 0 1.6rem;
 
     &::before {
         content: '';
         position: absolute;
         width: 10px;
         left: 0;
-        height: calc(100% - 1em);
+        height: calc(100%);
         background-color: $color4;
+    }
+
+    @media screen and (min-width: 900px) {
+                max-width: 600px;
+        margin: auto;
+    }
+}
+
+#simulator h2 {
+    font-size: 1.6rem;
+    @media screen and (min-width: 900px) {
+    font-size: 2.4rem;
     }
 }
 
 #simulator p {
     margin-bottom: 1em;
+    font-weight: 500;
 }
 
-#simulator .iframe-launch {
-    flex: 1;
+#simulator .button-container {
+    position: relative;
     width: 100%;
+    height: 100%;
+}
 
-    border: 2px solid darken($color3, 10%);
-      aspect-ratio: 16 / 9;
-      cursor: pointer;
+#simulator .button-container button {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    background: url('/assets/launch.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border: none;
+    cursor: pointer;
+}
 
+#simulator .button-container button:hover > span {
+    transform-origin: center;
+    transform: translateX(-50%) scale(1.05);
+    background-color: darken($color3, 6%);
+}
+
+#simulator .button-container button span {
+    position: absolute;
+    width: 280px;
+    left: 50%;
+    bottom: 2.4rem;
+    background-color: $color3;
+    padding: 1.2rem 1.6rem;
+    margin-right: 71px;
+    transform-origin: center center;
+    transform: translateX(-50%) scale(1) ;
+    font-family: $font2;
+    font-size: 1.1rem;
+    color: $color1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 150ms ease-in-out;
+
+    &::after {
+        position: absolute;
+        content: '';
+        top: 4px;
+        bottom: 0;
+        right: 0;
+        width: 71px;
+        background-image: url('/assets/chevron-right-green.svg');
+        background-size: 36px;
+        background-repeat: no-repeat;
+        background-position: 70% 50%;
+    }
 }
 
 /* NEXT STEPS

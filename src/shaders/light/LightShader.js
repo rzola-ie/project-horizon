@@ -8,7 +8,6 @@ import fragment from './fragment.glsl'
  */
 
 const LightShader = {
-
   uniforms: {
     uSensetivity: { value: 0.6 }
   },

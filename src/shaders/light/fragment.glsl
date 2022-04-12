@@ -1,7 +1,6 @@
 varying vec2 vUv;
 
 uniform sampler2D feed;
-uniform float uTime;
 uniform float uSensetivity;
 
 void main() {
