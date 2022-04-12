@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="button-container">
-                    <button>
+                    <button @click="activateSim">
                         <span>
                             Experience the symptoms now
                         </span>
