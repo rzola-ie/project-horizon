@@ -1,3 +1,4 @@
+import { Vector4 } from 'three'
 import vertex from './vertex.glsl'
 import fragment from './fragment.glsl'
 
@@ -11,6 +12,7 @@ const ColorLossShader = {
 
   uniforms: {
     tDiffuse: { value: null },
+    uResolution: { value: new Vector4() },
     uDesaturate: { value: -0.7 }
   },
 

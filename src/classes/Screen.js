@@ -90,9 +90,6 @@ export default class Screen {
     this.width = window.innerWidth
     this.height =  window.innerHeight
 
-    const debug = document.getElementById('debug')
-    debug.innerText = `${this.width} x ${this.height}`
-
     if(this.mesh) {
       this.mesh.geometry.dispose()
       this.mesh.material.dispose()
@@ -109,7 +106,6 @@ export default class Screen {
       this.setMesh()
       this.setPostProcessing()
       this.setUniforms()
-      console.log('nice timeout')
     }, 1000)
   }
 
@@ -286,6 +282,7 @@ export default class Screen {
   }
 
   setPostProcessing() {
+
     // remove any previous effects
     if(this.pass)
       this.renderer.postProcess.composer.removePass(this.pass)
@@ -306,7 +303,28 @@ export default class Screen {
         this.addColorPass()
     }
 
-    this.renderer.instance.needsUpdate = true
+    if(this.width > this.height) {
+      this.imageAspect = 1080 / 1920
+    } else {
+      this.imageAspect = 1920 / 1080
+    }
+
+    let a1, a2
+    if(this.height / this.width > this.imageAspect) {
+      a1 = (this.width / this.height) * this.imageAspect
+      a2 = 1
+    } else {
+      a1 = 1
+      a2 = (this.height / this.width) / this.imageAspect
+    }
+
+    if(this.pass.uniforms.uResolution) {
+      this.pass.uniforms.uResolution.value.x = this.width
+      this.pass.uniforms.uResolution.value.y = this.height
+      this.pass.uniforms.uResolution.value.z = a1
+      this.pass.uniforms.uResolution.value.w = a2
+      console.log(this.pass.uniforms.uResolution)
+    }
   }
 
   addColorPass() {

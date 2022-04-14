@@ -8,16 +8,22 @@ vec3 adjustSaturation(vec3 color, float value) {
 
 uniform sampler2D tDiffuse;
 uniform float uDesaturate;
+uniform vec4 uResolution;
 
 varying vec2 vUv;
 
-void main() {
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {  
+  vec2 newUv = (vUv - vec2(0.5)) * uResolution.zw + vec2(0.5);
   vec4 color = vec4(0.0);
 
-  color = texture2D(tDiffuse, vUv);
+  color = texture2D(tDiffuse, newUv);
 
   color.rgb = adjustSaturation(color.rgb, -0.7);
   // color += vUv;
 
-  gl_FragColor = color;
+  fragColor = color;
+}
+
+void main() {
+  mainImage(gl_FragColor, gl_FragCoord.xy);
 }
