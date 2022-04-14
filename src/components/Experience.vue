@@ -57,11 +57,7 @@
         </button>
       </div>
     </div>
-    <div class="container" ref="container">
-      <!-- <div id="overlay-desktop" v-if="experience === 'eyes' && !isMobile">
-        <div class="guide"></div>
-      </div> -->
-    </div>
+    <div class="container" ref="container"></div>
 
     <svg viewBox="0 0 8 17" id="overlay-mobile" v-if="experience === 'eyes' && isMobile">
       <defs>
@@ -171,6 +167,7 @@
           stroke-linecap="round"
         />
       </svg>
+      <span class="sr-only">Back to main menu</span>
     </router-link>
 
     <div class="orientation-modal" id="turn-landscape">
@@ -455,34 +452,6 @@ export default {
   @media screen and (min-width: $breakpoint) {
     display: none;
   }
-}
-
-#overlay-desktop {
-  display: none;
-
-  @media screen and (min-width: $breakpoint) {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: calc(75% - 4px);
-    max-width: calc(100vw - 25%);
-    background-color: rgba(black, 0.5);
-    z-index: 9999;
-    border: 2px solid blue;
-    mix-blend-mode: screen;
-    padding: 25% 0 0 0;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-#overlay-desktop .guide {
-  height: 200px;
-  width: clamp(80%, 500px, 800px);
-  background-color: white;
-
 }
 
 .container {
