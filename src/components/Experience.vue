@@ -265,11 +265,11 @@ export default {
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if(!this.isMobile) {
+    // if(!this.isMobile) {
       document.querySelector('#turn-landscape').style.display = 'none'
       document.querySelector('#turn-portrait').style.display = 'none'
       // document.querySelector('#overlay').style.display = 'none'
-    }
+    // }
 
     if(this.experience === 'eyes')
       this.scene = new EyeBulge({ canvasId: "three-canvas" });

@@ -303,11 +303,7 @@ export default class Screen {
         this.addColorPass()
     }
 
-    if(this.width > this.height) {
-      this.imageAspect = 1080 / 1920
-    } else {
-      this.imageAspect = 1920 / 1080
-    }
+    this.imageAspect = 1080 / 1920
 
     let a1, a2
     if(this.height / this.width > this.imageAspect) {
