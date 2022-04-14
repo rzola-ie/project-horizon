@@ -1,10 +1,7 @@
 <template>
   <div id="live">
     <header>
-        <div class="hcp">For US Healthcare Professionals</div>
-        <div class="logo">
-            <img src="/assets/ted-logo.png" alt="">
-        </div>
+
     </header>
     <div class="text-container">
       <h1 class="mobile">
@@ -99,9 +96,10 @@ export default {
 /* HEADER
 ================================ */
 header {
-  display: none;
+  // display: none;
+    height: 80px;
     width: 100%;
-    background-color: $color1;
+    background-color: $color2;
     color: white;
 
   @media screen and (min-width: $breakpoint) {

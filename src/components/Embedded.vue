@@ -237,12 +237,12 @@ iframe {
 
 .close-sim {
     position: fixed;
-    height: 40px;
-    width: 40px;
-    padding: 7px;
-    top: 1rem;
-    right: 1rem;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    padding: 2px;
+    top: 2px;
+    right: 2px;
+    border-radius: 0 0 0 10px;
     border: none;
     color: $color2;
     background-color: rgba(white, 0.6);

@@ -57,9 +57,13 @@
         </button>
       </div>
     </div>
-    <div class="container" ref="container"></div>
+    <div class="container" ref="container">
+      <!-- <div id="overlay-desktop" v-if="experience === 'eyes' && !isMobile">
+        <div class="guide"></div>
+      </div> -->
+    </div>
 
-    <svg viewBox="0 0 8 17" id="overlay" v-if="hideOverlay === false">
+    <svg viewBox="0 0 8 17" id="overlay-mobile" v-if="experience === 'eyes' && isMobile">
       <defs>
         <mask id="eye-mask" maskUnits="objectBoundingBox">
           <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
@@ -72,6 +76,8 @@
 
       <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
     </svg>
+
+
 
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
@@ -244,6 +250,10 @@
         </div>
       </div>
     </div>
+
+      <div class="legal">
+        Simulated Image
+      </div>
   </div>
 </template>
 
@@ -268,7 +278,6 @@ export default {
     if(!this.isMobile) {
       document.querySelector('#turn-landscape').style.display = 'none'
       document.querySelector('#turn-portrait').style.display = 'none'
-      // document.querySelector('#overlay').style.display = 'none'
     }
 
     if(this.experience === 'eyes')
@@ -330,17 +339,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#debug {
-  position: absolute;
-  right: 1rem;
-  bottom: 5rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  z-index: 99999;
-  padding: 0.5rem;
-  border-radius: 4px;
-}
-
 .live {
   position: fixed;
   inset: 0;
@@ -421,7 +419,7 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      width: 16px;
+      width: 12px;
       height: 100%;
       background-color: $color4;
     }
@@ -432,7 +430,24 @@ export default {
   }
 }
 
-#overlay {
+.legal {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  color: white;
+  background: rgba(black, 0.3);
+  z-index: 9998;
+  bottom: 60px;
+  right: 0;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+
+  @media screen and (min-width: $breakpoint) {
+    bottom: 0;
+  }
+}
+
+#overlay-mobile {
   position: fixed;
   top: 0;
   left: 0;
@@ -441,6 +456,34 @@ export default {
   @media screen and (min-width: $breakpoint) {
     display: none;
   }
+}
+
+#overlay-desktop {
+  display: none;
+
+  @media screen and (min-width: $breakpoint) {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(75% - 4px);
+    max-width: calc(100vw - 25%);
+    background-color: rgba(black, 0.5);
+    z-index: 9999;
+    border: 2px solid blue;
+    mix-blend-mode: screen;
+    padding: 25% 0 0 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+#overlay-desktop .guide {
+  height: 200px;
+  width: clamp(80%, 500px, 800px);
+  background-color: white;
+
 }
 
 .container {
