@@ -438,7 +438,6 @@ export default {
   z-index: 9998;
   bottom: 62px;
   right: 0;
-  left: 0;
   text-align: center;
   font-size: 12px;
 
