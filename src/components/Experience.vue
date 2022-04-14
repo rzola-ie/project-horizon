@@ -200,7 +200,7 @@
       <div class="body">
         <img src="/assets/landscape-mode.svg" alt="">
         <div class="content">
-          <h2>Please turn your phone.</h2>
+          <h2>Please turn your device.</h2>
           <p>This experience cannot be used in portrait mode</p>
         </div>
       </div>
@@ -239,7 +239,7 @@
       <div class="body">
         <img src="/assets/portrait-mode.svg" alt="">
         <div class="content">
-          <h2>Please turn your phone.</h2>
+          <h2>Please turn your device.</h2>
           <p>This experience cannot be used in landscape mode</p>
         </div>
       </div>
