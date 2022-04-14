@@ -436,7 +436,7 @@ export default {
   color: white;
   background: rgba(black, 0.3);
   z-index: 9998;
-  bottom: 60px;
+  bottom: 62px;
   right: 0;
   left: 0;
   text-align: center;
