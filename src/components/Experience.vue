@@ -435,7 +435,8 @@ export default {
   z-index: 9998;
   bottom: 62px;
   right: 0;
-  text-align: center;
+  left: 0;
+  text-align: right;
   font-size: 12px;
 
   @media screen and (min-width: $breakpoint) {
