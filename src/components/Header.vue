@@ -1,6 +1,6 @@
 <template>
   <header id="header" v-show="!isExperiencePage && !isEmbeddedPage && !isSymptomsPage">
-    <button v-if="!isHomePage" class="back" @click="goBack">
+    <button v-if="false" class="back" @click="goBack">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#ffffff">
         <line
           x1="2"

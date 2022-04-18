@@ -107,7 +107,7 @@
         data() {
             return {
                 iFrame: null,
-                iframeSrc: window.origin + '/live',
+                iframeSrc: window.origin,
                 showIframe: false
             }
         },

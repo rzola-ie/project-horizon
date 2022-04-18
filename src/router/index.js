@@ -7,12 +7,7 @@ import Embedded from '@/components/Embedded.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/live',
-    name: 'liveMode',
+    name: 'LiveMode',
     component: LiveMode
   },
   {
