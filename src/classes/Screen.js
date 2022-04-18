@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { PlaneBufferGeometry, MeshBasicMaterial, Mesh, VideoTexture, Vector2 } from 'three'
 import MainThreeScene from './MainThreeScene'
 
 // post processing effects
@@ -216,16 +216,16 @@ export default class Screen {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneBufferGeometry(1, 1, 1, 1)
+    this.geometry = new PlaneBufferGeometry(1, 1, 1, 1)
   }
 
   setMaterial() {
-    this.material = new THREE.MeshBasicMaterial()
+    this.material = new MeshBasicMaterial()
     this.setDebug()
   }
 
   setMesh() {
-    this.mesh = new THREE.Mesh(this.geometry, this.material)
+    this.mesh = new Mesh(this.geometry, this.material)
     this.mesh.name = 'screen'
     this.scene.add(this.mesh)
     this.mesh.scale.set(this.width, this.height, 1)
@@ -254,7 +254,7 @@ export default class Screen {
 
     this.container.appendChild(this.video);
 
-    this.videoTexture = new THREE.VideoTexture(this.video)
+    this.videoTexture = new VideoTexture(this.video)
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const constraints = {
@@ -282,12 +282,10 @@ export default class Screen {
   }
 
   setPostProcessing() {
-
     // remove any previous effects
     if(this.pass)
       this.renderer.postProcess.composer.removePass(this.pass)
       this.pass = null
-      console.log('bye', this.pass)
 
     switch (this.mode) {
       case 'blur':
@@ -314,12 +312,11 @@ export default class Screen {
       a2 = (this.height / this.width) / this.imageAspect
     }
 
-    if(this.pass.uniforms.uResolution) {
+    if(this.pass.uniforms && this.pass.uniforms.uResolution) {
       this.pass.uniforms.uResolution.value.x = this.width
       this.pass.uniforms.uResolution.value.y = this.height
       this.pass.uniforms.uResolution.value.z = a1
       this.pass.uniforms.uResolution.value.w = a2
-      console.log(this.pass.uniforms.uResolution)
     }
   }
 
@@ -354,10 +351,9 @@ export default class Screen {
 
   addLightPass() {
     // add new effect
-    console.log('isMobile', this.isMobile)
     if(!this.isMobile) {
       this.pass = new UnrealBloomPass(
-        new THREE.Vector2(
+        new Vector2(
           window.innerWidth,
           window.innerHeight
         ),

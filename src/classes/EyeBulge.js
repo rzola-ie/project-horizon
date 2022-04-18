@@ -1,6 +1,7 @@
 
 import '../lib/jeeliz/dist/jeelizFaceFilter'
-import * as THREE from '../lib/three/v112/three.min.js'
+import { BufferGeometryLoader, Mesh, ShaderMaterial } from '../lib/three/v112/three.min.js'
+
 import JeelizResizer from '../lib/jeeliz/helpers/JeelizResizer.js'
 import '../lib/jeeliz/helpers/JeelizThreeHelper.js'
 
@@ -98,14 +99,14 @@ export default class EyeBulge {
     const threeStuffs = JeelizThreeHelper.init(spec, this.detectCallback);
 
     // CREATE THE MASK:
-    const maskLoader = new THREE.BufferGeometryLoader();
+    const maskLoader = new BufferGeometryLoader();
     /*
     faceLowPoly.json has been exported from dev/faceLowPoly.blend using THREE.JS blender exporter with Blender v2.76
     */
     maskLoader.load('/models/face.json', (geometry) => {
       geometry.computeVertexNormals();
 
-      const threeMask = new THREE.Mesh(geometry, this.buildMaskMaterial(spec.videoTransformMat2));
+      const threeMask = new Mesh(geometry, this.buildMaskMaterial(spec.videoTransformMat2));
 
       threeMask.frustumCulled = false;
       threeMask.scale.multiplyScalar(1.2);
@@ -118,7 +119,7 @@ export default class EyeBulge {
   }
 
   buildMaskMaterial(videoTransformMat2) {
-    const mat = new THREE.ShaderMaterial({
+    const mat = new ShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
       uniforms: {

@@ -141,7 +141,7 @@
     </div>
 
     <router-link class="back-button" to="/live">
-      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
+      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
         <line
           x1="2"
           y1="14.5"

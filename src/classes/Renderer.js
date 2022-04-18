@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { WebGLRenderer, sRGBEncoding, PCFSoftShadowMap, ReinhardToneMapping, WebGLRenderTarget, WebGLMultisampleRenderTarget, LinearFilter, RGBAFormat } from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 
@@ -43,31 +43,19 @@ export default class Renderer {
     }
 
     // Renderer
-    this.instance = new THREE.WebGLRenderer({
+    this.instance = new WebGLRenderer({
       alpha: true,
       antialias: true,
     })
     this.instance.domElement.style.position = 'absolute'
-    // this.instance.domElement.style.top = 0
-    // this.instance.domElement.style.left = 0
-    // this.instance.domElement.style.width = '100%'
-    // this.instance.domElement.style.height = '100%'
     this.instance.domElement.style.inset = '0'
     this.instance.domElement.setAttribute('id', 'three-canvas')
 
-    // this.instance.setClearColor(0x414141, 1)
     this.instance.setClearColor(this.clearColor, 1)
     this.instance.setSize(this.config.width, this.config.height)
     this.instance.setPixelRatio(this.config.pixelRatio)
 
-    // this.instance.physicallyCorrectLights = true
-    // this.instance.gammaOutPut = true
-    this.instance.outputEncoding = THREE.sRGBEncoding
-    // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-    // this.instance.shadowMap.enabled = false
-    // this.instance.toneMapping = THREE.ReinhardToneMapping
-    // this.instance.toneMapping = THREE.ReinhardToneMapping
-    // this.instance.toneMappingExposure = 1.3
+    this.instance.outputEncoding = sRGBEncoding
 
     this.context = this.instance.getContext()
 
@@ -81,21 +69,20 @@ export default class Renderer {
     this.postProcess = {}
 
     // render target
-    const RenderTargetClass = this.config.pixelRatio >= 2 ? THREE.WebGLRenderTarget : THREE.WebGLMultisampleRenderTarget
-    // const RenderTargetClass = THREE.WebGLRenderTarget
-    const renderTarget = new RenderTargetClass(
+    const RenderTargetClass = this.config.pixelRatio >= 2 ? WebGLRenderTarget : WebGLMultisampleRenderTarget
+    this.renderTarget = new RenderTargetClass(
       this.config.width,
       this.config.height,
       {
         generateMipmaps: false,
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBAFormat,
-        encoding: THREE.sRGBEncoding
+        minFilter: LinearFilter,
+        magFilter: LinearFilter,
+        format: RGBAFormat,
+        encoding: sRGBEncoding
       }
     )
     // effect composer
-    this.postProcess.composer = new EffectComposer(this.instance, renderTarget)
+    this.postProcess.composer = new EffectComposer(this.instance, this.renderTarget)
 
     // passes
     this.postProcess.renderPass = new RenderPass(this.scene, this.camera.instance)
@@ -132,11 +119,11 @@ export default class Renderer {
   }
 
   destroy() {
-    // this.instance.renderLists.dispose()
+    this.instance.renderLists.dispose()
     this.instance.dispose()
-    // this.renderTarget.dispose()
-    // this.postProcess.composer.renderTarget1.dispose()
-    // this.postProcess.composer.renderTarget2.dispose()
+    this.renderTarget.dispose()
+    this.postProcess.composer.renderTarget1.dispose()
+    this.postProcess.composer.renderTarget2.dispose()
   }
 
   bind() {

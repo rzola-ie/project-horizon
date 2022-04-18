@@ -1,4 +1,5 @@
 uniform sampler2D feed;
+uniform vec4 iResolution;
 
 varying vec2 vUv;
 

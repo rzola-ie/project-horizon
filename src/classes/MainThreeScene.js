@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import { Scene} from "three"
 import { Pane } from 'tweakpane'
 
 import Camera from './Camera'
@@ -79,7 +79,7 @@ export default class MainThreeScene {
 	}
 
 	setScene() {
-		this.scene = new THREE.Scene()
+		this.scene = new Scene()
 	}
 
 	setCamera() {

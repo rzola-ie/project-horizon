@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { PerspectiveCamera } from 'three' 
 
 import MainThreeScene from './MainThreeScene'
 
@@ -14,7 +14,7 @@ export default class Camera {
   }
 
   setInstance() {
-    this.instance = new THREE.PerspectiveCamera(30, this.config.width / this.config.height, 0.1, 1000)
+    this.instance = new PerspectiveCamera(30, this.config.width / this.config.height, 0.1, 1000)
     this.instance.rotation.reorder('YXZ')
 
     this.scene.add(this.instance)
