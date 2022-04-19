@@ -2,6 +2,35 @@
   <div class="live" :id="$route.params.experience">
     <div class="menu">
       <div class="header">
+    <router-link class="header-back-button" to="/">
+      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
+        <line
+          x1="2"
+          y1="14.5"
+          x2="16"
+          y2="2"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <line
+          x1="2"
+          y1="14.5"
+          x2="38"
+          y2="14.5"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <line
+          x1="2"
+          y1="14.5"
+          x2="16"
+          y2="27"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+      <span class="sr-only">Back to main menu</span>
+    </router-link>
         <h1>LOOK CLOSER,<br />the danger can be hard to see.</h1>
         <p>Choose a symptom to get started.</p>
       </div>
@@ -356,7 +385,8 @@ export default {
   @media screen and (min-width: $breakpoint) {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
+    overflow: scroll;
     min-width: 350px;
     width: 25%;
     background-color: $color2;
@@ -365,16 +395,19 @@ export default {
 }
 
 .menu .header {
-  padding: 5rem 2rem 2rem;
+  padding: 1rem 1rem 2rem;
   background-color: white;
+  z-index: 10;
 
   h1 {
     color: $color2;
     margin-bottom: 1rem;
+    padding: 0 1rem;
     text-transform: uppercase;
   }
 
   p {
+    padding: 0 1rem;
     font-family: "Helvetica", sans-serif;
     font-size: 1.1rem;
     color: #666;
@@ -382,11 +415,12 @@ export default {
 }
 
 .menu .menu-group {
-  padding: 1rem 1rem 5rem;
+  padding: 1rem;
   flex: 1;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   gap: 0.5rem;
+  z-index: 9;
 }
 
 .menu .menu-group button {
@@ -424,23 +458,6 @@ export default {
 
   & img {
     width: 100px;
-  }
-}
-
-.legal {
-  position: absolute;
-  padding: 0.5rem 1rem;
-  color: white;
-  background: rgba(black, 0.3);
-  z-index: 9998;
-  bottom: 62px;
-  right: 0;
-  left: 0;
-  text-align: right;
-  font-size: 12px;
-
-  @media screen and (min-width: $breakpoint) {
-    bottom: 0;
   }
 }
 
@@ -720,6 +737,47 @@ export default {
   svg {
     height: 100%;
     width: 100%;
+  }
+
+
+  @media screen and (min-width: $breakpoint) {
+    display: none
+  }
+}
+
+.header-back-button {
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: rgba(white, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.legal {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  color: white;
+  background: rgba(black, 0.3);
+  z-index: 9998;
+  bottom: 62px;
+  right: 0;
+  left: 0;
+  text-align: right;
+  font-size: 12px;
+
+  @media screen and (min-width: $breakpoint) {
+    bottom: 0;
   }
 }
 </style>
