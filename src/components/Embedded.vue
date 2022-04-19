@@ -132,7 +132,7 @@
 
                 this.showIframe = true
                 this.iFrame = document.createElement('iframe')
-                this.iFrame.src = window.origin + '/live'
+                this.iFrame.src = window.origin
                 this.iFrame.classList.add('iframe')
                 this.iFrame.style.position = 'fixed'
                 // this.iFrame.style.top = '50%'
