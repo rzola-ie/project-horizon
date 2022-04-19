@@ -142,6 +142,7 @@
                 this.iFrame.style.inset = '0'
                 this.iFrame.style.height = '100%'
                 this.iFrame.style.width = '100%'
+                this.iFrame.title = "TED Impact Symptoms Simulator"
 
                 this.iFrame.style.border = '2px solid #c7c3a3'
                 this.iFrame.style.boxShadow = '2px 2px 8px rgba(black, 0.4)'
