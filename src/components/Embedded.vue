@@ -128,8 +128,6 @@
         },
         methods: {
             activateSim() {
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
                 this.showIframe = true
                 this.iFrame = document.createElement('iframe')
                 this.iFrame.src = window.origin
@@ -139,7 +137,6 @@
                 this.iFrame.style.height = '100%'
                 this.iFrame.style.width = '100%'
                 this.iFrame.title = "TED Impact Symptoms Simulator"
-
                 this.iFrame.style.border = 'none'
                 this.iFrame.style.zIndex = '9998'
                 this.iFrame.style.backgroundColor = 'white'

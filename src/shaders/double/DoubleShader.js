@@ -8,12 +8,8 @@ import fragment from './fragment.glsl'
  */
 
 const DoubleVisionShader = {
-
   uniforms: {
     tDiffuse: { value: null },
-    uOffset: { value: 0.1 },
-    uMix: { value: 0.4 },
-    uTime: { value: 0 },
   },
 
   vertexShader: vertex,

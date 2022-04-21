@@ -22,7 +22,7 @@ export default class Screen {
         settings: {
           focus: 2000.0,  // this does not matter
           aperture: 0.01, // any non-zero number
-          maxBlur: 0.02
+          maxBlur: 0.01
         }
       },
       color: {
@@ -33,7 +33,7 @@ export default class Screen {
       double: {
         settings: {
           offset: 0.1,
-          mix: 0.4,
+          mix: 0.2,
         }
       },
       light: {
@@ -329,8 +329,8 @@ export default class Screen {
   addDoublePass() {
     // add new effect
     this.pass = new ShaderPass(DoubleVisionShader)
-    this.pass.uniforms.uOffset.value = this.settings.offset
-    this.pass.uniforms.uMix.value = this.settings.mix
+    // this.pass.uniforms.uOffset.value = this.settings.offset
+    // this.pass.uniforms.uMix.value = this.settings.mix
 
     this.renderer.postProcess.composer.addPass(this.pass)
   }
@@ -401,11 +401,11 @@ export default class Screen {
           }
           break
         case 'double':
-          if (this.pass) {
-            this.pass.uniforms.uOffset.value = this.settings.doubleOffset
-            this.pass.uniforms.uMix.value = this.settings.doubleMix
-            this.pass.uniforms.uTime.value = this.time.elapsed * 0.001
-          }
+          // if (this.pass) {
+          //   this.pass.uniforms.uOffset.value = this.settings.doubleOffset
+          //   this.pass.uniforms.uMix.value = this.settings.doubleMix
+          //   this.pass.uniforms.uTime.value = this.time.elapsed * 0.001
+          // }
           break
         case 'light':
           if(!this.isMobile && this.pass) {
