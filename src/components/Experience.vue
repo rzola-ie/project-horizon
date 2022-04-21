@@ -296,8 +296,13 @@ export default {
     };
   },
   mounted() {
+    if(this.$route.params.experience == undefined){
+      this.$router.push('/')
+      return
+    }
+
     this.experience =
-      this.$route.params.experience || sessionStorage.getItem("mode");
+      this.$route.params.experience;
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -315,8 +320,9 @@ export default {
     this.setIdleTimeout();
   },
   beforeUnmount() {
-    this.scene.destroy();
-    this.scene = null;
+    if(this.scene)
+      this.scene.destroy();
+      this.scene = null;
   },
   methods: {
     toggleMenu() {
