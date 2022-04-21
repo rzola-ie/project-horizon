@@ -296,13 +296,13 @@ export default {
     };
   },
   mounted() {
-    if(this.$route.params.experience == undefined){
+    if(this.$route.params.experience == undefined && !sessionStorage.getItem('mode')){
       this.$router.push('/')
       return
     }
 
     this.experience =
-      this.$route.params.experience;
+      this.$route.params.experience || sessionStorage.getItem('mode');
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
