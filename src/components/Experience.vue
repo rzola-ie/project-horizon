@@ -311,6 +311,8 @@ export default {
 
     if(this.experience !== 'eyes')
       this.selectMode(this.experience, true)
+
+    this.setIdleTimeout();
   },
   beforeUnmount() {
     this.scene.destroy();
@@ -319,6 +321,8 @@ export default {
   methods: {
     toggleMenu() {
       this.hideControls = !this.hideControls
+
+      this.setIdleTimeout()
     },
     selectMode(mode) {
       this.experience = mode;
@@ -347,7 +351,8 @@ export default {
         });
         this.hideOverlay = true
       }
-
+      
+      this.setIdleTimeout()
       this.sendGTM(mode)
     },
     sendGTM(data, isFirstCall = false) {
@@ -362,6 +367,13 @@ export default {
       } catch(e) {
         window.console && window.console.log(e)
       }
+    },
+    setIdleTimeout() {
+      if(this.timeOut) clearTimeout(this.timeOut)
+
+      this.timeOut = setTimeout(() => {
+        this.$router.push('/')
+      }, 1000 * 60 * 2)
     }
   },
 };
