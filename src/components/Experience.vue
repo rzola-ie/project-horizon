@@ -198,7 +198,7 @@
     <!-- mobile back button -->
 
     <div class="orientation-modal" id="turn-landscape">
-      <router-link class="back-button" to="/live">
+      <router-link class="back-button" to="/">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
@@ -238,7 +238,7 @@
     <!-- turn landscape modal -->
 
     <div class="orientation-modal" id="turn-portrait">
-      <router-link class="back-button" to="/live">
+      <router-link class="back-button" to="/">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
@@ -351,7 +351,7 @@ export default {
         });
         this.hideOverlay = true
       }
-      
+
       this.setIdleTimeout()
       this.sendGTM(mode)
     },
