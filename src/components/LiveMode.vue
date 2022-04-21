@@ -82,7 +82,7 @@ export default {
 /* CONTAINER
 ================================ */
 #live {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin-top: 60px;
   background-color: $color2;
