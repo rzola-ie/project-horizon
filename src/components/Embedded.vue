@@ -135,17 +135,12 @@
                 this.iFrame.src = window.origin
                 this.iFrame.classList.add('iframe')
                 this.iFrame.style.position = 'fixed'
-                // this.iFrame.style.top = '50%'
-                // this.iFrame.style.left = '2em'
-                // this.iFrame.style.left = '1em'
-                // this.iFrame.style.right = '1em'
                 this.iFrame.style.inset = '0'
                 this.iFrame.style.height = '100%'
                 this.iFrame.style.width = '100%'
                 this.iFrame.title = "TED Impact Symptoms Simulator"
 
-                this.iFrame.style.border = '2px solid #c7c3a3'
-                this.iFrame.style.boxShadow = '2px 2px 8px rgba(black, 0.4)'
+                this.iFrame.style.border = 'none'
                 this.iFrame.style.zIndex = '9998'
                 this.iFrame.style.backgroundColor = 'white'
 
@@ -234,8 +229,8 @@ iframe {
     height: 25px;
     width: 25px;
     padding: 2px;
-    top: 2px;
-    right: 2px;
+    top: 0;
+    right: 0;
     border-radius: 0 0 0 10px;
     border: none;
     color: $color2;
