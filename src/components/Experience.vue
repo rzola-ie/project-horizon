@@ -284,7 +284,7 @@
 </template>
 
 <script>
-import MainThreeScene from "@/classes/MainThreeScene";
+import MainThreeScene from "../classes/MainThreeScene";
 import EyeBulge from "../classes/EyeBulge";
 
 export default {

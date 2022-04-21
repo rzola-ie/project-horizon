@@ -20,7 +20,7 @@
         @click="sendGTM('blur')"
         :to="{ name: 'liveExperience', params: { experience: 'blur' } }"
       >
-        <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
+        <img src="/assets/icons/dry.png" alt="" />
         Blurred Vision
       </router-link>
 
@@ -29,7 +29,7 @@
         @click="sendGTM('double')"
         :to="{ name: 'liveExperience', params: { experience: 'double' } }"
       >
-        <img src="/assets/diplopia-icon.svg" alt="" />
+        <img src="/assets/icons/diplo.png" alt="" />
         Diplopia
       </router-link>
 
@@ -38,7 +38,7 @@
         @click="sendGTM('color')"
         :to="{ name: 'liveExperience', params: { experience: 'color' } }"
       >
-        <img src="/assets/color-loss.svg" alt="" />
+        <img src="/assets/icons/color.png" alt="" />
         Color Vision Loss
       </router-link>
 
@@ -47,7 +47,7 @@
         @click="sendGTM('light')"
         :to="{ name: 'liveExperience', params: { experience: 'light' } }"
       >
-        <img src="/assets/photophobia-icon.svg" alt="" />
+        <img src="/assets/icons/photo.png" alt="" />
         Photophobia
       </router-link>
 
@@ -56,7 +56,7 @@
         @click="sendGTM('eyes')"
         :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
       >
-        <img src="/assets/proptosis-icon.svg" alt="" />
+        <img src="/assets/icons/proptosis.png" alt="" />
         Proptosis
       </router-link>
     </nav>
@@ -203,6 +203,8 @@ header .logo img {
 }
 
 .symptoms {
+  max-width: 1440px;
+  margin: auto;
   padding: 1.6em 0.8em;
   display: grid;
   flex: 1;
@@ -238,7 +240,6 @@ header .logo img {
   justify-content: space-between;
   justify-self: center;
   align-items: center;
-  gap: 0.5em;
   color: $color2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background-color: $color3;
@@ -258,7 +259,7 @@ header .logo img {
   }
 
   @media screen and (min-width: $breakpoint) {
-      height: 230px;
+      height: 200px;
       grid-template-columns: 1fr;
       grid-template-rows: auto auto;
       justify-items: center;
