@@ -2,35 +2,37 @@
   <div class="live" :id="$route.params.experience">
     <div class="menu">
       <div class="header">
-    <router-link class="header-back-button" to="/">
-      <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
-        <line
-          x1="2"
-          y1="14.5"
-          x2="16"
-          y2="2"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <line
-          x1="2"
-          y1="14.5"
-          x2="38"
-          y2="14.5"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <line
-          x1="2"
-          y1="14.5"
-          x2="16"
-          y2="27"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-      </svg>
-      <span class="sr-only">Back to main menu</span>
-    </router-link>
+        <router-link class="header-back-button" to="/">
+          <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
+            <line
+              x1="2"
+              y1="14.5"
+              x2="16"
+              y2="2"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <line
+              x1="2"
+              y1="14.5"
+              x2="38"
+              y2="14.5"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <line
+              x1="2"
+              y1="14.5"
+              x2="16"
+              y2="27"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="sr-only">Back to main menu</span>
+        </router-link>
+        <!-- back button -->
+
         <h1>LOOK CLOSER,<br />the danger can be hard to see.</h1>
         <p>Choose a symptom to get started.</p>
       </div>
@@ -102,16 +104,10 @@
       <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
     </svg>
 
-
-
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
         <button
-          @click="
-            () => {
-              hideControls = !hideControls;
-            }
-          "
+          @click="toggleMenu"
         >Menu
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -168,6 +164,7 @@
         Proptosis
       </button>
     </div>
+    <!-- mobile button -->
 
     <router-link class="back-button" to="/">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
@@ -198,6 +195,7 @@
       </svg>
       <span class="sr-only">Back to main menu</span>
     </router-link>
+    <!-- mobile back button -->
 
     <div class="orientation-modal" id="turn-landscape">
       <router-link class="back-button" to="/live">
@@ -237,6 +235,7 @@
         </div>
       </div>
     </div>
+    <!-- turn landscape modal -->
 
     <div class="orientation-modal" id="turn-portrait">
       <router-link class="back-button" to="/live">
@@ -276,10 +275,11 @@
         </div>
       </div>
     </div>
+    <!-- turn portrait modal -->
 
-      <div class="legal">
-        Simulated Image
-      </div>
+    <div class="legal">
+      Simulated Image
+    </div>
   </div>
 </template>
 
@@ -317,6 +317,9 @@ export default {
     this.scene = null;
   },
   methods: {
+    toggleMenu() {
+      this.hideControls = !this.hideControls
+    },
     selectMode(mode) {
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);

@@ -1,8 +1,5 @@
 <template>
   <div id="live">
-    <header>
-
-    </header>
     <div class="text-container">
       <h1 class="mobile">
         LOOK CLOSER, the danger can be hard to see. <br />
@@ -87,50 +84,10 @@ export default {
 #live {
   height: 100vh;
   width: 100%;
+  margin-top: 60px;
   background-color: $color2;
   display: flex;
   flex-direction: column;
-
-}
-
-/* HEADER
-================================ */
-header {
-  // display: none;
-    height: 80px;
-    width: 100%;
-    background-color: $color2;
-    color: white;
-
-  @media screen and (min-width: $breakpoint) {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-    z-index: 10;
-  }
-}
-
-header .hcp {
-    padding: 0.8em 1em;
-    line-height: 1;
-    border-bottom: 1px solid rgba(white, 0.2);
-
-            @media screen and (min-width: 900px) {
-                padding: 0.8rem 6rem
-            }
-}
-
-header .logo {
-    height: 80px;
-    padding: 0.8em 1em;
-
-    @media screen and (min-width: 900px) {
-        padding: 0.8rem 6rem
-    }
-}
-
-header .logo img {
-    height: 100%;
 }
 
 /* TEXT CONTAINER
@@ -213,12 +170,11 @@ header .logo img {
   gap: 0.5em;
 
   @media screen and (orientation: landscape) {
-    padding: 2rem;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   @media screen and (min-width: $breakpoint) {
@@ -228,8 +184,6 @@ header .logo img {
     gap: 1rem;
     align-items: unset;
   }
-
-
 }
 
 .symptom {
@@ -266,8 +220,6 @@ header .logo img {
       font-size: 1.5vw;
   }
 
-
-
   &:hover {
     background-color: lighten($color2, 60%);
     &::after {
@@ -282,9 +234,9 @@ header .logo img {
     width: 50%;
     min-width: 90px;
 
-      @media screen and (orientation: landscape) {
+    @media screen and (orientation: landscape) {
         width: 65%;
-  }
+    }
   }
 }
 </style>

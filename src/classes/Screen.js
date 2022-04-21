@@ -401,11 +401,6 @@ export default class Screen {
           }
           break
         case 'double':
-          // if (this.pass) {
-          //   this.pass.uniforms.uOffset.value = this.settings.doubleOffset
-          //   this.pass.uniforms.uMix.value = this.settings.doubleMix
-          //   this.pass.uniforms.uTime.value = this.time.elapsed * 0.001
-          // }
           break
         case 'light':
           if(!this.isMobile && this.pass) {
