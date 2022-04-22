@@ -462,7 +462,10 @@ export default {
   box-shadow: 0 4px 10px rgb(black, 0.3);
   cursor: pointer;
 
-  &:hover:not(.selected) {
+  &:hover:not(.selected),
+  &:focus:not(.selected) {
+    outline: none;
+    background-color: lighten($color2, 60%);
     &::after {
       content: '';
       position: absolute;
