@@ -462,6 +462,15 @@ export default {
   box-shadow: 0 4px 10px rgb(black, 0.3);
   cursor: pointer;
 
+  &:hover:not(.selected) {
+    &::after {
+      content: '';
+      position: absolute;
+      border: 3px solid $color2;
+      inset: 4px;
+    }
+  }
+
 
   &.selected {
     background-color: white;
