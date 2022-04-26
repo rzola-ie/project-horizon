@@ -359,15 +359,13 @@ export default {
         this.hideOverlay = true
       }
 
-      console.log('prev:', previousExperience, "current:", this.experience)
-
       this.setIdleTimeout()
       this.sendGTM(previousExperience, this.experience)
     },
     sendGTM(prev, next) {
       window.dataLayer = window.dataLayer || []; 
       if(prev !== next) {
-        console.log('flubbin')
+        console.log('f-f-flennin....')
         dataLayer.push({
           'event': 'filterChange',
           'previousFilter': prev,
