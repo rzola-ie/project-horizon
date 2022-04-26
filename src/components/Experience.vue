@@ -331,6 +331,7 @@ export default {
       this.setIdleTimeout()
     },
     selectMode(mode) {
+      const previousExperience = this.experience
       this.experience = mode;
       document.querySelector('.live').setAttribute('id', mode);
 
@@ -358,16 +359,28 @@ export default {
         this.hideOverlay = true
       }
 
+      console.log('prev:', previousExperience, "current:", this.experience)
+
       this.setIdleTimeout()
-      this.sendGTM(mode)
+      this.sendGTM(previousExperience, this.experience)
     },
-    sendGTM(data, isFirstCall = false) {
-      if(isFirstCall) return
+    sendGTM(prev, next) {
+      window.dataLayer = window.dataLayer || []; 
+      if(prev !== next) {
+        console.log('flubbin')
+        dataLayer.push({
+          'event': 'filterChange',
+          'previousFilter': prev,
+          'nextFilter': next
+        })
+
+        console.log(window.dataLayer)
+      }
 
       try {
         let postObject = JSON.stringify({
           event: 'click',
-          data: data
+          data: prev
         })
         parent.postMessage(postObject, window.origin)
       } catch(e) {
