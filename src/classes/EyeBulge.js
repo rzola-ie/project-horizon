@@ -77,11 +77,11 @@ export default class EyeBulge {
       maxFacesDetected: 1,
       callbackReady: (errCode, spec) => {
         if (errCode) {
-          console.log('AN ERROR HAPPENS. ERROR CODE =', errCode);
+          console.log('AN ERROR HAS OCCURRED. ERROR CODE =', errCode);
           return;
         }
         // [init scene with spec...]
-        console.log('INFO: JEELIZFACEFILTER IS READY');
+        console.log('INFO: FACE FILTER IS READY');
         this.initThreeScene(spec)
       }, //end callbackReady()
 

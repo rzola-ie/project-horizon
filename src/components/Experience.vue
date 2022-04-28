@@ -365,14 +365,11 @@ export default {
     sendGTM(prev, next) {
       window.dataLayer = window.dataLayer || []; 
       if(prev !== next) {
-        console.log('f-f-flennin....')
         dataLayer.push({
           'event': 'filterChange',
           'previousFilter': prev,
           'nextFilter': next
         })
-
-        console.log(window.dataLayer)
       }
 
       try {
