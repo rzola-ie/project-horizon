@@ -43,7 +43,7 @@
           :disabled=" experience === 'blur'"
           @click="selectMode('blur')"
         >
-        <img src="/assets/dry-gritty-eyes-icon.svg" alt="" />
+        <img src="/assets/icons/dry.svg" alt="" />
           Blurred Vision
         </button>
 
@@ -53,7 +53,7 @@
           :disabled=" experience === 'double'"
           @click="selectMode('double')"
         >
-          <img src="/assets/diplopia-icon.svg" alt="" />
+          <img src="/assets/icons/diplo.svg" alt="" />
           Diplopia
         </button>
 
@@ -63,7 +63,7 @@
           :disabled=" experience === 'color'"
           @click="selectMode('color')"
         >
-          <img src="/assets/color-loss.svg" alt="" />
+          <img src="/assets/icons/color.svg" alt="" />
           Color Vision Loss
         </button>
 
@@ -73,7 +73,7 @@
           :disabled=" experience === 'light'"
           @click="selectMode('light')"
         >
-          <img src="/assets/photophobia-icon.svg" alt="" />
+          <img src="/assets/icons/photo.svg" alt="" />
           Photophobia
         </button>
 
@@ -83,7 +83,7 @@
           :disabled=" experience === 'eyes'"
           @click="selectMode('eyes')"
         >
-          <img src="/assets/proptosis-icon.svg" alt="" />
+          <img src="/assets/icons/proptosis.svg" alt="" />
           Proptosis
         </button>
       </div>

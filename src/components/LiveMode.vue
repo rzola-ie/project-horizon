@@ -17,7 +17,7 @@
         @click="sendGTM('blur')"
         :to="{ name: 'liveExperience', params: { experience: 'blur' } }"
       >
-        <img src="/assets/icons/dry.png" alt="" />
+        <img src="/assets/icons/dry.svg" alt="" />
         Blurred Vision
       </router-link>
 
@@ -26,7 +26,7 @@
         @click="sendGTM('double')"
         :to="{ name: 'liveExperience', params: { experience: 'double' } }"
       >
-        <img src="/assets/icons/diplo.png" alt="" />
+        <img src="/assets/icons/diplo.svg" alt="" />
         Diplopia
       </router-link>
 
@@ -35,7 +35,7 @@
         @click="sendGTM('color')"
         :to="{ name: 'liveExperience', params: { experience: 'color' } }"
       >
-        <img src="/assets/icons/color.png" alt="" />
+        <img src="/assets/icons/color.svg" alt="" />
         Color Vision Loss
       </router-link>
 
@@ -44,7 +44,7 @@
         @click="sendGTM('light')"
         :to="{ name: 'liveExperience', params: { experience: 'light' } }"
       >
-        <img src="/assets/icons/photo.png" alt="" />
+        <img src="/assets/icons/photo.svg" alt="" />
         Photophobia
       </router-link>
 
@@ -53,7 +53,7 @@
         @click="sendGTM('eyes')"
         :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
       >
-        <img src="/assets/icons/proptosis.png" alt="" />
+        <img src="/assets/icons/proptosis.svg" alt="" />
         Proptosis
       </router-link>
     </nav>
