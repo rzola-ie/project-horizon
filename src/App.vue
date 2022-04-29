@@ -19,7 +19,7 @@ export default {
 html,
 body {
   font-family: $font1;
-  background-color: $color2;
+  background-color: black;
 }
 
 * {
