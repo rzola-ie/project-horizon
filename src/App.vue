@@ -18,6 +18,7 @@ export default {
 <style lang="scss">
 body {
   font-family: $font1;
+  background-color: $color2;
 }
 
 * {

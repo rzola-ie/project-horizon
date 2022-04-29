@@ -244,6 +244,7 @@ p {
 
 section {
     padding: 1em;
+    background-color: white;
 
     @media screen and (min-width: 900px) {
         padding: 4rem 6rem;
