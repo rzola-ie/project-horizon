@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
+html,
 body {
   font-family: $font1;
   background-color: $color2;
