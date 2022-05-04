@@ -67,7 +67,7 @@ export default class EyeBulge {
   initFaceFilter(bestVideoSettings) {
     JEELIZFACEFILTER.init({
       canvasId: this.canvasId,
-      NNCPath: '/neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
+      NNCPath: '../neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
       videoSettings: { // increase the default video resolution since we are in full screen
         'idealWidth': 1280,  // ideal video width in pixels
         'idealHeight': 800,  // ideal video height in pixels
