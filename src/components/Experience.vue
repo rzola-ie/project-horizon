@@ -2,7 +2,7 @@
   <div class="live" :id="$route.params.experience">
     <div class="menu">
       <div class="header">
-        <router-link class="header-back-button" to="/">
+        <router-link class="header-back-button" to="/index.html">
           <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
             <line
               x1="2"
@@ -166,7 +166,7 @@
     </div>
     <!-- mobile button -->
 
-    <router-link class="back-button" to="/">
+    <router-link class="back-button" to="/index.html">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
         <line
           x1="2"
@@ -198,7 +198,7 @@
     <!-- mobile back button -->
 
     <div class="orientation-modal" id="turn-landscape">
-      <router-link class="back-button" to="/">
+      <router-link class="back-button" to="/index.html">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
@@ -238,7 +238,7 @@
     <!-- turn landscape modal -->
 
     <div class="orientation-modal" id="turn-portrait">
-      <router-link class="back-button" to="/">
+      <router-link class="back-button" to="/index.html">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
