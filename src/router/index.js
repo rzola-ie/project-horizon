@@ -4,7 +4,7 @@ import Experience from '../components/Experience.vue'
 
 const routes = [
   {
-    path: '/index.html',
+    path: '/',
     name: 'LiveMode',
     component: LiveMode
   },
