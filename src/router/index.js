@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LiveMode from '../components/LiveMode.vue'
-import Experience from '@/components/Experience.vue'
+import Experience from '../components/Experience.vue'
 
 const routes = [
   {
