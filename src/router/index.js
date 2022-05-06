@@ -22,7 +22,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  base: 'https://storage.googleapis.com/horizon-simulator-bucket/',
+  base: '/horizon-simulator-bucket',
   history: createWebHistory(),
   routes
 })

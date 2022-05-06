@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "start": "vue-cli-service serve"
+    "start": "vue-cli-service serve",
+    "deploy": "gsutil -m rsync -d -r ./dist gs://horizon-simulator-bucket"
   },
   "dependencies": {
     "core-js": "^3.6.5",
