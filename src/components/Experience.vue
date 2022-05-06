@@ -2,7 +2,7 @@
   <div class="live" :id="$route.params.experience">
     <div class="menu">
       <div class="header">
-        <router-link class="header-back-button" to="/">
+        <router-link class="header-back-button" to="/index.html">
           <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
             <line
               x1="2"
@@ -43,7 +43,7 @@
           :disabled=" experience === 'blur'"
           @click="selectMode('blur')"
         >
-        <img src="/assets/icons/dry.svg" alt="" />
+        <img src="assets/icons/dry.svg" alt="" />
           Blurred Vision
         </button>
 
@@ -53,7 +53,7 @@
           :disabled=" experience === 'double'"
           @click="selectMode('double')"
         >
-          <img src="/assets/icons/diplo.svg" alt="" />
+          <img src="assets/icons/diplo.svg" alt="" />
           Diplopia
         </button>
 
@@ -63,7 +63,7 @@
           :disabled=" experience === 'color'"
           @click="selectMode('color')"
         >
-          <img src="/assets/icons/color.svg" alt="" />
+          <img src="assets/icons/color.svg" alt="" />
           Color Vision Loss
         </button>
 
@@ -73,7 +73,7 @@
           :disabled=" experience === 'light'"
           @click="selectMode('light')"
         >
-          <img src="/assets/icons/photo.svg" alt="" />
+          <img src="assets/icons/photo.svg" alt="" />
           Photophobia
         </button>
 
@@ -83,7 +83,7 @@
           :disabled=" experience === 'eyes'"
           @click="selectMode('eyes')"
         >
-          <img src="/assets/icons/proptosis.svg" alt="" />
+          <img src="assets/icons/proptosis.svg" alt="" />
           Proptosis
         </button>
       </div>
@@ -166,7 +166,7 @@
     </div>
     <!-- mobile button -->
 
-    <router-link class="back-button" to="/">
+    <router-link class="back-button" to="/index.html">
       <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664" aria-hidden="true">
         <line
           x1="2"
@@ -198,7 +198,7 @@
     <!-- mobile back button -->
 
     <div class="orientation-modal" id="turn-landscape">
-      <router-link class="back-button" to="/">
+      <router-link class="back-button" to="/index.html">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
@@ -228,7 +228,7 @@
       </router-link>
 
       <div class="body">
-        <img src="/assets/landscape-mode.svg" alt="">
+        <img src="assets/landscape-mode.svg" alt="">
         <div class="content">
           <h2>Please turn your device.</h2>
           <p>This experience cannot be used in portrait mode</p>
@@ -238,7 +238,7 @@
     <!-- turn landscape modal -->
 
     <div class="orientation-modal" id="turn-portrait">
-      <router-link class="back-button" to="/">
+      <router-link class="back-button" to="/index.html">
         <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
           <line
             x1="2"
@@ -268,7 +268,7 @@
       </router-link>
 
       <div class="body">
-        <img src="/assets/portrait-mode.svg" alt="">
+        <img src="assets/portrait-mode.svg" alt="">
         <div class="content">
           <h2>Please turn your device.</h2>
           <p>This experience cannot be used in landscape mode</p>
@@ -297,7 +297,7 @@ export default {
   },
   mounted() {
     if(this.$route.params.experience == undefined && !sessionStorage.getItem('mode')){
-      this.$router.push('/')
+      this.$router.push('/index.html')
       return
     }
 
@@ -386,7 +386,7 @@ export default {
       if(this.timeOut) clearTimeout(this.timeOut)
 
       this.timeOut = setTimeout(() => {
-        this.$router.push('/')
+        this.$router.push('/index.html')
       }, 1000 * 60 * 2)
     }
   },

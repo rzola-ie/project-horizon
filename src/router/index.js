@@ -4,15 +4,16 @@ import Experience from '../components/Experience.vue'
 import PageNotFound from '../components/PageNotFound.vue'
 
 const routes = [
-  {
-    path: '/index.html',
-    name: 'LiveMode',
-    component: LiveMode
-  },
+
   {
     path: '/experience',
     name: 'liveExperience',
     component: Experience,
+  },
+  {
+    path: '/index.html',
+    name: 'LiveMode',
+    component: LiveMode
   },
   {
     path: '/:pathMatch(.*)*',
@@ -23,7 +24,7 @@ const routes = [
 
 const router = createRouter({
   base: '/horizon-simulator-bucket',
-  history: createWebHistory(),
+  history: createWebHistory("/horizon-simulator-bucket/"),
   routes
 })
 
