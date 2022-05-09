@@ -220,15 +220,17 @@ export default {
       font-size: 1.5vw;
   }
 
-  &:hover,
-  &:focus {
-    outline: none;
-    background-color: lighten($color2, 60%);
-    &::after {
-      content: "";
-      inset: 4px;
-      position: absolute;
-      border: 3px solid $color2;
+  @media (hover: hover) {
+    &:hover,
+    &:focus {
+      outline: none;
+      background-color: lighten($color2, 60%);
+      &::after {
+        content: "";
+        inset: 4px;
+        position: absolute;
+        border: 3px solid $color2;
+      }
     }
   }
 
