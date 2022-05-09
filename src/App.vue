@@ -12,6 +12,18 @@ export default {
   components: {
     Header,
   },
+  created() {
+    window.onload = () => {
+      if(this.$route.query.GTMID) {
+        const googleHeadTag = document.head.getElementsByTagName('script')[0]
+        googleHeadTag.src = `https://www.googletagmanager.com/gtm.js?id=${this.$route.query.GTMID}`
+
+        const googleBodyTag = document.body.getElementsByTagName('noscript')[0]
+        googleBodyTag.innerText = `<iframe src="https://www.googletagmanager.com/ns.html?id=${this.$route.query.GTMID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+      }
+    }
+
+  },
 };
 </script>
 
