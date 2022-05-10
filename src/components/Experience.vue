@@ -94,15 +94,16 @@
       <defs>
         <mask id="eye-mask" maskUnits="objectBoundingBox">
           <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
-          <rect x="0.1" y="4.5" width="7.8" height="2.5" fill="black" />
+          <rect x="0.5" y="5" width="7" height="2" fill="black" />
         </mask>
       </defs>
       <g mask="url(#eye-mask)">
         <rect x="0" y="0" width="8" height="17" fill="black" />
       </g>  
 
-      <path d="M0.1 5 v-0.5h0.5 m6.8 0 h0.5v0.5 m0 1.5 v0.5h-0.5 m-6.8 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
+      <path d="M0.5 5.5 v-0.5h0.5 m6 0 h0.5v0.5 m0 1 v0.5h-0.5 m-6 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
     </svg>
+    <!-- mobile eye guides -->
 
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
