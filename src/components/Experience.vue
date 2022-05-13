@@ -199,7 +199,7 @@
         <img src="assets/landscape-mode.svg" alt="">
         <div class="content">
           <h2>Please turn your device.</h2>
-          <p>This experience cannot be used in portrait mode</p>
+          <p>This experience cannot be used in portrait mode.</p>
           <p>
             <small>
               If this message does not go away after turning your device, please check to make sure you do not have your screen orientation lock on.
