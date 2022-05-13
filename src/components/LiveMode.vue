@@ -47,15 +47,6 @@
         <img src="assets/icons/photo.svg" alt="" />
         Photophobia
       </router-link>
-
-      <router-link
-        class="symptom"
-        @click="sendGTM('eyes')"
-        :to="{ name: 'liveExperience', params: { experience: 'eyes' } }"
-      >
-        <img src="assets/icons/proptosis.svg" alt="" />
-        Proptosis
-      </router-link>
     </nav>
   </div>
 </template>
@@ -166,12 +157,12 @@ export default {
   display: grid;
   flex: 1;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 0.5em;
 
   @media screen and (orientation: landscape) {
     grid-template-rows: 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: center;
     align-items: center;
     gap: 0.5rem;
@@ -180,7 +171,7 @@ export default {
   @media screen and (min-width: $breakpoint) {
     padding: 0 5rem;
     grid-template-rows: 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     align-items: unset;
   }

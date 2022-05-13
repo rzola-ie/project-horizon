@@ -76,34 +76,9 @@
           <img src="assets/icons/photo.svg" alt="" />
           Photophobia
         </button>
-
-        <button
-          id="eyes"
-          :class="['menu-button', { selected: experience === 'eyes' }]"
-          :disabled=" experience === 'eyes'"
-          @click="selectMode('eyes')"
-        >
-          <img src="assets/icons/proptosis.svg" alt="" />
-          Proptosis
-        </button>
       </div>
     </div>
     <div class="container" ref="container"></div>
-
-    <svg viewBox="0 0 8 17" id="overlay-mobile" v-if="experience === 'eyes' && isMobile">
-      <defs>
-        <mask id="eye-mask" maskUnits="objectBoundingBox">
-          <rect x="0" y="0" width="8" height="17" fill="rgba(255, 255, 255, 0.15)" />
-          <rect x="0.5" y="5" width="7" height="2" fill="black" />
-        </mask>
-      </defs>
-      <g mask="url(#eye-mask)">
-        <rect x="0" y="0" width="8" height="17" fill="black" />
-      </g>  
-
-      <path d="M0.5 5.5 v-0.5h0.5 m6 0 h0.5v0.5 m0 1 v0.5h-0.5 m-6 0 h-0.5v-0.5" stroke="white" stroke-width="0.05" fill="none"/>
-    </svg>
-    <!-- mobile eye guides -->
 
     <div :class="['button-group', { hidden: hideControls }]">
       <div class="controls">
@@ -155,14 +130,6 @@
         @click="selectMode('light')"
       >
         Photophobia
-      </button>
-
-      <button
-        id="eyes"
-        :class="['menu-button', { selected: experience === 'eyes' }]"
-        @click="selectMode('eyes')"
-      >
-        Proptosis
       </button>
     </div>
     <!-- mobile button -->
@@ -238,46 +205,6 @@
     </div>
     <!-- turn landscape modal -->
 
-    <div class="orientation-modal" id="turn-portrait">
-      <router-link class="back-button" to="/index.html">
-        <svg height="28" width="40" viewBox="0 0 40 29" stroke="#3d7664">
-          <line
-            x1="2"
-            y1="14.5"
-            x2="16"
-            y2="2"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-          <line
-            x1="2"
-            y1="14.5"
-            x2="38"
-            y2="14.5"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-          <line
-            x1="2"
-            y1="14.5"
-            x2="16"
-            y2="27"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-        </svg>
-      </router-link>
-
-      <div class="body">
-        <img src="assets/portrait-mode.svg" alt="">
-        <div class="content">
-          <h2>Please turn your device.</h2>
-          <p>This experience cannot be used in landscape mode</p>
-        </div>
-      </div>
-    </div>
-    <!-- turn portrait modal -->
-
     <div class="legal">
       Simulated Image
     </div>
@@ -286,7 +213,6 @@
 
 <script>
 import MainThreeScene from "../classes/MainThreeScene";
-import EyeBulge from "../classes/EyeBulge";
 
 export default {
   data() {
@@ -309,14 +235,10 @@ export default {
 
     if(!this.isMobile) {
       document.querySelector('#turn-landscape').style.display = 'none'
-      document.querySelector('#turn-portrait').style.display = 'none'
     }
 
-    if(this.experience === 'eyes')
-      this.scene = new EyeBulge({ canvasId: "three-canvas" });
 
-    if(this.experience !== 'eyes')
-      this.selectMode(this.experience, true)
+    this.selectMode(this.experience, true)
 
     this.setIdleTimeout();
   },
@@ -347,18 +269,13 @@ export default {
       if(document.querySelector('video'))
         document.querySelector('video').remove()
 
-      if(mode === 'eyes') {
-        this.scene = new EyeBulge({ canvasId: "three-canvas" });
-        this.hideOverlay = false
-      }
 
-      if(mode !== 'eyes') {
-        this.scene = new MainThreeScene({
-          targetElement: this.$refs.container,
-          mode: this.experience,
-        });
-        this.hideOverlay = true
-      }
+      this.scene = new MainThreeScene({
+        targetElement: this.$refs.container,
+        mode: this.experience,
+      });
+      this.hideOverlay = true
+
 
       this.setIdleTimeout()
       this.sendGTM(previousExperience, this.experience)
@@ -582,30 +499,15 @@ export default {
 
 @media screen and (orientation: portrait) {
   // CSS applied when the device is in portrait mode
-.live:not(#eyes) .orientation-modal#turn-landscape {
+.live .orientation-modal#turn-landscape {
     display: flex;
-  }
-.live:not(#eyes) .orientation-modal#turn-portrait {
-    display: none;
-  }
-.live#eyes .orientation-modal#turn-portrait {
-    display: none;
-  }
-.live#eyes .orientation-modal#turn-landscape {
-    display: none;
   }
 }
 
 @media screen and (orientation: landscape) {
   // CSS applied when the device is in landscape mode
-.live:not(#eyes) .orientation-modal#turn-landscape {
+.live .orientation-modal#turn-landscape {
     display: none;
-  }
-.live:not(#eyes) .orientation-modal#turn-portrait {
-    display: none;
-  }
-.live#eyes .orientation-modal#turn-portrait {
-    display: flex;
   }
 }
 
@@ -659,9 +561,6 @@ export default {
     button#color {
       grid-row: 4;
     }
-    button#eyes {
-      grid-row: 6;
-    }
   }
 
   .button-group .controls {
@@ -678,35 +577,31 @@ export default {
       bottom: -155px;
     }
 
-  button#blur {
-    grid-row: 2;
-    grid-column: 1 / 3;
+    button#blur {
+      grid-row: 2;
+      grid-column: 1 / 4;
+    }
 
-  }
-  button#light {
-    grid-row: 3;
-    grid-column: 2/4;
+    button#double {
+      grid-row: 2;
+      grid-column: 4 / 7;
+    }
 
-  }
-  button#double {
-    grid-row: 2;
-    grid-column: 3/5;
-  }
-  button#color {
-    grid-row: 2;
-    grid-column: 5/7
+    button#color {
+      grid-row: 3;
+      grid-column: 1 / 4
+    }
 
-  }
-  button#eyes {
-    grid-row: 3;
-    grid-column: 4/6;
-  }
+    button#light {
+      grid-row: 3;
+      grid-column: 4 / 7;
+    }
   }
 
-.button-group .controls {
-  grid-row: 1;
-  grid-column: 3 / 5;
-}
+  .button-group .controls {
+    grid-row: 1;
+    grid-column: 3 / 5;
+  }
 }
 
 .button-group button {
