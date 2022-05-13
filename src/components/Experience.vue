@@ -200,6 +200,11 @@
         <div class="content">
           <h2>Please turn your device.</h2>
           <p>This experience cannot be used in portrait mode</p>
+          <p>
+            <small>
+              If this message does not go away after turning your device, please check to make sure you do not have your screen orientation lock on.
+            </small>
+          </p>
         </div>
       </div>
     </div>
@@ -459,7 +464,6 @@ export default {
   background-color: white;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 1.2em;
   z-index: 9999;
   border-radius: 0.25em;
@@ -475,14 +479,14 @@ export default {
   }
 
   .body {
-    padding: 0 3.5em;
+    padding: 0 2em;
     display: flex;
     align-items: center;
     flex-direction: column;
 
     * {
       color: $color2;
-      text-align: center;
+      margin-bottom: 1rem;
     }
   }
 
@@ -493,7 +497,10 @@ export default {
 
   p {
     font-size: 1.2em;
-    text-align: center;
+  }
+
+  small {
+    font-size: 0.9rem;
   }
 }
 
