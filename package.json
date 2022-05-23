@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "vue-cli-service serve",
-    "deploy": "gsutil cp -r ./dist gs://horizon-simulator-staging"
+    "deploy": "cd ./dist && gsutil cp -r . gs://horizon-simulator-staging"
   },
   "dependencies": {
     "core-js": "^3.6.5",
