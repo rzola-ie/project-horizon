@@ -23,8 +23,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  base: '/horizon-simulator-bucket',
-  history: createWebHistory("/horizon-simulator-bucket/"),
+  base: '/horizon-simulator-stagingt',
+  history: createWebHistory("/horizon-simulator-staging/"),
   routes
 })
 

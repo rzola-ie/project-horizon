@@ -67,7 +67,7 @@ export default class EyeBulge {
   initFaceFilter(bestVideoSettings) {
     JEELIZFACEFILTER.init({
       canvasId: this.canvasId,
-      NNCPath: '../horizon-simulator-bucket/neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
+      NNCPath: '../horizon-simulator-staging/neuralNets/', // path to JSON neural network model (NN_DEFAULT.json by default)
       videoSettings: { // increase the default video resolution since we are in full screen
         'idealWidth': 1280,  // ideal video width in pixels
         'idealHeight': 800,  // ideal video height in pixels
@@ -103,7 +103,7 @@ export default class EyeBulge {
     /*
     faceLowPoly.json has been exported from dev/faceLowPoly.blend using THREE.JS blender exporter with Blender v2.76
     */
-    maskLoader.load('/horizon-simulator-bucket/models/face.json', (geometry) => {
+    maskLoader.load('/horizon-simulator-staging/models/face.json', (geometry) => {
       geometry.computeVertexNormals();
 
       const threeMask = new Mesh(geometry, this.buildMaskMaterial(spec.videoTransformMat2));
